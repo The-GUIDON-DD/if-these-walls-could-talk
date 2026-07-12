@@ -2,7 +2,7 @@ import { createTimer } from "animejs";
 import { useEffect, useState } from "react";
 import { findLast, zip } from "remeda";
 
-const totalSeconds = 15;
+const totalSeconds = 10;
 
 export function LoadingBar({ timer }: { timer: number }) {
 	const totalBars = 18;
@@ -41,13 +41,16 @@ export function LoadingScreen() {
 	useEffect(() => {
 		createTimer({
 			duration: 1000,
-			loop: totalSeconds,
+			loop: true,
 			onLoop: () => setTime(time + 1),
 		});
 	}, [time]);
 
 	return (
-		<div className="flex flex-col gap-15 h-screen w-screen items-center justify-center">
+		<div
+			className="flex flex-col gap-15 h-screen w-screen items-center justify-center transition-opacity duration-500"
+			style={{ opacity: time >= totalSeconds ? 0 : 1 }}
+		>
 			<p className="font-mono text-white text-2xl text-shadow text-center w-1/2">
 				Trigger warning: This interactive article contains
 				<br />
