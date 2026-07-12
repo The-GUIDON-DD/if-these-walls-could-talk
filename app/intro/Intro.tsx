@@ -21,7 +21,8 @@ export function LoadingBar({ timer }: { timer: number }) {
 
 	return (
 		<div
-			className={`w-[40vw] h-[8vh] border-[4px] border-white grid grid-cols-${totalBars} grid-rows-1 gap-2 p-2`}
+			className={`w-[40vw] h-[8vh] border-4 border-white grid grid-rows-1 gap-2 p-2`}
+			style={{ gridTemplateColumns: `repeat(${totalBars}, minmax(0,1fr))` }}
 		>
 			{Array.from(
 				{ length: 18 },
