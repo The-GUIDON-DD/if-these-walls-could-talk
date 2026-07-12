@@ -9,10 +9,10 @@ export default function ScreenLayout() {
 				<Outlet />
 			</div>
 			<div
-				className={`${fullScreenLayer} bg-[url('/screen-layout/texture1.svg')] mix-blend-soft-light`}
+				className={`${fullScreenLayer} bg-[url('/screen-layout/texture1.svg')] mix-blend-soft-light opacity-25`}
 			/>
 			<div
-				className={`${fullScreenLayer} bg-[url('/screen-layout/texture2.svg')]`}
+				className={`${fullScreenLayer} bg-[url('/screen-layout/texture2.svg')] opacity-10`}
 			/>
 			<div
 				className={`${fullScreenLayer} bg-no-repeat bg-[url('/screen-layout/ScreenBorder.svg')] border-[#010414] border-18`}
