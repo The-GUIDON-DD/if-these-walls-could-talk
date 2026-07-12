@@ -32,6 +32,9 @@ importers:
       react-router:
         specifier: 8.0.0
         version: 8.0.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      remeda:
+        specifier: ^2.39.0
+        version: 2.39.0
     devDependencies:
       '@react-router/dev':
         specifier: 8.0.0
@@ -1106,6 +1109,10 @@ packages:
   readdirp@5.0.0:
     resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
     engines: {node: '>= 20.19.0'}
+
+  remeda@2.39.0:
+    resolution: {integrity: sha512-3Ki8dU1o3OVu4dwIQ2Pj+yiuP7OnEbmWAGmJ3yDRqopily5jsj8NWzPvbS89H85d6UdONKEcUnrfuHY6jN9vyw==}
+    engines: {node: '>=18.0.0'}
 
   rolldown@1.1.5:
     resolution: {integrity: sha512-t9z29cJjXf/vxQ8dyhCSpt6H6aSwHTk8cT5I3iy6SMXuFpk5mB6PL6XfC8PCwrPTx93udwKUm9HRteAlTGBLiA==}
@@ -2231,6 +2238,8 @@ snapshots:
   react@19.2.7: {}
 
   readdirp@5.0.0: {}
+
+  remeda@2.39.0: {}
 
   rolldown@1.1.5:
     dependencies:
