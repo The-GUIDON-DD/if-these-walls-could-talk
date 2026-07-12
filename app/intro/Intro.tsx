@@ -61,14 +61,52 @@ export function LoadingScreen() {
 	);
 }
 
+export function IntroText() {
+	const paragraphStyle =
+		"w-3/5 font-sans font-medium leading-[145%] text-4xl col-span-full row-span-full text-white font-bold text-center retro-text-shadow";
+	const linkStyle = "text-white underline";
+	return (
+		<section className="w-full h-[200vh] overflow-y-auto">
+			<section className="fixed inset-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-screen">
+				<p className={paragraphStyle}>
+					IN RECENT years, the University has expanded policies, offices, and
+					student{" "}
+					<a
+						href="https://www.ateneo.edu/mission/hcw/genderrelated-services"
+						className={linkStyle}
+					>
+						support systems
+					</a>{" "}
+					aimed at making campus spaces more inclusive through adopting
+					grievance mechanisms and gender focused initiatives and guidelines.
+				</p>
+				<p className={paragraphStyle}>
+					While the Ateneo{" "}
+					<a href="https://www.ateneo.edu/central/policies/code-of-decorum">
+						commits
+					</a>{" "}
+					to building safe spaces for all students, victims navigating sexual
+					harassment{" "}
+					<a href="https://www.ateneo.edu/central/policies/code-of-decorum">
+						cases
+					</a>{" "}
+					encounter lengthy procedures that often fail to deliver timely justice
+					or safety.
+				</p>
+			</section>
+		</section>
+	);
+}
+
 export default function Intro() {
 	return (
 		<>
 			{/* scroll container */}
-			<section className="w-screen min-h-screen overflow-x-clip overflow-y-auto">
+			<section className="w-screen min-h-screen overflow-x-clip">
 				{/* container for animations */}
-				<section className="radial-bg w-screen h-screen grid grid-cols-1 grid-rows-1 place-items-center">
-					<LoadingScreen />
+				<section className="radial-bg fixed inset-0 w-screen h-screen grid grid-cols-1 grid-rows-1 place-items-center">
+					{/* <LoadingScreen /> */}
+					<IntroText />
 				</section>
 			</section>
 		</>
