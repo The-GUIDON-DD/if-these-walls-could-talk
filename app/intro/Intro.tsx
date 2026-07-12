@@ -1,5 +1,6 @@
 import { animate, createScope, createTimer, onScroll } from "animejs";
 import { useEffect, useRef, useState } from "react";
+import { FaChevronDown } from "react-icons/fa6";
 import { findLast, zip } from "remeda";
 
 const totalSeconds = 10;
@@ -86,6 +87,16 @@ export function IntroText() {
 					sync: "play reverse play reset",
 				}),
 			});
+			animate("#intro-chevron", {
+				opacity: [1, 0],
+				duration: 500,
+				autoplay: onScroll({
+					target: "#intro-text-cont",
+					enter: { target: "top+=120vh", container: "top" },
+					leave: { target: "top+=320vh", container: "top" },
+					sync: "play pause reverse reset",
+				}),
+			});
 		});
 
 		return () => scope.current?.revert();
@@ -125,6 +136,12 @@ export function IntroText() {
 					encounter lengthy procedures that often fail to deliver timely justice
 					or safety.
 				</p>
+				<div
+					id="intro-chevron"
+					className="text-white align-self-end relative bottom-30"
+				>
+					<FaChevronDown size={48} />
+				</div>
 			</section>
 		</section>
 	);
