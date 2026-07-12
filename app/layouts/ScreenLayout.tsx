@@ -5,7 +5,7 @@ export default function ScreenLayout() {
 		"pointer-events-none bg-center bg-cover w-full h-full fixed inset-0";
 	return (
 		<main className="w-screen min-h-screen">
-			<div className="w-full min-h-screen fixed inset-0">
+			<div className="w-full min-h-screen">
 				<Outlet />
 			</div>
 			<div

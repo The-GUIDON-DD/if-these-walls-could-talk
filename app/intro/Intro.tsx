@@ -1,5 +1,5 @@
-import { createTimer } from "animejs";
-import { useEffect, useState } from "react";
+import { animate, createScope, createTimer, onScroll } from "animejs";
+import { useEffect, useRef, useState } from "react";
 import { findLast, zip } from "remeda";
 
 const totalSeconds = 10;
@@ -62,13 +62,45 @@ export function LoadingScreen() {
 }
 
 export function IntroText() {
+	const root = useRef<HTMLElement>(null);
+	const scope = useRef<ReturnType<typeof createScope> | null>(null);
+	useEffect(() => {
+		scope.current = createScope({ root }).add(() => {
+			animate("#intro-text-p1", {
+				opacity: [0, 1],
+				duration: 500,
+				autoplay: onScroll({
+					target: "#intro-text-cont",
+					enter: { target: "top", container: "top" },
+					leave: { target: "top+=100vh", container: "top" },
+					sync: "play reverse play reset",
+				}),
+			});
+			animate("#intro-text-p2", {
+				opacity: [0, 1],
+				duration: 500,
+				autoplay: onScroll({
+					target: "#intro-text-cont",
+					enter: { target: "top+=120vh", container: "top" },
+					leave: { target: "top+=220vh", container: "top" },
+					sync: "play reverse play reset",
+				}),
+			});
+		});
+
+		return () => scope.current?.revert();
+	}, []);
+
 	const paragraphStyle =
-		"w-3/5 font-sans font-medium leading-[145%] text-4xl col-span-full row-span-full text-white font-bold text-center retro-text-shadow";
+		"w-3/5 font-sans font-medium leading-[145%] text-4xl col-span-full row-span-full text-white font-bold text-center retro-text-shadow opacity-0";
 	const linkStyle = "text-white underline";
 	return (
-		<section className="w-full h-[200vh] overflow-y-auto">
-			<section className="fixed inset-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-screen">
-				<p className={paragraphStyle}>
+		<section ref={root} id="intro-text" className="w-full h-[360vh]">
+			<section
+				id="intro-text-cont"
+				className="sticky top-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-full"
+			>
+				<p id="intro-text-p1" className={paragraphStyle} style={{ opacity: 0 }}>
 					IN RECENT years, the University has expanded policies, offices, and
 					student{" "}
 					<a
@@ -80,7 +112,7 @@ export function IntroText() {
 					aimed at making campus spaces more inclusive through adopting
 					grievance mechanisms and gender focused initiatives and guidelines.
 				</p>
-				<p className={paragraphStyle}>
+				<p id="intro-text-p2" className={paragraphStyle} style={{ opacity: 0 }}>
 					While the Ateneo{" "}
 					<a href="https://www.ateneo.edu/central/policies/code-of-decorum">
 						commits
@@ -102,9 +134,10 @@ export default function Intro() {
 	return (
 		<>
 			{/* scroll container */}
-			<section className="w-screen min-h-screen overflow-x-clip">
+			<section className="w-screen min-h-screen">
+				<div className="radial-bg fixed inset-0 size-screen" />
 				{/* container for animations */}
-				<section className="radial-bg fixed inset-0 w-screen h-screen grid grid-cols-1 grid-rows-1 place-items-center">
+				<section className="bg-transparent w-screen min-h-screen relative">
 					{/* <LoadingScreen /> */}
 					<IntroText />
 				</section>
