@@ -9,7 +9,7 @@ export default [
 	layout("./layouts/ScreenLayout.tsx", [
 		index("routes/home.tsx"),
 		layout("./layouts/DesktopLayout.tsx", [
-			route("start", "./desktop/Desktop.tsx"),
+			route("desktop", "./desktop/Desktop.tsx"),
 		]),
 	]),
 ] satisfies RouteConfig;
