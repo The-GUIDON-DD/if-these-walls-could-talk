@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { createTimer } from "animejs";
+import { useEffect, useState } from "react";
 import { findLast, zip } from "remeda";
 
+const totalSeconds = 15;
+
 export function LoadingBar({ timer }: { timer: number }) {
-	const totalSeconds = 30;
 	const totalBars = 18;
 	// bar should update at 0, 25%, 75%, and 100% of the total seconds/completion.
 	const updatePercentages = [0, 0.25, 0.75, 1];
@@ -33,7 +35,16 @@ export function LoadingBar({ timer }: { timer: number }) {
 }
 
 export function LoadingScreen() {
-	useEffect(() => {}, []);
+	const [time, setTime] = useState(0);
+
+	useEffect(() => {
+		createTimer({
+			duration: 1000,
+			loop: totalSeconds,
+			onLoop: () => setTime(time + 1),
+		});
+	}, [time]);
+
 	return (
 		<div className="flex flex-col gap-15 h-screen w-screen items-center justify-center">
 			<p className="font-mono text-white text-2xl text-shadow text-center w-1/2">
@@ -41,7 +52,7 @@ export function LoadingScreen() {
 				<br />
 				mentions of sexual harassment
 			</p>
-			<LoadingBar timer={0} />
+			<LoadingBar timer={time} />
 		</div>
 	);
 }
