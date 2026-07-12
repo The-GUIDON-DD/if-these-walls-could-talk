@@ -24,14 +24,8 @@
 	background: radial-gradient(#3a54cf, #0a124d);
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	color: #161b3f;
+.text-shadow {
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
 }
 
 a,
@@ -39,4 +33,8 @@ a:hover,
 a:visited,
 a:active {
 	color: #002eff;
+}
+
+html {
+	@apply text-[#161b3f];
 }
