@@ -1,0 +1,35 @@
+@reference "../app.css";
+
+.browser h1,
+.browser h2,
+.browser h3,
+.browser h4,
+.browser h5,
+.browser h6,
+.browser p,
+.browser a,
+.browser a:active,
+.browser a:hover,
+.browser a:visited {
+	@apply text-white;
+}
+
+.browser h1 {
+	@apply text-6xl;
+	@apply font-mono;
+	@apply font-bold;
+}
+
+.browser p {
+	@apply text-2xl;
+	@apply font-sans;
+	@apply font-medium;
+	@apply w-full;
+}
+
+.browser a,
+a:active,
+a:hover,
+a:visited {
+	@apply underline;
+}

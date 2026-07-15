@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { last } from "remeda";
 import BrowserBar from "../components/BrowserBar";
+import styles from "../styles/BrowserBarLayout.module.css";
 import type { Route } from "./+types/menubar-layout";
 
 export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
@@ -9,13 +10,15 @@ export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
 
 	return (
 		<>
-			<main className="w-screen relative top-[2vh]">
+			<header className="w-screen top-4 fixed">
 				<BrowserBar fileName={fileName} />
-				{/* content section */}
-				<section className="min-h-screen text-white flex flex-col text-center items-stretchpx-1/6 pt-20 bg-[#060e24]">
-					<Outlet />
-				</section>
-			</main>
+			</header>
+			{/* content section */}
+			<section
+				className={`w-screen min-h-screen text-white flex flex-col items-stretchpx-1/6 pt-50 pb-50 bg-[#060e24] px-[20%] ${styles.browser}`}
+			>
+				<Outlet />
+			</section>
 			<div className="w-screen pointer-events-none h-70 bg-linear-to-t from-[#060e24] to-transparent fixed bottom-[5vh]" />
 		</>
 	);

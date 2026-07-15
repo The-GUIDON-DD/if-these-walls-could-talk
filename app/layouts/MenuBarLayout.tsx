@@ -17,7 +17,7 @@ export default function MenuBarLayout({ matches }: Route.ComponentProps) {
 	return (
 		<>
 			<Outlet />
-			<div className="w-screen fixed top-[2vh]">
+			<div className="w-screen fixed top-4">
 				<MenuBar title={routeName} closeAction={() => redirect("/desktop")} />
 			</div>
 		</>

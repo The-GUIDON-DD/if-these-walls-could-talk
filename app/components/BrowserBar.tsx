@@ -3,7 +3,7 @@ import { MenuBar } from "./MenuBar";
 
 export default function BrowserBar({ fileName }: { fileName: string }) {
 	const browserBarClass =
-		"bg-[#B1BFED] px-20 py-2 flex border-t-4 border-[#7988c9]";
+		"bg-[#B1BFED] px-[12vw] py-2 flex border-t-4 border-[#7988c9]";
 	const buttonClass =
 		"p-2 bg-[#bacbff,_rgba(0,0,0,0.1)] border-t-3 border-l-3 border-[rgba(30,50,147,0.5)]";
 	return (
