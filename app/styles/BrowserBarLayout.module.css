@@ -1,16 +1,16 @@
 @reference "../app.css";
 
-.brower h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-a:active,
-a:hover,
-a:visited {
+.browser h1,
+.browser h2,
+.browser h3,
+.browser h4,
+.browser h5,
+.browser h6,
+.browser p,
+.browser a,
+.browser a:active,
+.browser a:hover,
+.browser a:visited {
 	@apply text-white;
 }
 
