@@ -1,7 +1,11 @@
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
-import { PopupWindow } from "~/components/PopupWindow";
-import { DESKTOP_ICONS, POPUP_CONTENTS } from "./popupWindowData";
+import { PopupWindow } from "../components/PopupWindow";
+import {
+	DESKTOP_ICONS,
+	POPUP_CONTENTS,
+	type PopupWindowKey,
+} from "./SystemMessage";
 
 function DesktopIcon({
 	imagePath,
@@ -14,59 +18,111 @@ function DesktopIcon({
 	link?: string;
 	onClick?: () => void;
 }) {
-	if (link) {
-		return (
-			<Link to={link} className="w-[70%] flex flex-col items-stretch">
-				<img alt={label} src={imagePath} />
-				<p className="font-mono text-center text-shadow-[0_3px_3px_black] text-white text-lg tracking-wide">
-					{label}
-				</p>
-			</Link>
-		);
-	}
-
-	return (
-		<div className="w-[70%] flex flex-col items-stretch">
+	const iconContent = (
+		<>
 			<img alt={label} src={imagePath} />
 			<p className="font-mono text-center text-shadow-[0_3px_3px_black] text-white text-lg tracking-wide">
 				{label}
 			</p>
-		</div>
+		</>
 	);
+
+	if (link) {
+		return (
+			<Link to={link} className="w-[70%] flex flex-col items-stretch">
+				{iconContent}
+			</Link>
+		);
+	}
+
+	if (onClick) {
+		return (
+			<button
+				type="button"
+				onClick={onClick}
+				className="w-[70%] flex flex-col items-stretch text-left focus:outline-none focus:ring-2 focus:ring-white/60"
+			>
+				{iconContent}
+			</button>
+		);
+	}
+
+	return <div className="w-[70%] flex flex-col items-stretch">{iconContent}</div>;
 }
 
 export default function Desktop() {
 	const desktopImagePath = "/desktop";
-	const [activePopup, setActivePopup] = useState<string | null>(
-		"System Message",
-	);
-	const icons = [
-		{ imageName: "files.svg", label: "Files", popupKey: "Files" },
-		{ imageName: "email.svg", label: "Email", link: "/email" },
-		{ imageName: "about.svg", label: "About", popupKey: "About" },
-	];
+	const [showSystemMessage, setShowSystemMessage] = useState(true);
+	const [showAbout, setShowAbout] = useState(true);
+	const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
+
+	const openPopup = (popupKey?: PopupWindowKey) => {
+		if (!popupKey) return;
+		if (popupKey === "About") {
+			setShowAbout(true);
+			return;
+		}
+		if (popupKey === "System Message") {
+			setShowSystemMessage(true);
+			return;
+		}
+		setActivePopup(popupKey);
+	};
+
+	const closeActivePopup = () => {
+		setActivePopup(null);
+	};
+
 	return (
 		<section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
 			<section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
-				{icons.map(({ imageName, label, link, popupKey }) => (
+				{DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
 					<DesktopIcon
 						key={label}
 						imagePath={`${desktopImagePath}/${imageName}`}
 						label={label}
 						link={link}
-						onClick={popupKey ? () => setActivePopup(popupKey) : undefined}
+						onClick={popupKey ? () => openPopup(popupKey) : undefined}
 					/>
 				))}
 			</section>
-			<PopupWindow
-				title={activePopup ?? ""}
-				isOpen={!!activePopup}
-				closeAction={() => setActivePopup(null)}
-			>
-				{activePopup
-					? POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))
-					: null}
-			</PopupWindow>
+
+			{showSystemMessage && (
+				<PopupWindow
+					title="System Message"
+					isOpen
+					closeAction={() => setShowSystemMessage(false)}
+					zIndex={40}
+					width={399}
+					height={230}
+				>
+					{POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
+				</PopupWindow>
+			)}
+
+			{showAbout && (
+				<PopupWindow
+					title="About"
+					isOpen
+					closeAction={() => setShowAbout(false)}
+					zIndex={45}
+					width={888}
+					height={662}
+				>
+					{POPUP_CONTENTS["About"](() => setShowAbout(false))}
+				</PopupWindow>
+			)}
+
+			{activePopup && activePopup !== "About" && activePopup !== "System Message" && (
+				<PopupWindow
+					title={activePopup}
+					isOpen
+					closeAction={closeActivePopup}
+					zIndex={50}
+				>
+					{POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
+				</PopupWindow>
+			)}
 		</section>
 	);
 }
