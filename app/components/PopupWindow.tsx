@@ -21,36 +21,43 @@ export function PopupWindow({
 }: PopupWindowProps) {
     if (!isOpen) return null;
 
+    const handleClose = (e?: React.MouseEvent) => {
+        // stop propagation where applicable and call the parent close action
+        if (e && typeof e.stopPropagation === "function") e.stopPropagation();
+        console.log("PopupWindow handleClose:", title);
+        closeAction();
+    };
+
     return (
-        <div
-            className="fixed inset-0 flex items-center justify-center bg-black/20"
-            style={{ zIndex }}
-            onClick={closeAction}
-        >
+        <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex }}>
+            {/* Backdrop receives clicks to close */}
             <div
-                className="flex flex-col shadow-[0_2px_2px_rgba(0,0,0,0.5)] overflow-hidden select-none"
-                style={{ width, height }}
+                className="absolute inset-0 bg-black/20"
+                onClick={handleClose}
+            />
+
+            <div
+                className="relative flex flex-col shadow-[0_2px_2px_rgba(0,0,0,0.5)] overflow-hidden select-none box-border"
+                style={{ minWidth: width, minHeight: height, zIndex: zIndex + 1 }}
                 onClick={(event) => event.stopPropagation()}
             >
-                {/* Notice relative z-30 on the header bar */}
-                <div className="relative z-30 w-full h-[60px] bg-gradient-to-r from-[#161B3F] to-[#1E3293] flex items-center justify-between pl-4">
-                    <span className="font-['Chivo_Mono'] font-medium text-[20px] text-white tracking-wide">
+                {/* Fixed header height to match close button */}
+                <div className="relative w-full h-[60px] bg-gradient-to-r from-[#161B3F] to-[#1E3293] flex items-center justify-between pl-4 box-border" style={{ zIndex: zIndex + 2 }}>
+
+                    <span className="font-mono font-medium text-lg text-white tracking-wide">
                         {title}
                     </span>
 
-                    <div className="flex h-full">
-                        <div className="w-[77px] h-[60px] flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-[24px]">
+                    <div className="flex items-center h-full">
+                        <div className="px-6 h-[60px] flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl">
                             _
                         </div>
-                        {/* Notice explicit pointer-events-auto and cursor-pointer */}
                         <button
                             type="button"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                closeAction();
-                            }}
-                            className="w-[77px] h-[60px] flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-[24px] cursor-pointer active:bg-white/10 pointer-events-auto"
+                            onClick={(e) => { e.stopPropagation(); handleClose(e); }}
+                            aria-label="Close"
+                            title="Close"
+                            className="w-[77px] h-[60px] flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl cursor-pointer active:bg-white/10 pointer-events-auto"
                         >
                             ✕
                         </button>

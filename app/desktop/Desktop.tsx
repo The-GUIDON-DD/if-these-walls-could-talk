@@ -70,8 +70,9 @@ export default function Desktop() {
 	};
 
 	const closeActivePopup = () => {
-		setActivePopup(null);
-	};
+			console.log('Desktop: close active popup');
+			setActivePopup(null);
+		};
 
 	return (
 		<section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
@@ -91,12 +92,12 @@ export default function Desktop() {
 				<PopupWindow
 					title="System Message"
 					isOpen
-					closeAction={() => setShowSystemMessage(false)}
+								closeAction={() => { console.log('Desktop: close System Message'); setShowSystemMessage(false); }}
 					zIndex={40}
 					width={399}
 					height={230}
 				>
-					{POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
+								{POPUP_CONTENTS["System Message"](() => { console.log('System Message OK -> closing'); setShowSystemMessage(false); })}
 				</PopupWindow>
 			)}
 
@@ -104,12 +105,12 @@ export default function Desktop() {
 				<PopupWindow
 					title="About"
 					isOpen
-					closeAction={() => setShowAbout(false)}
+								closeAction={() => { console.log('Desktop: close About'); setShowAbout(false); }}
 					zIndex={45}
 					width={888}
 					height={662}
 				>
-					{POPUP_CONTENTS["About"](() => setShowAbout(false))}
+								{POPUP_CONTENTS["About"](() => { console.log('About OK -> closing'); setShowAbout(false); })}
 				</PopupWindow>
 			)}
 
