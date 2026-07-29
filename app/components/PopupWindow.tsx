@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 type PopupWindowProps = {
@@ -28,6 +29,24 @@ export function PopupWindow({
         closeAction();
     };
 
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
+    const debug = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("popupDebug");
+
+    useEffect(() => {
+        if (!debug) return;
+        const c = containerRef.current;
+        const ch = contentRef.current;
+        if (c) {
+            c.style.outline = "2px solid lime";
+            console.log("Popup container size:", c.offsetWidth, c.offsetHeight, window.getComputedStyle(c));
+        }
+        if (ch) {
+            ch.style.outline = "2px solid red";
+            console.log("Popup content size:", ch.offsetWidth, ch.offsetHeight, window.getComputedStyle(ch));
+        }
+    }, [debug]);
+
     return (
         <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex }}>
             {/* Backdrop receives clicks to close */}
@@ -37,8 +56,9 @@ export function PopupWindow({
             />
 
             <div
-                className="relative flex flex-col shadow-[0_2px_2px_rgba(0,0,0,0.5)] overflow-hidden select-none box-border"
-                style={{ minWidth: width, minHeight: height, zIndex: zIndex + 1 }}
+                ref={containerRef}
+                className="relative flex flex-col shadow-[0_8px_0px_rgba(0,0,0,0.25)] overflow-hidden select-none box-border"
+                style={{ width: width, height: height, zIndex: zIndex + 1 }}
                 onClick={(event) => event.stopPropagation()}
             >
                 {/* Fixed header height to match close button */}
@@ -64,7 +84,7 @@ export function PopupWindow({
                     </div>
                 </div>
 
-                <div className="flex-1 relative z-0">{children}</div>
+                <div ref={contentRef} className="flex-1 relative z-0 bg-[#c2ccff] border-t-[4px] border-l-[4px] border-[#1E3293]/50 box-border overflow-hidden">{children}</div>
             </div>
         </div>
     );

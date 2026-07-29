@@ -58,12 +58,24 @@ export default function Desktop() {
 
 	const openPopup = (popupKey?: PopupWindowKey) => {
 		if (!popupKey) return;
+		// Ensure only the requested popup is visible — close any others
 		if (popupKey === "About") {
 			setShowAbout(true);
+			setShowSystemMessage(false);
+			setActivePopup(null);
 			return;
 		}
 		if (popupKey === "System Message") {
 			setShowSystemMessage(true);
+			setShowAbout(false);
+			setActivePopup(null);
+			return;
+		}
+		// Files: close any existing About/System Message popups and open Files
+		if (popupKey === "Files") {
+			setShowAbout(false);
+			setShowSystemMessage(false);
+			setActivePopup(popupKey);
 			return;
 		}
 		setActivePopup(popupKey);
