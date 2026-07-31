@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import type { ReactNode } from "react";
+import { useRef } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 type PopupWindowProps = {
     title: string;
@@ -22,36 +22,23 @@ export function PopupWindow({
 }: PopupWindowProps) {
     if (!isOpen) return null;
 
-    const handleClose = (e?: React.MouseEvent) => {
-        // stop propagation where applicable and call the parent close action
-        if (e && typeof e.stopPropagation === "function") e.stopPropagation();
-        console.log("PopupWindow handleClose:", title);
+    const handleClose = (e?: MouseEvent) => {
+        /*
+         * Prevent clicks originating inside the popup from bubbling up to the
+         * backdrop and trigger handleClose again. 
+         */
+        e?.stopPropagation();
         closeAction();
     };
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contentRef = useRef<HTMLDivElement | null>(null);
-    const debug = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("popupDebug");
-
-    useEffect(() => {
-        if (!debug) return;
-        const c = containerRef.current;
-        const ch = contentRef.current;
-        if (c) {
-            c.style.outline = "2px solid lime";
-            console.log("Popup container size:", c.offsetWidth, c.offsetHeight, window.getComputedStyle(c));
-        }
-        if (ch) {
-            ch.style.outline = "2px solid red";
-            console.log("Popup content size:", ch.offsetWidth, ch.offsetHeight, window.getComputedStyle(ch));
-        }
-    }, [debug]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex }}>
             {/* Backdrop receives clicks to close */}
             <div
-                className="absolute inset-0 bg-black/20"
+                className="fixed inset-0 bg-black/20"
                 onClick={handleClose}
             />
 
@@ -74,7 +61,7 @@ export function PopupWindow({
                         </div>
                         <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); handleClose(e); }}
+                            onClick={(e) => handleClose(e)}
                             aria-label="Close"
                             title="Close"
                             className="w-[77px] h-[60px] flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl cursor-pointer active:bg-white/10 pointer-events-auto"
