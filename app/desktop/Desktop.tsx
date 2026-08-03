@@ -132,8 +132,8 @@ export default function Desktop() {
                     isOpen
                     closeAction={closeActivePopup}
                     zIndex={50}
-                    width={500}  
-                    height={350}
+                    width={1001}  
+                    height={541}
                 >
                     {POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
                 </PopupWindow>
