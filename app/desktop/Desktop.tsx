@@ -5,7 +5,7 @@ import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
     type PopupWindowKey,
-} from "./SystemMessage";
+} from "./desktopConfig";
 
 function DesktopIcon({
     imagePath,
