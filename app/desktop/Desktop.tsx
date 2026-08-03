@@ -2,140 +2,142 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
 import {
-	DESKTOP_ICONS,
-	POPUP_CONTENTS,
-	type PopupWindowKey,
+    DESKTOP_ICONS,
+    POPUP_CONTENTS,
+    type PopupWindowKey,
 } from "./SystemMessage";
 
 function DesktopIcon({
-	imagePath,
-	label,
-	link,
-	onClick,
+    imagePath,
+    label,
+    link,
+    onClick,
 }: {
-	imagePath: string;
-	label: string;
-	link?: string;
-	onClick?: () => void;
+    imagePath: string;
+    label: string;
+    link?: string;
+    onClick?: () => void;
 }) {
-	const iconContent = (
-		<>
-			<img alt={label} src={imagePath} />
-			<p className="font-mono text-center text-shadow-[0_3px_3px_black] text-white text-lg tracking-wide">
-				{label}
-			</p>
-		</>
-	);
+    const iconContent = (
+        <>
+            <img alt={label} src={imagePath} />
+            <p className="font-mono text-center text-shadow-[0_3px_3px_black] text-white text-lg tracking-wide">
+                {label}
+            </p>
+        </>
+    );
 
-	if (link) {
-		return (
-			<Link to={link} className="w-[70%] flex flex-col items-stretch">
-				{iconContent}
-			</Link>
-		);
-	}
+    if (link) {
+        return (
+            <Link to={link} className="w-[70%] flex flex-col items-stretch">
+                {iconContent}
+            </Link>
+        );
+    }
 
-	if (onClick) {
-		return (
-			<button
-				type="button"
-				onClick={onClick}
-				className="w-[70%] flex flex-col items-stretch text-left focus:outline-none focus:ring-2 focus:ring-white/60"
-			>
-				{iconContent}
-			</button>
-		);
-	}
+    if (onClick) {
+        return (
+            <button
+                type="button"
+                onClick={onClick}
+                className="w-[70%] flex flex-col items-stretch text-left focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+                {iconContent}
+            </button>
+        );
+    }
 
-	return <div className="w-[70%] flex flex-col items-stretch">{iconContent}</div>;
+    return <div className="w-[70%] flex flex-col items-stretch">{iconContent}</div>;
 }
 
 export default function Desktop() {
-	const desktopImagePath = "/desktop";
-	const [showSystemMessage, setShowSystemMessage] = useState(true);
-	const [showAbout, setShowAbout] = useState(true);
-	const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
+    const desktopImagePath = "/desktop";
+    const [showSystemMessage, setShowSystemMessage] = useState(true);
+    const [showAbout, setShowAbout] = useState(true);
+    const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
 
-	const openPopup = (popupKey?: PopupWindowKey) => {
-		if (!popupKey) return;
-		// Ensure only the requested popup is visible — close any others
-		if (popupKey === "About") {
-			setShowAbout(true);
-			setShowSystemMessage(false);
-			setActivePopup(null);
-			return;
-		}
-		if (popupKey === "System Message") {
-			setShowSystemMessage(true);
-			setShowAbout(false);
-			setActivePopup(null);
-			return;
-		}
-		// Files: close any existing About/System Message popups and open Files
-		if (popupKey === "Files") {
-			setShowAbout(false);
-			setShowSystemMessage(false);
-			setActivePopup(popupKey);
-			return;
-		}
-		setActivePopup(popupKey);
-	};
+    const openPopup = (popupKey?: PopupWindowKey) => {
+        if (!popupKey) return;
+        // Ensure only the requested popup is visible — close any others
+        if (popupKey === "About") {
+            setShowAbout(true);
+            setShowSystemMessage(false);
+            setActivePopup(null);
+            return;
+        }
+        if (popupKey === "System Message") {
+            setShowSystemMessage(true);
+            setShowAbout(false);
+            setActivePopup(null);
+            return;
+        }
+        // Files: close any existing About/System Message popups and open Files
+        if (popupKey === "Files") {
+            setShowAbout(false);
+            setShowSystemMessage(false);
+            setActivePopup(popupKey);
+            return;
+        }
+        setActivePopup(popupKey);
+    };
 
-	const closeActivePopup = () => {
-			console.log('Desktop: close active popup');
-			setActivePopup(null);
-		};
+    const closeActivePopup = () => {
+            console.log('Desktop: close active popup');
+            setActivePopup(null);
+        };
 
-	return (
-		<section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
-			<section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
-				{DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
-					<DesktopIcon
-						key={label}
-						imagePath={`${desktopImagePath}/${imageName}`}
-						label={label}
-						link={link}
-						onClick={popupKey ? () => openPopup(popupKey) : undefined}
-					/>
-				))}
-			</section>
+    return (
+        <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
+            <section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
+                {DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
+                    <DesktopIcon
+                        key={label}
+                        imagePath={`${desktopImagePath}/${imageName}`}
+                        label={label}
+                        link={link}
+                        onClick={popupKey ? () => openPopup(popupKey) : undefined}
+                    />
+                ))}
+            </section>
 
-			{showSystemMessage && (
-				<PopupWindow
-					title="System Message"
-					isOpen
-								closeAction={() => { console.log('Desktop: close System Message'); setShowSystemMessage(false); }}
-					zIndex={40}
-					width={399}
-					height={230}
-				>
-								{POPUP_CONTENTS["System Message"](() => { console.log('System Message OK -> closing'); setShowSystemMessage(false); })}
-				</PopupWindow>
-			)}
+            {showSystemMessage && (
+                <PopupWindow
+                    title="System Message"
+                    isOpen
+                                closeAction={() => { console.log('Desktop: close System Message'); setShowSystemMessage(false); }}
+                    zIndex={40}
+                    width={399}
+                    height={230}
+                >
+                                {POPUP_CONTENTS["System Message"](() => { console.log('System Message OK -> closing'); setShowSystemMessage(false); })}
+                </PopupWindow>
+            )}
 
-			{showAbout && (
-				<PopupWindow
-					title="About"
-					isOpen
-								closeAction={() => { console.log('Desktop: close About'); setShowAbout(false); }}
-					zIndex={45}
-					width={888}
-					height={662}
-				>
-								{POPUP_CONTENTS["About"](() => { console.log('About OK -> closing'); setShowAbout(false); })}
-				</PopupWindow>
-			)}
+            {showAbout && (
+                <PopupWindow
+                    title="About"
+                    isOpen
+                                closeAction={() => { console.log('Desktop: close About'); setShowAbout(false); }}
+                    zIndex={45}
+                    width={889}
+                    height={622}
+                >
+                                {POPUP_CONTENTS["About"](() => { console.log('About OK -> closing'); setShowAbout(false); })}
+                </PopupWindow>
+            )}
 
-			{activePopup && activePopup !== "About" && activePopup !== "System Message" && (
-				<PopupWindow
-					title={activePopup}
-					isOpen
-					closeAction={closeActivePopup}
-					zIndex={50}
-				>
-					{POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
-				</PopupWindow>
-			)}
-		</section>
-	);
+            {activePopup && activePopup !== "About" && activePopup !== "System Message" && (
+                <PopupWindow
+                    title={activePopup}
+                    isOpen
+                    closeAction={closeActivePopup}
+                    zIndex={50}
+                    width={500}  
+                    height={350}
+                >
+                    {POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
+                </PopupWindow>
+            )}
+        </section>
+    );
 }

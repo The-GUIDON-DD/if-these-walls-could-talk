@@ -34,11 +34,11 @@ export const POPUP_CONTENTS: Record<PopupWindowKey, (onOk: () => void) => ReactN
     ),
     Files: () => (
         <div className="p-4 text-[#161B3F] font-['Chivo_Mono'] text-sm leading-6 bg-[#F8FBFF] h-full">
-            <p className="font-semibold mb-3">Files</p>
             <ul className="list-disc list-inside space-y-2">
-                <li>Case notes</li>
-                <li>Campus safety report</li>
-                <li>Policy review draft</li>
+                <li>Public Reckonings</li>
+                <li>Codes and Complaints</li>
+                <li>Procedure Hesitation</li>
+                <li>Journey Ahead</li>
             </ul>
         </div>
     ),
