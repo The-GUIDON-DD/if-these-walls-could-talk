@@ -7,11 +7,22 @@ const FILES_LIST = [
     { id: "journey-ahead", label: "Journey Ahead" },
 ];
 
-export function FilesContent(): ReactNode {
-    const [selectedId, setSelectedId] = useState("public-reckonings");
+type FilesContentProps = {
+    onOpenProcedureHesitation?: () => void;
+};
+
+export function FilesContent({ onOpenProcedureHesitation }: FilesContentProps): ReactNode {
+    const [selectedId, setSelectedId] = useState("procedure-hesitation");
+
+    const handleFileClick = (id: string) => {
+        setSelectedId(id);
+        if (id === "procedure-hesitation" && onOpenProcedureHesitation) {
+            onOpenProcedureHesitation();
+        }
+    };
 
     return (
-        <div className="relative w-full h-full p-[28px] font-['Chivo_Mono'] select-none">
+        <div className="relative w-full h-full p-[28px] font-['Chivo_Mono'] select-none flex flex-col justify-between">
             {/* Main File Box */}
             <div className="w-[945px] h-[369px] bg-[#A7B8E6] border-t-[3px] border-l-[3px] border-[#1E3293]/50 p-8 flex gap-12 justify-center items-center">
                 {FILES_LIST.map(({ id, label }) => {
@@ -20,12 +31,16 @@ export function FilesContent(): ReactNode {
                         <button
                             key={id}
                             type="button"
-                            onClick={() => setSelectedId(id)}
+                            onClick={() => handleFileClick(id)}
+                            onDoubleClick={() => {
+                                if (id === "procedure-hesitation" && onOpenProcedureHesitation) {
+                                    onOpenProcedureHesitation();
+                                }
+                            }}
                             className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all ${
                                 active ? "bg-[#D0D9F3]" : "hover:bg-white/20"
                             }`}
                         >
-                            {/* SVG Icon */}
                             <svg
                                 width="70"
                                 height="88"
@@ -55,7 +70,7 @@ export function FilesContent(): ReactNode {
 
                             <span
                                 className={`text-base text-center leading-snug ${
-                                    active ? "text-[#161B3F]" : "text-[#2B3563]"
+                                    active ? "text-[#161B3F] font-bold" : "text-[#2B3563]"
                                 }`}
                             >
                                 {label}
