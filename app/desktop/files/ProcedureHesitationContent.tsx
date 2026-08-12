@@ -46,8 +46,8 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
                             </a>
                             {" "} first responders. These volunteers listen to disclosures, offer initial guidance, and help connect survivors to the appropriate University offices, making the first step toward reporting feel more accessible.
                         </p>
-                        <div className="w-full max-w-[961px] bg-[#F5FF64] text-[#161B3F] p-[20px] md:py-[20px] md:px-[63px] border-r-[4px] border-b-[4px] border-[#000000] shadow-[inset_4px_4px_0px_#FFFFFF] font-sans">
-                            <p>
+                            <div className="w-full max-w-[961px] bg-[#F5FF64] text-[#161B3F] p-[20px] md:pt-[36px] md:pb-[36px] md:px-[63px] border-r-[4px] border-b-[4px] border-[#000000] shadow-[inset_4px_4px_0px_#FFFFFF] font-sans">                            
+                                <p>
                                 Within the conversation sessions held with responders, Escarez explains that the principle of{" "} 
                                 <a href="https://learn.childhood.org.au/empowered-consent/#:~:text=Affirmative%20consent%20moves%20us%20away%20from%20the,be%20enthusiastic%2C%20clear%2C%20and%20an%20ongoing%20yes" target="_blank" rel="noopener noreferrer" className="underline">
                                     empowered consent
@@ -96,31 +96,28 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
                         </div>
                     </div>
 
-                    <div className="w-full max-w-[961px] bg-[#BACBFF] text-[#161B3F] p-[20px] md:py-[20px] md:px-[63px] border-t-[4px] border-l-[4px] border-[#1E3293]/50 border-r-[4px] border-b-[4px] border-[#1E3293] shadow-[4px_4px_0px_rgba(0,0,0,0.25)] font-sans">
+                    <div className="w-full max-w-[961px] bg-[#BACBFF] text-[#161B3F] p-[20px] md:py-[20px] md:px-[32px] border-t-[4px] border-l-[4px] border-[#1E3293]/50 border-r-[4px] border-b-[4px] border-[#1E3293] shadow-[4px_4px_0px_rgba(0,0,0,0.25)] font-sans">
                         <div className="flex flex-col border border-[#1E3293]/30 bg-[#F4F7FF] shadow-md">
                             <div 
                                 onMouseEnter={() => setHoveredIndex(0)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                className={`p-4 font-semibold text-lg flex items-center justify-between cursor-pointer transition-colors duration-200 ${
-                                    (hoveredIndex === 0 || hoveredIndex === null) ? "bg-[#3B69FF] text-white" : "bg-[#F4F7FF] text-[#161B3F]"
+                                className={`p-4 font-semibold text-lg flex items-center justify-between cursor-pointer ${
+                                    (hoveredIndex === 0 || hoveredIndex === null) ? "bg-[#254EDF] text-white shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3)]" : "bg-[#F4F7FF] text-[#161B3F]"
                                 }`}
                             >
                                 <span>“Will there be support?”</span>
                             </div>
                             <div 
                                 onMouseEnter={() => setHoveredIndex(1)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                className={`p-4 border-t border-[#1E3293]/20 font-semibold text-lg flex items-center justify-between cursor-pointer transition-colors duration-200 ${
-                                    hoveredIndex === 1 ? "bg-[#3B69FF] text-white" : "bg-[#F4F7FF] text-[#161B3F]"
+                                className={`p-4 border-t border-[#1E3293]/20 font-semibold text-lg flex items-center justify-between cursor-pointer ${
+                                    hoveredIndex === 1 ? "bg-[#254EDF] text-white shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3)]" : "bg-[#F4F7FF] text-[#161B3F]"
                                 }`}
                             >
                                 <span>“Will they be believed?”</span>
                             </div>
                             <div 
                                 onMouseEnter={() => setHoveredIndex(2)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                className={`p-4 border-t border-[#1E3293]/20 font-semibold text-lg flex items-center justify-between cursor-pointer transition-colors duration-200 ${
-                                    hoveredIndex === 2 ? "bg-[#3B69FF] text-white" : "bg-[#F4F7FF] text-[#161B3F]"
+                                className={`p-4 border-t border-[#1E3293]/20 font-semibold text-lg flex items-center justify-between cursor-pointer ${
+                                    hoveredIndex === 2 ? "bg-[#254EDF] text-white shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3)]" : "bg-[#F4F7FF] text-[#161B3F]"
                                 }`}
                             >
                                 <span>“Will they be further shamed or stigmatized?”</span>
@@ -130,6 +127,7 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
                             <p>These questions, she adds, weigh heavily on those considering whether to come forward.</p>
                         </div>
                     </div>
+
                     <div className="space-y-6 text-base md:text-lg leading-relaxed text-[#BACBFF] font-sans text-left">
                         <p> Despite laws like the{" "} 
                             <a href="https://www.ombudsman.gov.ph/GAD/Laws%20and%20Mandates/IRR-of-RA-11313-Safe-Spaces-Act.pdf" target="_blank" rel="noopener noreferrer" className="underline">
@@ -150,7 +148,7 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
                         <p>For Selena, hesitation was shaped by these concerns about accountability. She recalled her father asking what would happen to the student who had harassed her. “They told [my father] that the Ateneo isn’t the kind of institution that likes to punish its students,” she says, referring to the administrators handling her case.</p>
                     </div>
                     
-                    <div className="w-full mt-8 p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center text-left" style={{ background: "linear-gradient(90deg, #6D91FE 0%, #0F1A4F 10%)" }}>
+                    <div className="w-full mt-8 p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center text-left bg-[linear-gradient(90deg,#6D91FE_0%,rgba(15,26,79,0.1)_100%)]">
                         <div className="w-[240px] h-[240px] md:w-[314px] md:h-[314px] bg-[#BACBFF] shrink-0 border border-[#6D91FE]/30 overflow-hidden relative flex items-center justify-center">
                             <svg width="100%" height="100%" viewBox="0 0 314 314" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="313.049" height="313.049" fill="#BACBFF"/>
