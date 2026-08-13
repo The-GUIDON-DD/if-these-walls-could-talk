@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { FileNavigationBar } from "./FileNavigationBar";
+import BrowserBar from "../../components/BrowserBar";
 import { InteractiveEye } from "../../components/InteractiveEye";
 
 type ProcedureHesitationContentProps = {
@@ -12,10 +12,8 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
 
     return (
         <div className="w-full h-full flex flex-col font-['Chivo_Mono'] select-none bg-[#0B1021] text-white overflow-hidden relative">
-            <FileNavigationBar
-                currentFile={currentFile}
-                onClose={onClose}
-                onSelectFile={(file: string) => setCurrentFile(file)}
+            <BrowserBar
+                fileName={currentFile}
             />
 
             <div className="flex-1 p-8 md:p-16 overflow-y-auto flex flex-col items-center justify-start text-center">
