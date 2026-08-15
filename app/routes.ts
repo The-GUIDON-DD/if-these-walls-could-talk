@@ -12,4 +12,5 @@ export default [
 			route("desktop", "./desktop/Desktop.tsx"),
 		]),
 	]),
+route("desktop/files/procedure-hesitation", "./desktop/files/ProcedureHesitationContent.tsx"),
 ] satisfies RouteConfig;

@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import BrowserBar from "../../components/BrowserBar";
+import ScreenLayout from "~/layouts/ScreenLayout";
 import { InteractiveEye } from "../../components/InteractiveEye";
 
 type ProcedureHesitationContentProps = {
@@ -7,13 +8,31 @@ type ProcedureHesitationContentProps = {
 };
 
 export function ProcedureHesitationContent({ onClose }: ProcedureHesitationContentProps): ReactNode {
-    const [currentFile, setCurrentFile] = useState("Files/Procedure_hesitation.txt");
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    const [history, setHistory] = useState<string[]>(["Procedure_hesitation.txt"]);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+    const currentFile = history[currentIndex];
+    const handleBack = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+        }
+    };
+
+    const handleForward = () => {
+        if (currentIndex < history.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        }
+    };
 
     return (
         <div className="w-full h-full flex flex-col font-['Chivo_Mono'] select-none bg-[#0B1021] text-white overflow-hidden relative">
             <BrowserBar
                 fileName={currentFile}
+                closeAction={onClose}
+                onBack={handleBack}
+                onForward={handleForward}  
             />
 
             <div className="flex-1 p-8 md:p-16 overflow-y-auto flex flex-col items-center justify-start text-center">

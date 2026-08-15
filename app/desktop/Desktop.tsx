@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
-import { FilesContent, ProcedureHesitationContent } from "./files";
+import { ProcedureHesitationContent } from "./files/ProcedureHesitationContent";
+import { FilesContent } from "./files/FilesContent";
 import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
@@ -144,16 +146,30 @@ export default function Desktop() {
                 </PopupWindow>
             )}
 
-            {isProcedureFullScreen && (
-                <div className="absolute inset-0 z-[100] bg-[#0B1021] flex flex-col w-full h-full">
-                    <ProcedureHesitationContent
-                        onClose={() => {
-                            setIsProcedureFullScreen(false);
-                            setActivePopup("Files");
+            {isProcedureFullScreen &&
+                createPortal(
+                    <div 
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100vw",
+                            height: "100vh",
+                            zIndex: 999999,
+                            margin: 0,
+                            borderRadius: 0,
                         }}
-                    />
-                </div>
-            )}
+                        className="bg-[#0B1021] flex flex-col overflow-y-auto"
+                    >
+                        <ProcedureHesitationContent
+                            onClose={() => {
+                                setIsProcedureFullScreen(false);
+                                setActivePopup("Files");
+                            }}
+                        />
+                    </div>,
+                    document.body
+                )}
         </section>
     );
 }
