@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
-import { Link } from "react-router";
+import { Link, useNavigate, useLocation, Outlet } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
-import { ProcedureHesitationContent } from "./files/ProcedureHesitationContent";
 import { FilesContent } from "./files/FilesContent";
 import {
     DESKTOP_ICONS,
@@ -54,11 +52,14 @@ function DesktopIcon({
 }
 
 export default function Desktop() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const desktopImagePath = "/desktop";
     const [showSystemMessage, setShowSystemMessage] = useState(true);
     const [showAbout, setShowAbout] = useState(true);
     const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
-    const [isProcedureFullScreen, setIsProcedureFullScreen] = useState(false);
+    
+    const isNestedRoute = location.pathname !== "/desktop";
 
     const openPopup = (popupKey?: PopupWindowKey) => {
         if (!popupKey) return;
@@ -88,88 +89,71 @@ export default function Desktop() {
     };
 
     return (
-        <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative overflow-hidden">
-            <section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
-                {DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
-                    <DesktopIcon
-                        key={label}
-                        imagePath={`${desktopImagePath}/${imageName}`}
-                        label={label}
-                        link={link}
-                        onClick={popupKey ? () => openPopup(popupKey) : undefined}
-                    />
-                ))}
-            </section>
+        <>
+            {!isNestedRoute && (
+                <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative overflow-hidden">
+                    <section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
+                        {DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
+                            <DesktopIcon
+                                key={label}
+                                imagePath={`${desktopImagePath}/${imageName}`}
+                                label={label}
+                                link={link}
+                                onClick={popupKey ? () => openPopup(popupKey) : undefined}
+                            />
+                        ))}
+                    </section>
 
-            {showSystemMessage && (
-                <PopupWindow
-                    title="System Message"
-                    isOpen
-                    closeAction={() => setShowSystemMessage(false)}
-                    zIndex={40}
-                    width={399}
-                    height={230}
-                >
-                    {POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
-                </PopupWindow>
-            )}
-
-            {showAbout && (
-                <PopupWindow
-                    title="About"
-                    isOpen
-                    closeAction={() => setShowAbout(false)}
-                    zIndex={45}
-                    width={889}
-                    height={622}
-                >
-                    {POPUP_CONTENTS["About"](() => setShowAbout(false))}
-                </PopupWindow>
-            )}
-
-            {activePopup && activePopup !== "About" && activePopup !== "System Message" && !isProcedureFullScreen && (
-                <PopupWindow
-                    title={activePopup}
-                    isOpen
-                    closeAction={closeActivePopup}
-                    zIndex={50}
-                    width={1001}  
-                    height={541}
-                >
-                    {activePopup === "Files" ? (
-                        <FilesContent 
-                            onOpenProcedureHesitation={() => setIsProcedureFullScreen(true)} 
-                        />
-                    ) : (
-                        (POPUP_CONTENTS[activePopup] as any)?.(() => setActivePopup("Files"))
+                    {showSystemMessage && (
+                        <PopupWindow
+                            title="System Message"
+                            isOpen
+                            closeAction={() => setShowSystemMessage(false)}
+                            zIndex={40}
+                            width={399}
+                            height={230}
+                        >
+                            {POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
+                        </PopupWindow>
                     )}
-                </PopupWindow>
-            )}
 
-            {isProcedureFullScreen &&
-                createPortal(
-                    <div 
-                        style={{
-                            position: "fixed",
-                            top: 0,
-                            left: 0,
-                            width: "100vw",
-                            height: "100vh",
-                            zIndex: 999999,
-                            margin: 0,
-                            borderRadius: 0,
-                        }}
-                        className="bg-[#0B1021] flex flex-col overflow-y-auto"
-                    >
-                        <ProcedureHesitationContent
-                            onClose={() => {
-                                setIsProcedureFullScreen(false);
-                                setActivePopup("Files");
-                            }}
-                        />
-                    </div>,
-                    document.body
-                )}
-        </section>
+                    {showAbout && (
+                        <PopupWindow
+                            title="About"
+                            isOpen
+                            closeAction={() => setShowAbout(false)}
+                            zIndex={45}
+                            width={889}
+                            height={622}
+                        >
+                            {POPUP_CONTENTS["About"](() => setShowAbout(false))}
+                        </PopupWindow>
+                    )}
+
+                    {activePopup && activePopup !== "About" && activePopup !== "System Message" && (
+                        <PopupWindow
+                            title={activePopup}
+                            isOpen
+                            closeAction={closeActivePopup}
+                            zIndex={50}
+                            width={1001}  
+                            height={541}
+                        >
+                            {activePopup === "Files" ? (
+                                <FilesContent 
+                                    onOpenProcedureHesitation={() => {
+                                        setActivePopup(null);
+                                        navigate("files/procedure-hesitation");
+                                    }} 
+                                />
+                            ) : (
+                                (POPUP_CONTENTS[activePopup] as any)?.(() => setActivePopup("Files"))
+                            )}
+                        </PopupWindow>
+                    )}
+                </section>
+            )}
+            <Outlet />
+        </>
     );
 }

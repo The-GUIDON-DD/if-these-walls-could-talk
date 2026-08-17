@@ -9,8 +9,9 @@ export default [
 	layout("./layouts/ScreenLayout.tsx", [
 		index("routes/home.tsx"),
 		layout("./layouts/DesktopLayout.tsx", [
-			route("desktop", "./desktop/Desktop.tsx"),
+			route("desktop", "./desktop/Desktop.tsx", [
+				route("files/procedure-hesitation", "./desktop/files/ProcedureHesitationContent.tsx"),
+			]),
 		]),
 	]),
-route("desktop/files/procedure-hesitation", "./desktop/files/ProcedureHesitationContent.tsx"),
 ] satisfies RouteConfig;

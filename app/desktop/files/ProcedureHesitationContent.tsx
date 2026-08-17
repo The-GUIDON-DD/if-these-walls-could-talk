@@ -1,13 +1,10 @@
 import { useState, type ReactNode } from "react";
+import { useNavigate } from "react-router";
 import BrowserBar from "../../components/BrowserBar";
-import ScreenLayout from "~/layouts/ScreenLayout";
 import { InteractiveEye } from "../../components/InteractiveEye";
 
-type ProcedureHesitationContentProps = {
-    onClose?: () => void;
-};
-
-export function ProcedureHesitationContent({ onClose }: ProcedureHesitationContentProps): ReactNode {
+export default function ProcedureHesitationContent(): ReactNode {
+    const navigate = useNavigate();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     const [history, setHistory] = useState<string[]>(["Procedure_hesitation.txt"]);
@@ -26,11 +23,15 @@ export function ProcedureHesitationContent({ onClose }: ProcedureHesitationConte
         }
     };
 
+    const handleClose = () => {
+        navigate("/desktop");
+    };
+
     return (
         <div className="w-full h-full flex flex-col font-['Chivo_Mono'] select-none bg-[#0B1021] text-white overflow-hidden relative">
             <BrowserBar
                 fileName={currentFile}
-                closeAction={onClose}
+                closeAction={handleClose}
                 onBack={handleBack}
                 onForward={handleForward}  
             />
