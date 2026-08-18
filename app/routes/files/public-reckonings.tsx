@@ -1,6 +1,9 @@
+import { createTimeline, onScroll, stagger } from "animejs";
+import { useEffect } from "react";
+
 function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
-		<article className="grow flex flex-col items-center md: gap-5 md:gap-10">
+		<article className="grow flex flex-col items-center md: gap-5 md:gap-10 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
 			<h3 className="text-white font-medium text-3xl text-center  h-10 md:h-20">
 				{title}
@@ -9,6 +12,59 @@ function StepContainer({ title, desc }: { title: string; desc: string }) {
 				<p className="text-white font-medium text-2xl text-center ">{desc}</p>
 			</section>
 		</article>
+	);
+}
+
+function ThreeStepFramework() {
+	const steps = [
+		{
+			title: "Submission of reports",
+			desc: "UODI complies all formal and informal reports from complainants.",
+		},
+		{
+			title: "Preliminary investigation",
+			desc: "UODI acquires evidence and responses from both parties.",
+		},
+		{
+			title: "Hearing process",
+			desc: "UODI also conducts further deliberations for decision-making.",
+		},
+	];
+	useEffect(() => {
+		const tl = createTimeline({
+			autoplay: onScroll({
+				target: "#public-reckonings",
+				enter: "start top+=50vh",
+				leave: "start bottom+=100vh",
+			}),
+		});
+		tl.add("#three-step-framework", {
+			opacity: [0, 1],
+			duration: 750,
+		})
+			.add(
+				".three-step",
+				{
+					opacity: [0, 1],
+					y: [20, 0],
+					duration: 750,
+					delay: stagger(500),
+				},
+				"<+=200",
+			)
+			.init();
+	}, []);
+	return (
+		<section className="mt-10" id="three-step-framework">
+			<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
+				Three-Step Framework
+			</h2>
+			<section className="w-full flex flex-col md:flex-row gap-15 my-25">
+				{steps.map(({ title, desc }) => (
+					<StepContainer key={title} title={title} desc={desc} />
+				))}
+			</section>
+		</section>
 	);
 }
 
@@ -65,23 +121,12 @@ function PersonCard({ name, desc }: { name: string; desc: string }) {
 export default function PublicReckonings() {
 	// move to own constants file
 	const P_CLASS = "mb-10";
-	const steps = [
-		{
-			title: "Submission of reports",
-			desc: "UODI complies all formal and informal reports from complainants.",
-		},
-		{
-			title: "Preliminary investigation",
-			desc: "UODI acquires evidence and responses from both parties.",
-		},
-		{
-			title: "Hearing process",
-			desc: "UODI also conducts further deliberations for decision-making.",
-		},
-	];
 
 	return (
-		<main className="w-full flex flex-col items-stretch mb-50">
+		<main
+			id="public-reckonings"
+			className="w-full flex flex-col items-stretch mb-50"
+		>
 			<h1 className="text-center mt-30 mb-20">Public Reckonings</h1>
 			<p className={P_CLASS}>
 				In accordance with the{" "}
@@ -108,16 +153,7 @@ export default function PublicReckonings() {
 				investigations to acquire evidence and responses from both parties, and
 				a hearing process followed by deliberations for decision-making.
 			</p>
-			<section className="mt-10">
-				<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
-					Three-Step Framework
-				</h2>
-				<section className="w-full flex flex-col md:flex-row gap-15 my-25">
-					{steps.map(({ title, desc }) => (
-						<StepContainer key={title} title={title} desc={desc} />
-					))}
-				</section>
-			</section>
+			<ThreeStepFramework />
 			<p className={P_CLASS}>
 				Consequently,{" "}
 				<a href="https://www.ateneo.edu/central/policies/code-of-decorum">
