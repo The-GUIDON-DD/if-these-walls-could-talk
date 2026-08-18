@@ -170,7 +170,7 @@ export default function PublicReckonings() {
 				.
 			</p>
 			<p className={P_CLASS}>
-				Apart from informal channels, community-based advocacy efforts, such as
+				Apart from informal channels, community-based advocacy efforts, such as{" "}
 				<a href="https://timesupateneo.org/">Times Up Ateneo</a> (TUA) and the
 				#MeToo{" "}
 				<a href="https://www.spot.ph/newsfeatures/culture/75358/ateneo-essay-by-leloy-claudio-a1946-20181005">
