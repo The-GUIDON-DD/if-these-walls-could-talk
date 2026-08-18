@@ -10,6 +10,9 @@ export default [
 		index("routes/home.tsx"),
 		layout("./layouts/DesktopLayout.tsx", [
 			route("desktop", "./desktop/Desktop.tsx"),
+			layout("./layouts/BrowserBarLayout.tsx", [
+				route("public-reckonings", "routes/files/public-reckonings.tsx"),
+			]),
 		]),
 	]),
 ] satisfies RouteConfig;
