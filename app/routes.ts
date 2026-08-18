@@ -1,6 +1,7 @@
 import {
 	index,
 	layout,
+	prefix,
 	type RouteConfig,
 	route,
 } from "@react-router/dev/routes";
@@ -10,8 +11,14 @@ export default [
 		index("routes/home.tsx"),
 		layout("./layouts/DesktopLayout.tsx", [
 			route("desktop", "./desktop/Desktop.tsx"),
-			layout("./layouts/BrowserBarLayout.tsx", [
-				route("public-reckonings", "routes/files/public-reckonings.tsx"),
+			...prefix("files", [
+				layout("./layouts/BrowserBarLayout.tsx", [
+					route("public-reckonings", "routes/files/public-reckonings.tsx"),
+					route(
+						"codes-and-complaints",
+						"routes/files/codes-and-complaints.tsx",
+					),
+				]),
 			]),
 		]),
 	]),
