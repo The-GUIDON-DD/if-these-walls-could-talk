@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { AboutContent } from "./AboutContent";
 import { SystemMessageContent } from "./SystemMessage";
+import { FilesContent } from "./files/FilesContent";
 
 export type PopupWindowKey = "System Message" | "About" | "Files";
 
@@ -20,5 +21,5 @@ export const DESKTOP_ICONS: DesktopIconConfig[] = [
 export const POPUP_CONTENTS: Record<PopupWindowKey, (onOk?: () => void) => ReactNode> = {
     "System Message": (onOk) => <SystemMessageContent onOk={onOk} />,
     About: (onOk) => <AboutContent onOk={onOk} />,
-    Files: () => null,
+    Files: () => <FilesContent />,
 };

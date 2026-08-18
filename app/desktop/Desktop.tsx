@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate, useLocation, Outlet } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
+import { FilesContent } from "./files/FilesContent";
 import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
@@ -40,7 +41,7 @@ function DesktopIcon({
             <button
                 type="button"
                 onClick={onClick}
-                className="w-[70%] flex flex-col items-stretch text-left focus:outline-none focus:ring-2 focus:ring-white/60"
+                className="w-[70%] flex flex-col items-stretch text-left focus:outline-none focus:ring-2 focus:ring-white/60 cursor-pointer"
             >
                 {iconContent}
             </button>
@@ -51,14 +52,17 @@ function DesktopIcon({
 }
 
 export default function Desktop() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const desktopImagePath = "/desktop";
     const [showSystemMessage, setShowSystemMessage] = useState(true);
     const [showAbout, setShowAbout] = useState(true);
     const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
+    
+    const isNestedRoute = location.pathname !== "/desktop";
 
     const openPopup = (popupKey?: PopupWindowKey) => {
         if (!popupKey) return;
-        // Ensure only the requested popup is visible — close any others
         if (popupKey === "About") {
             setShowAbout(true);
             setShowSystemMessage(false);
@@ -71,7 +75,6 @@ export default function Desktop() {
             setActivePopup(null);
             return;
         }
-        // Files: close any existing About/System Message popups and open Files
         if (popupKey === "Files") {
             setShowAbout(false);
             setShowSystemMessage(false);
@@ -82,62 +85,75 @@ export default function Desktop() {
     };
 
     const closeActivePopup = () => {
-            console.log('Desktop: close active popup');
-            setActivePopup(null);
-        };
+        setActivePopup(null);
+    };
 
     return (
-        <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
-            <section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
-                {DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
-                    <DesktopIcon
-                        key={label}
-                        imagePath={`${desktopImagePath}/${imageName}`}
-                        label={label}
-                        link={link}
-                        onClick={popupKey ? () => openPopup(popupKey) : undefined}
-                    />
-                ))}
-            </section>
+        <>
+            {!isNestedRoute && (
+                <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative overflow-hidden">
+                    <section className="w-1/10 h-3/5 top-1/6 right-[8vw] absolute flex flex-col items-center justify-center gap-8">
+                        {DESKTOP_ICONS.map(({ imageName, label, link, popupKey }) => (
+                            <DesktopIcon
+                                key={label}
+                                imagePath={`${desktopImagePath}/${imageName}`}
+                                label={label}
+                                link={link}
+                                onClick={popupKey ? () => openPopup(popupKey) : undefined}
+                            />
+                        ))}
+                    </section>
 
-            {showSystemMessage && (
-                <PopupWindow
-                    title="System Message"
-                    isOpen
-                                closeAction={() => { console.log('Desktop: close System Message'); setShowSystemMessage(false); }}
-                    zIndex={40}
-                    width={399}
-                    height={230}
-                >
-                                {POPUP_CONTENTS["System Message"](() => { console.log('System Message OK -> closing'); setShowSystemMessage(false); })}
-                </PopupWindow>
-            )}
+                    {showSystemMessage && (
+                        <PopupWindow
+                            title="System Message"
+                            isOpen
+                            closeAction={() => setShowSystemMessage(false)}
+                            zIndex={40}
+                            width={399}
+                            height={230}
+                        >
+                            {POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
+                        </PopupWindow>
+                    )}
 
-            {showAbout && (
-                <PopupWindow
-                    title="About"
-                    isOpen
-                                closeAction={() => { console.log('Desktop: close About'); setShowAbout(false); }}
-                    zIndex={45}
-                    width={889}
-                    height={622}
-                >
-                                {POPUP_CONTENTS["About"](() => { console.log('About OK -> closing'); setShowAbout(false); })}
-                </PopupWindow>
-            )}
+                    {showAbout && (
+                        <PopupWindow
+                            title="About"
+                            isOpen
+                            closeAction={() => setShowAbout(false)}
+                            zIndex={45}
+                            width={889}
+                            height={622}
+                        >
+                            {POPUP_CONTENTS["About"](() => setShowAbout(false))}
+                        </PopupWindow>
+                    )}
 
-            {activePopup && activePopup !== "About" && activePopup !== "System Message" && (
-                <PopupWindow
-                    title={activePopup}
-                    isOpen
-                    closeAction={closeActivePopup}
-                    zIndex={50}
-                    width={500}  
-                    height={350}
-                >
-                    {POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
-                </PopupWindow>
+                    {activePopup && activePopup !== "About" && activePopup !== "System Message" && (
+                        <PopupWindow
+                            title={activePopup}
+                            isOpen
+                            closeAction={closeActivePopup}
+                            zIndex={50}
+                            width={1001}  
+                            height={541}
+                        >
+                            {activePopup === "Files" ? (
+                                <FilesContent 
+                                    onOpenProcedureHesitation={() => {
+                                        setActivePopup(null);
+                                        navigate("files/procedure-hesitation");
+                                    }} 
+                                />
+                            ) : (
+                                (POPUP_CONTENTS[activePopup] as any)?.(() => setActivePopup("Files"))
+                            )}
+                        </PopupWindow>
+                    )}
+                </section>
             )}
-        </section>
+            <Outlet />
+        </>
     );
 }
