@@ -1,0 +1,23 @@
+name: Notify when there are changes in main
+
+on:
+  push:
+    branches:
+      main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send TG Reminder
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_TOKEN }}
+          message: |
+            *[CHANGES TO MAIN BRANCH]*
+
+            Commit Message: ${{ github.event.head_commit.message }}
+            View Changes: ${{ github.event.head_commit.url }}
+
+            The main branch has been updated. Please pull/merge from the latest version of main.
