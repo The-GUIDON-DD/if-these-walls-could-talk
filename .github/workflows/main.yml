@@ -17,7 +17,7 @@ jobs:
         with:
           to: ${{ secrets.TG_TO }}
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
-          message_thread_id: ${{ secrets.TG_DEBUG_CHAT }}
+          message_thread_id: ${{ secrets.TG_DEBUG_THREAD }}
           message: |
             **[CHANGES TO MAIN BRANCH]**
 
