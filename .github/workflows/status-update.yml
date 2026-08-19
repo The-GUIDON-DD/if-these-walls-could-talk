@@ -1,8 +1,9 @@
-name: Notify when there are changes in main
+name: Status update changes
 
 on:
   schedule:
     - cron: '0 14 * * 1,3,5'
+  workflow_dispatch:
 
 jobs:
   notify:
