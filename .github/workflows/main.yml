@@ -17,7 +17,7 @@ jobs:
         with:
           to: ${{ secrets.TG_TO }}
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
-          message_thread_id: ${{ secrets.TG_DEBUG_THREAD }}
+          message_thread_id: ${{ secrets.TG_THREAD_ID }}
           format: markdown
           message: |
             *[CHANGES TO MAIN BRANCH]*
