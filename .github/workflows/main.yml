@@ -1,19 +1,22 @@
 name: Notify when there are changes in main
 
 on:
-  push:
+  pull_request:
     branches:
-      main
+      - main
+    types:
+      - closed
 
 jobs:
   notify:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Send TG Reminder
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TG_TO }}
-          token: ${{ secrets.TG_TOKEN }}
+          token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
           message: |
             *[CHANGES TO MAIN BRANCH]*
 
