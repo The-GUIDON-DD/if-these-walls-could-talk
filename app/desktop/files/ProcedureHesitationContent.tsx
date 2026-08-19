@@ -1,41 +1,13 @@
 import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router";
-import BrowserBar from "../../components/BrowserBar";
 import { InteractiveEye } from "../../components/InteractiveEye";
 
 export default function ProcedureHesitationContent(): ReactNode {
     const navigate = useNavigate();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-    const [history, setHistory] = useState<string[]>(["Procedure_hesitation.txt"]);
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-    const currentFile = history[currentIndex];
-    const handleBack = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
-
-    const handleForward = () => {
-        if (currentIndex < history.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        }
-    };
-
-    const handleClose = () => {
-        navigate("/desktop");
-    };
-
     return (
         <div className="w-full h-full flex flex-col font-['Chivo_Mono'] select-none bg-[#0B1021] text-white overflow-hidden relative">
-            <BrowserBar
-                fileName={currentFile}
-                closeAction={handleClose}
-                onBack={handleBack}
-                onForward={handleForward}  
-            />
-
             <div className="flex-1 p-8 md:p-16 overflow-y-auto flex flex-col items-center justify-start text-center">
                 <div className="max-w-3xl space-y-8 my-auto">
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[#BACBFF] leading-tight">
@@ -71,8 +43,8 @@ export default function ProcedureHesitationContent(): ReactNode {
                                     empowered consent
                                 </a> 
                                 {" "}ensures survivors decide for themselves whether to file a formal complaint, pause the process, or pursue other forms of support. For her, keeping these decisions with the survivor helps prevent additional harm and allows them to engage with the process in ways that feel safe.
-                            </p>
-                        </div>
+                                </p>
+                            </div>
                         <p>
                             However, even with these mechanisms, societal attitudes continue to shape how survivors experience the process. Broader societal attitudes, such as{" "}
                             <a href="https://www.sace.ca/learn/victim-blaming/" target="_blank" rel="noopener noreferrer" className="underline">
@@ -89,7 +61,7 @@ export default function ProcedureHesitationContent(): ReactNode {
                     <div className="relative w-full h-[350px] flex items-center justify-center my-12">
                         <div className="relative flex flex-col items-center">
                             <div 
-                                className="w-[153.49px] h-[153.49px] rounded-full shadow-[0px_6px_0px_rgba(22,27,63,0.3)] z-10"
+                                className="w-[153.49px] h-[153.49px] rounded-full shadow-[0px_6px_0px_rgba(22,27,63,0.3)]"
                                 style={{ background: "linear-gradient(180deg, #C2CCFF 0%, #8593DC 100%)" }}
                             />
                             <div 
@@ -99,11 +71,8 @@ export default function ProcedureHesitationContent(): ReactNode {
                         </div>
 
                         <InteractiveEye direction="left" width="272.52px" height="124.61px" className="left-[2%] top-[5%]" style={{ transform: "rotate(-3.32deg)" }} />
-
                         <InteractiveEye direction="left" width="188.71px" height="86.74px" className="left-[5%] bottom-[5%]" style={{ transform: "rotate(-16.33deg)" }} />
-
                         <InteractiveEye direction="right" width="188.71px" height="86.74px" className="right-[5%] top-[5%]" style={{ transform: "rotate(-16.33deg)" }} />
-
                         <InteractiveEye direction="right" width="272.52px" height="124.61px" className="right-[2%] bottom-[5%]" style={{ transform: "rotate(-3.32deg)" }} />
                     </div>
 
@@ -151,7 +120,7 @@ export default function ProcedureHesitationContent(): ReactNode {
                             <a href="https://www.ombudsman.gov.ph/GAD/Laws%20and%20Mandates/IRR-of-RA-11313-Safe-Spaces-Act.pdf" target="_blank" rel="noopener noreferrer" className="underline">
                                 Safe Spaces Act of 2019
                             </a>
-                            , reports from the Philippine Commission on Women{" "}  
+                            , reports from the Philippine Commission on Women{" "}   
                             <a href="https://www.gmanetwork.com/news/topstories/nation/929640/pcw-violence-against-women/story/" target="_blank" rel="noopener noreferrer" className="underline">
                                 show
                             </a>
@@ -170,7 +139,7 @@ export default function ProcedureHesitationContent(): ReactNode {
                         <div className="w-[240px] h-[240px] md:w-[314px] md:h-[314px] bg-[#BACBFF] shrink-0 border border-[#6D91FE]/30 overflow-hidden relative flex items-center justify-center">
                             <svg width="100%" height="100%" viewBox="0 0 314 314" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="313.049" height="313.049" fill="#BACBFF"/>
-                                <path d="M118.568 140.738C108.044 130.213 102.781 117.561 102.781 102.782C102.781 88.0027 108.044 75.3507 118.568 64.8261C129.093 54.3014 141.745 49.0391 156.524 49.0391C171.304 49.0391 183.956 54.3014 194.48 64.8261C205.005 75.3507 210.267 88.0027 210.267 102.782C210.267 117.561 205.005 130.213 194.48 140.738C183.956 151.263 171.304 156.525 156.524 156.525C141.745 156.525 129.093 151.263 118.568 140.738ZM49.0383 264.011V226.391C49.0383 218.777 51 211.782 54.9232 205.404C58.8464 199.027 64.0505 194.154 70.5355 190.786C84.4191 183.844 98.5266 178.64 112.858 175.174C127.19 171.707 141.745 169.97 156.524 169.961C171.304 169.952 185.859 171.689 200.19 175.174C214.522 178.658 228.629 183.862 242.513 190.786C249.007 194.145 254.216 199.018 258.139 205.404C262.062 211.791 264.019 218.786 264.01 226.391V264.011H49.0383Z" fill="url(#paint0_linear_355_2008)"/>
+                                <path d="M118.568 140.738C108.044 130.213 102.781 117.561 102.781 102.782C102.781 88.0027 108.044 75.3507 118.568 64.8261C129.093 54.3014 141.745 49.0391 156.524 49.0391C171.304 49.0391 183.956 54.3014 194.48 64.8261C205.005 75.3507 210.267 88.0027 210.267 102.782C210.267 117.561 205.005 130.213 194.48 140.738C183.956 151.263 171.304 156.525 156.524 156.525C141.745 156.525 129.093 151.263 118.568 140.738ZM49.0383 264.011V226.391C49.0383 218.777 51 211.782 54.9232 205.404C58.8464 199.027 64.0505 194.154 70.5355 190.786C84.4191 183.844 98.5266 178.64 112.858 175.174C127.19 171.707 141.745 169.97 156.524 169.961C171.304 169.952 185.859 171.689 200.19 175.174C214.522 178.658 228.629 183.862 242.513 190.786C249.007 194.145 254.216 199.018 258.139 205.404C262.062 211.791 264.019 218.786 264.01 226.391H264.011V264.011H49.0383Z" fill="url(#paint0_linear_355_2008)"/>
                                 <defs>
                                     <linearGradient id="paint0_linear_355_2008" x1="156.524" y1="49.0391" x2="156.524" y2="264.011" gradientUnits="userSpaceOnUse">
                                         <stop stopColor="#0827C0"/>
