@@ -19,7 +19,7 @@ jobs:
           message: |
             *[STATUS UPDATE]*
 
-            Hello @angelakyras @abbibi_m. Please update me with the following format by *5PM today*:
+            Hello @angelakyras @abbibi_m . Please update me with the following format by *5PM today*:
             1. Progress
             2. Blockers
             3. PR or Screenshots/Video for any progress you have
