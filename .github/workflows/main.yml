@@ -19,10 +19,10 @@ jobs:
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
           message_thread_id: ${{ secrets.TG_DEBUG_THREAD }}
           message: |
-            <b>[CHANGES TO MAIN BRANCH]</b>
+            *[CHANGES TO MAIN BRANCH]*
 
-            <b>PR Title</b>: ${{ github.event.pull_request.title }}
-            <b>PR Author</b>: ${{ github.event.pull_request.user.name }}
-            <b>PR URL</b>: ${{ github.event.pull_request.url }}
+            *PR Title*: ${{ github.event.pull_request.title }}
+            *PR Author*: ${{ github.event.pull_request.user.name }}
+            *PR URL*: ${{ github.event.pull_request.html_url }}
 
             The main branch has been updated. Please pull/merge from the latest version of main.
