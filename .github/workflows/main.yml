@@ -15,9 +15,8 @@ jobs:
       - name: Send TG Reminder
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TG_CHAT_ID }}
+          to: 5225168827
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
-          message_thread_id: ${{ secrets.TG_DEBUG_THREAD }}
           message: |
             *[CHANGES TO MAIN BRANCH]*
 
