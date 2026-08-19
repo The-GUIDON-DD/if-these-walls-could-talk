@@ -23,7 +23,7 @@ jobs:
             *[CHANGES TO MAIN BRANCH]*
 
             *PR Title*: ${{ github.event.pull_request.title }}
-            *PR Author*: ${{ github.event.pull_request.user.name }}
+            *PR Author*: ${{ github.event.pull_request.user.login }}
             *PR URL*: ${{ github.event.pull_request.html_url }}
 
             The main branch has been updated. Please pull/merge from the latest version of main.
