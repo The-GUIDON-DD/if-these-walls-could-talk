@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
+import { FilesContent } from "./FilesContent"; 
 import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
@@ -58,7 +59,6 @@ export default function Desktop() {
 
     const openPopup = (popupKey?: PopupWindowKey) => {
         if (!popupKey) return;
-        // Ensure only the requested popup is visible — close any others
         if (popupKey === "About") {
             setShowAbout(true);
             setShowSystemMessage(false);
@@ -71,7 +71,6 @@ export default function Desktop() {
             setActivePopup(null);
             return;
         }
-        // Files: close any existing About/System Message popups and open Files
         if (popupKey === "Files") {
             setShowAbout(false);
             setShowSystemMessage(false);
@@ -82,9 +81,8 @@ export default function Desktop() {
     };
 
     const closeActivePopup = () => {
-            console.log('Desktop: close active popup');
-            setActivePopup(null);
-        };
+        setActivePopup(null);
+    };
 
     return (
         <section className="h-screen w-screen bg-[url('/desktop/wallpaper.png')] bg-cover bg-center relative">
@@ -104,12 +102,12 @@ export default function Desktop() {
                 <PopupWindow
                     title="System Message"
                     isOpen
-                                closeAction={() => { console.log('Desktop: close System Message'); setShowSystemMessage(false); }}
+                    closeAction={() => { setShowSystemMessage(false); }}
                     zIndex={40}
                     width={399}
                     height={230}
                 >
-                                {POPUP_CONTENTS["System Message"](() => { console.log('System Message OK -> closing'); setShowSystemMessage(false); })}
+                    {POPUP_CONTENTS["System Message"](() => { setShowSystemMessage(false); })}
                 </PopupWindow>
             )}
 
@@ -117,12 +115,12 @@ export default function Desktop() {
                 <PopupWindow
                     title="About"
                     isOpen
-                                closeAction={() => { console.log('Desktop: close About'); setShowAbout(false); }}
+                    closeAction={() => { setShowAbout(false); }}
                     zIndex={45}
                     width={889}
                     height={622}
                 >
-                                {POPUP_CONTENTS["About"](() => { console.log('About OK -> closing'); setShowAbout(false); })}
+                    {POPUP_CONTENTS["About"](() => { setShowAbout(false); })}
                 </PopupWindow>
             )}
 
@@ -135,7 +133,7 @@ export default function Desktop() {
                     width={1001}  
                     height={541}
                 >
-                    {POPUP_CONTENTS[activePopup](() => setActivePopup("Files"))}
+                    {POPUP_CONTENTS[activePopup as PopupWindowKey]?.(() => setActivePopup("Files"))}
                 </PopupWindow>
             )}
         </section>
