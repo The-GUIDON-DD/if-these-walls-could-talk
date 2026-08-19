@@ -14,12 +14,12 @@ jobs:
         with:
           to: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
-          message_thread_id: ${{ secrets.TG_DEBUG_THREAD }}
+          message_thread_id: ${{ secrets.TG_THREAD_ID }}
           format: markdown
           message: |
             *[STATUS UPDATE]*
 
-            Hello @julyannahuang. Please update me with the following format by *5PM today*:
+            Hello @angelakyras @abbibi_m. Please update me with the following format by *5PM today*:
             1. Progress
             2. Blockers
             3. PR or Screenshots/Video for any progress you have
