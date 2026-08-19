@@ -15,7 +15,7 @@ jobs:
       - name: Send TG Reminder
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TG_TO }}
+          to: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_NOTIFY_BOT_TOKEN }}
           message_thread_id: ${{ secrets.TG_THREAD_ID }}
           format: markdown
