@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { Link } from "react-router";
 
 const FILES_LIST = [
     { id: "public-reckonings", label: "Public Reckonings" },
@@ -7,38 +8,24 @@ const FILES_LIST = [
     { id: "journey-ahead", label: "Journey Ahead" },
 ];
 
-type FilesContentProps = {
-    onOpenProcedureHesitation?: () => void;
-};
-
-export function FilesContent({ onOpenProcedureHesitation }: FilesContentProps): ReactNode {
-    const [selectedId, setSelectedId] = useState("procedure-hesitation");
-
-    const handleFileClick = (id: string) => {
-        setSelectedId(id);
-        if (id === "procedure-hesitation" && onOpenProcedureHesitation) {
-            onOpenProcedureHesitation();
-        }
-    };
+export function FilesContent(): ReactNode {
+    const [hoveredId, setHoveredId] = useState<string>("public-reckonings");
 
     return (
-        <div className="relative w-full h-full p-[28px] font-['Chivo_Mono'] select-none flex flex-col justify-between">
-            {/* Main File Box */}
-            <div className="w-[945px] h-[369px] bg-[#A7B8E6] border-t-[3px] border-l-[3px] border-[#1E3293]/50 p-8 flex gap-12 justify-center items-center">
+        <div className="relative w-full h-full p-6 font-['Chivo_Mono'] select-none flex flex-col justify-between">
+            <div className="w-full flex-1 bg-[#A7B8E6] border-t-[3px] border-l-[3px] border-[#1E3293]/50 p-6 flex flex-wrap gap-6 justify-center items-center overflow-auto">
                 {FILES_LIST.map(({ id, label }) => {
-                    const active = selectedId === id;
+                    const active = hoveredId === id;
+
                     return (
-                        <button
+                        <Link
                             key={id}
-                            type="button"
-                            onClick={() => handleFileClick(id)}
-                            onDoubleClick={() => {
-                                if (id === "procedure-hesitation" && onOpenProcedureHesitation) {
-                                    onOpenProcedureHesitation();
-                                }
-                            }}
-                            className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all ${
-                                active ? "bg-[#D0D9F3]" : "hover:bg-white/20"
+                            to={`/files/${id}`}
+                            onMouseEnter={() => setHoveredId(id)}
+                            className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all outline-none ${
+                                active 
+                                    ? "bg-[#D0D9F3] border border-[#1E3293]/30 shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]" 
+                                    : "bg-transparent"
                             }`}
                         >
                             <svg
@@ -68,20 +55,15 @@ export function FilesContent({ onOpenProcedureHesitation }: FilesContentProps): 
                                 </defs>
                             </svg>
 
-                            <span
-                                className={`text-base text-center leading-snug ${
-                                    active ? "text-[#161B3F] font-bold" : "text-[#2B3563]"
-                                }`}
-                            >
+                            <span className="text-base text-center leading-snug px-1 text-[#2B3563]">
                                 {label}
                             </span>
-                        </button>
+                        </Link>
                     );
                 })}
             </div>
 
-            {/* Bottom Bar */}
-            <div className="w-[945px] h-[32px] mt-4 flex gap-2 text-xs text-[#161B3F]">
+            <div className="w-full h-[32px] mt-4 flex gap-2 text-xs text-[#161B3F]">
                 <div className="px-4 flex items-center border-t-[3px] border-l-[3px] border-[#1E3293]/50 bg-[#A7B8E6]">
                     <p className="text-base">{FILES_LIST.length} object(s)</p>
                 </div>

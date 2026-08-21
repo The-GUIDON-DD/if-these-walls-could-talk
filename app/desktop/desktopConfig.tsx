@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { AboutContent } from "./AboutContent";
 import { SystemMessageContent } from "./SystemMessage";
-import { FilesContent } from "./files/FilesContent";
+import { FilesContent } from "./FilesContent";
 
 export type PopupWindowKey = "System Message" | "About" | "Files";
 

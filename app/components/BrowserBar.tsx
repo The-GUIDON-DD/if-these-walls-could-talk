@@ -1,4 +1,4 @@
-import { redirect } from "react-router";
+import { useNavigate } from "react-router";
 import { MenuBar } from "./MenuBar";
 
 type BrowserBarProps = {
@@ -9,6 +9,9 @@ type BrowserBarProps = {
 };
 
 export default function BrowserBar({ fileName, onBack, onForward, closeAction }: BrowserBarProps) {
+    const navigate = useNavigate();
+    const handleBack = onBack ?? (() => navigate(-1));
+    const handleClose = closeAction ?? (() => navigate("/desktop"));
     const browserBarClass =
         "bg-[#B1BFED] px-[12vw] py-2 flex border-t-4 border-[#7988c9]";
     const buttonClass =
@@ -16,10 +19,10 @@ export default function BrowserBar({ fileName, onBack, onForward, closeAction }:
 
     return (
         <header className="w-full flex flex-col items-stretch">
-            <MenuBar title="Files" closeAction={closeAction || (() => redirect("/desktop"))} />
+            <MenuBar title="Files" closeAction={handleClose} />
             <section className={`${browserBarClass} h-15`}>
                 <section className="flex h-full items-stretch gap-1">
-                    <button type="button" onClick={onBack} className={buttonClass}>
+                    <button type="button" onClick={handleBack} className={buttonClass}>
                         <img
                             alt="Back"
                             className="w-full h-full -scale-x-100"

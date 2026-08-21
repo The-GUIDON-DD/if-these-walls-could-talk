@@ -8,7 +8,7 @@ export default function ProcedureHesitationContent(): ReactNode {
 
     return (
         <div className="w-full h-full flex flex-col font-['Chivo_Mono'] select-none bg-[#0B1021] text-white overflow-hidden relative">
-            <div className="flex-1 p-8 md:p-16 overflow-y-auto flex flex-col items-center justify-start text-center">
+            <div className="flex-1 overflow-y-auto flex flex-col items-center justify-start text-center">
                 <div className="max-w-3xl space-y-8 my-auto">
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[#BACBFF] leading-tight">
                         Between procedure and hesitation
@@ -36,13 +36,13 @@ export default function ProcedureHesitationContent(): ReactNode {
                             </a>
                             {" "} first responders. These volunteers listen to disclosures, offer initial guidance, and help connect survivors to the appropriate University offices, making the first step toward reporting feel more accessible.
                         </p>
-                            <div className="w-full max-w-[961px] bg-[#F5FF64] text-[#161B3F] p-[20px] md:pt-[36px] md:pb-[36px] md:px-[63px] border-r-[4px] border-b-[4px] border-[#000000] shadow-[inset_4px_4px_0px_#FFFFFF] font-sans">                            
-                                <p>
-                                Within the conversation sessions held with responders, Escarez explains that the principle of{" "} 
-                                <a href="https://learn.childhood.org.au/empowered-consent/#:~:text=Affirmative%20consent%20moves%20us%20away%20from%20the,be%20enthusiastic%2C%20clear%2C%20and%20an%20ongoing%20yes" target="_blank" rel="noopener noreferrer" className="underline">
-                                    empowered consent
-                                </a> 
-                                {" "}ensures survivors decide for themselves whether to file a formal complaint, pause the process, or pursue other forms of support. For her, keeping these decisions with the survivor helps prevent additional harm and allows them to engage with the process in ways that feel safe.
+                            <div className="w-full max-w-[961px] bg-[#F5FF64] text-[#000000] p-[20px] md:pt-[36px] md:pb-[36px] md:px-[63px] border-r-[4px] border-b-[4px] border-[#000000] shadow-[inset_4px_4px_0px_#FFFFFF] font-sans">
+                                <p className="!text-black">                            
+                                    Within the conversation sessions held with responders, Escarez explains that the principle of{" "} 
+                                    <a href="https://learn.childhood.org.au/empowered-consent/#:~:text=Affirmative%20consent%20moves%20us%20away%20from%20the,be%20enthusiastic%2C%20clear%2C%20and%20an%20ongoing%20yes" target="_blank" rel="noopener noreferrer" className="underline !text-[#000000]">
+                                        empowered consent
+                                    </a> 
+                                    {" "}ensures survivors decide for themselves whether to file a formal complaint, pause the process, or pursue other forms of support. For her, keeping these decisions with the survivor helps prevent additional harm and allows them to engage with the process in ways that feel safe.
                                 </p>
                             </div>
                         <p>
@@ -110,8 +110,8 @@ export default function ProcedureHesitationContent(): ReactNode {
                                 <span>“Will they be further shamed or stigmatized?”</span>
                             </div>
                         </div>
-                        <div className="space-y-6 text-base md:text-lg leading-relaxed text-[#161B3F] font-sans text-left mt-6">
-                            <p>These questions, she adds, weigh heavily on those considering whether to come forward.</p>
+                        <div className="space-y-6 text-base md:text-lg leading-relaxed font-sans text-left mt-6">
+                            <p className="!text-[#161B3F]">These questions, she adds, weigh heavily on those considering whether to come forward.</p>
                         </div>
                     </div>
 

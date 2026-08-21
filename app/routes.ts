@@ -15,7 +15,7 @@ export default [
                 layout("./layouts/BrowserBarLayout.tsx", [
                     route("public-reckonings", "routes/files/public-reckonings.tsx"),
                     route("codes-and-complaints", "routes/files/codes-and-complaints.tsx"),
-                    route("procedure-hesitation", "./desktop/files/ProcedureHesitationContent.tsx"),
+                    route("procedure-hesitation", "routes/files/ProcedureHesitationContent.tsx"),
                 ]),
             ]),
         ]),

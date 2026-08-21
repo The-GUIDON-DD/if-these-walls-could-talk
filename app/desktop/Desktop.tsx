@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation, Outlet } from "react-router";
+import { Link, useLocation, Outlet } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
-import { FilesContent } from "./files/FilesContent";
+import { FilesContent } from "./FilesContent";
 import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
@@ -52,14 +52,14 @@ function DesktopIcon({
 }
 
 export default function Desktop() {
-    const navigate = useNavigate();
     const location = useLocation();
     const desktopImagePath = "/desktop";
     const [showSystemMessage, setShowSystemMessage] = useState(true);
     const [showAbout, setShowAbout] = useState(true);
     const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
     
-    const isNestedRoute = location.pathname !== "/desktop";
+    // Fixed: Handles trailing slashes properly so /desktop/ doesn't trigger blank screen
+    const isNestedRoute = location.pathname.replace(/\/$/, "") !== "/desktop";
 
     const openPopup = (popupKey?: PopupWindowKey) => {
         if (!popupKey) return;
@@ -140,12 +140,7 @@ export default function Desktop() {
                             height={541}
                         >
                             {activePopup === "Files" ? (
-                                <FilesContent 
-                                    onOpenProcedureHesitation={() => {
-                                        setActivePopup(null);
-                                        navigate("files/procedure-hesitation");
-                                    }} 
-                                />
+                                <FilesContent />
                             ) : (
                                 (POPUP_CONTENTS[activePopup] as any)?.(() => setActivePopup("Files"))
                             )}
