@@ -36,3 +36,15 @@
 html {
 	@apply text-[#161b3f];
 }
+
+.file-main {
+	@apply w-full flex flex-col items-stretch mb-50;
+}
+
+.file-main p {
+	@apply mb-10;
+}
+
+.file-main h1 {
+	@apply text-center mt-30 mb-20;
+}
