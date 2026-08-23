@@ -1,4 +1,5 @@
 import { type ReactNode, useState } from "react";
+import { Link } from "react-router";
 import { FILES_LIST } from "~/utils/constants";
 
 export function FilesContent(): ReactNode {
@@ -11,49 +12,51 @@ export function FilesContent(): ReactNode {
 					const active = hoveredId === id;
 
 					return (
-						<div
-							key={id}
-							onMouseEnter={() => setHoveredId(id)}
-							className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all outline-none ${
-								active
-									? "bg-[#D0D9F3] border border-[#1E3293]/30 shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-									: "bg-transparent"
-							}`}
-						>
-							<svg
-								width="70"
-								height="88"
-								viewBox="0 0 70 88"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								className="mb-4"
+						<Link key={id} to={`/files/${id}`}>
+							<div
+								onMouseEnter={() => setHoveredId(id)}
+								className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all outline-none ${
+									active
+										? "bg-[#D0D9F3] border border-[#1E3293]/30 shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+										: "bg-transparent"
+								}`}
 							>
-								<path
-									d="M39.375 30.8V6.6L63.4375 30.8M8.75 0C3.89375 0 0 3.916 0 8.8V79.2C0 81.5339 0.921872 83.7722 2.56282 85.4225C4.20376 87.0729 6.42936 88 8.75 88H61.25C63.5706 88 65.7962 87.0729 67.4372 85.4225C69.0781 83.7722 70 81.5339 70 79.2V26.4L43.75 0H8.75Z"
-									fill={`url(#gradient-${id})`}
-								/>
-								<defs>
-									<linearGradient
-										id={`gradient-${id}`}
-										x1="35"
-										y1="88"
-										x2="35"
-										y2="0"
-										gradientUnits="userSpaceOnUse"
-									>
-										<stop stopColor={active ? "#1E3293" : "#3D4775"} />
-										<stop
-											offset="1"
-											stopColor={active ? "#3F56CD" : "#707AA7"}
-										/>
-									</linearGradient>
-								</defs>
-							</svg>
+								<svg
+									width="70"
+									height="88"
+									viewBox="0 0 70 88"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									className="mb-4"
+								>
+									<title>bar</title>
+									<path
+										d="M39.375 30.8V6.6L63.4375 30.8M8.75 0C3.89375 0 0 3.916 0 8.8V79.2C0 81.5339 0.921872 83.7722 2.56282 85.4225C4.20376 87.0729 6.42936 88 8.75 88H61.25C63.5706 88 65.7962 87.0729 67.4372 85.4225C69.0781 83.7722 70 81.5339 70 79.2V26.4L43.75 0H8.75Z"
+										fill={`url(#gradient-${id})`}
+									/>
+									<defs>
+										<linearGradient
+											id={`gradient-${id}`}
+											x1="35"
+											y1="88"
+											x2="35"
+											y2="0"
+											gradientUnits="userSpaceOnUse"
+										>
+											<stop stopColor={active ? "#1E3293" : "#3D4775"} />
+											<stop
+												offset="1"
+												stopColor={active ? "#3F56CD" : "#707AA7"}
+											/>
+										</linearGradient>
+									</defs>
+								</svg>
 
-							<span className="text-base text-center leading-snug px-1 text-[#2B3563]">
-								{label}
-							</span>
-						</div>
+								<span className="text-base text-center leading-snug px-1 text-[#2B3563]">
+									{label}
+								</span>
+							</div>
+						</Link>
 					);
 				})}
 			</div>
