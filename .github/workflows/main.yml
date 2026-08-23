@@ -1,12 +1,11 @@
 name: Notify when there are changes in main
-
 on:
   pull_request:
     branches:
       - main
+      - staging
     types:
       - closed
-
 jobs:
   notify:
     if: github.event.pull_request.merged == true
@@ -20,10 +19,10 @@ jobs:
           message_thread_id: ${{ secrets.TG_THREAD_ID }}
           format: markdown
           message: |
-            *[CHANGES TO MAIN BRANCH]*
+            *[CHANGES TO MAIN/STAGING BRANCH]*
 
             *PR Title*: ${{ github.event.pull_request.title }}
             *PR Author*: ${{ github.event.pull_request.user.login }}
             *PR URL*: ${{ github.event.pull_request.html_url }}
 
-            The main branch has been updated. Please pull/merge from the latest version of main.
+            The main branch has been updated. Please pull/merge from the latest version of ${{ github.base_ref }}.
