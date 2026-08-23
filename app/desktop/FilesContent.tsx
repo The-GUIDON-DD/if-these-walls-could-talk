@@ -1,12 +1,6 @@
 import { type ReactNode, useState } from "react";
 import { Link } from "react-router";
-
-const FILES_LIST = [
-	{ id: "public-reckonings", label: "Public Reckonings" },
-	{ id: "codes-and-complaints", label: "Codes and Complaints" },
-	{ id: "procedure-hesitation", label: "Procedure Hesitation" },
-	{ id: "journey-ahead", label: "Journey Ahead" },
-];
+import { FILES_LIST } from "~/utils/constants";
 
 export function FilesContent(): ReactNode {
 	const [hoveredId, setHoveredId] = useState<string>("public-reckonings");
