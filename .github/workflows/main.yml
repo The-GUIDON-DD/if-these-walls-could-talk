@@ -25,4 +25,4 @@ jobs:
             *PR Author*: ${{ github.event.pull_request.user.login }}
             *PR URL*: ${{ github.event.pull_request.html_url }}
 
-            The main branch has been updated. Please pull/merge from the latest version of ${{ github.base_ref }}.
+            The ${{ github.base_ref }} branch has been updated. Please pull/merge from the latest version of ${{ github.base_ref }}.
