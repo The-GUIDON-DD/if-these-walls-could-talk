@@ -1,7 +1,4 @@
-import Desktop from "~/desktop/Desktop";
 import Intro from "~/intro/Intro";
-import { Welcome } from "../welcome/welcome";
-import type { Route } from "./+types/home";
 
 export function meta() {
 	return [
@@ -11,5 +8,5 @@ export function meta() {
 }
 
 export default function Home() {
-	return <Desktop />;
+	return <Intro />;
 }

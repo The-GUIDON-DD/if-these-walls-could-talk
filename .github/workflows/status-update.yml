@@ -1,11 +1,9 @@
 name: Status update changes
-
 on:
   schedule:
-    - cron: '30 6 * * 1,3,5'
+    - cron: "30 6 * * 1,3,5"
       timezone: "Asia/Manila"
   workflow_dispatch:
-
 jobs:
   notify:
     runs-on: ubuntu-latest
