@@ -35,7 +35,7 @@ function ThreeStepFramework() {
 		const tl = createTimeline({
 			autoplay: onScroll({
 				target: "#public-reckonings",
-				enter: "start top+=50vh",
+				enter: "start top+=20vh",
 				leave: "start bottom+=100vh",
 			}),
 		});
@@ -51,7 +51,7 @@ function ThreeStepFramework() {
 					duration: 750,
 					delay: stagger(500),
 				},
-				"<+=200",
+				"<<+=200",
 			)
 			.init();
 	}, []);
@@ -70,16 +70,10 @@ function ThreeStepFramework() {
 }
 
 export default function PublicReckonings() {
-	// move to own constants file
-	const P_CLASS = "mb-10";
-
 	return (
-		<main
-			id="public-reckonings"
-			className="w-full flex flex-col items-stretch mb-50"
-		>
-			<h1 className="text-center mt-30 mb-20">Public Reckonings</h1>
-			<p className={P_CLASS}>
+		<main id="public-reckonings" className="file-main">
+			<h1>Public Reckonings</h1>
+			<p>
 				In accordance with the{" "}
 				<a href="https://www.officialgazette.gov.ph/1995/02/14/republic-act-no-7877/">
 					Anti-Sexual Harassment Act
@@ -94,7 +88,7 @@ export default function PublicReckonings() {
 				policy establishes formal procedures for addressing sexual harassment
 				complaints.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				To ensure due process, the Code{" "}
 				<a href="https://www.ateneo.edu/sites/default/files/2022-01/2020-08-28-ADMU-Code-Decorum-Administrative-Rules-v1.0.pdf">
 					envisions
@@ -105,7 +99,7 @@ export default function PublicReckonings() {
 				a hearing process followed by deliberations for decision-making.
 			</p>
 			<ThreeStepFramework />
-			<p className={P_CLASS}>
+			<p>
 				Consequently,{" "}
 				<a href="https://www.ateneo.edu/central/policies/code-of-decorum">
 					Section 37.3
@@ -114,7 +108,7 @@ export default function PublicReckonings() {
 				President shall make an effort to reach a decision within 10 days from
 				the responses from both parties.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				Since the establishment of this three-step framework in 2020, the
 				University has followed it as standard procedure when addressing{" "}
 				<a href="https://www.ateneo.edu/document/2022/07/26/uodi-report-2021-2022-26-july-2022">
@@ -128,7 +122,7 @@ export default function PublicReckonings() {
 					"However, no such formal framework was in place during the time of former Philosophy professor Jade Principe, who faced sexual harassment cases in 2016 for breaching professional boundaries, sending inappropriate messages, and extending date invitations to his student."
 				}
 			/>
-			<p className={P_CLASS}>
+			<p>
 				The case was initially classified as a disciplinary matter despite the
 				reported misconduct,{" "}
 				<a href="https://theguidon.com/2020/03/alumni-come-forward-about-sexual-harassment-cases-against-philosophy-professor/">
@@ -142,21 +136,21 @@ export default function PublicReckonings() {
 				cases handled in earlier years, prompted the University to continue
 				refining its policies and procedures.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				While the University seeks to maintain clear and technical processes
 				when addressing possible sanctions, Escarez also underscores that each
 				step must be anchored on the <strong>“do no harm”</strong> principle,
 				ensuring that the safety, dignity, and well-being of those who come
 				forward with reports are honored.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				In developing the University procedures, Escarez notes that the
 				Committee on Decorum and Investigation (CODI) incorporated the 2019 Safe
 				Spaces Act to broaden protections by including gender-based
 				discrimination and harassment, expanding the CODI’s scope beyond the
 				earlier Republic Act 7877.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				Beyond formal campus proceedings, attention also shifted to a broader
 				range of complaints emerging across campus life. For instance, concerns
 				involving student organization{" "}
@@ -169,7 +163,7 @@ export default function PublicReckonings() {
 				</a>
 				.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				Apart from informal channels, community-based advocacy efforts, such as{" "}
 				<a href="https://timesupateneo.org/">Times Up Ateneo</a> (TUA) and the
 				#MeToo{" "}
@@ -183,13 +177,13 @@ export default function PublicReckonings() {
 				<a href="https://timesupateneo.org/category/statements/">statements</a>{" "}
 				regarding institutional responses to sexual violence.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				Additionally, TUA has provided{" "}
 				<a href="https://timesupateneo.org/about/">support</a> systems for
 				survivors and advocates while conducting community care activities, such
 				as focused group discussions, reading groups, and writing workshops.
 			</p>
-			<p className={P_CLASS}>
+			<p>
 				The pattern of informal complaints suggests barriers within formal
 				reporting, including limited awareness of procedures, uncertainty about
 				institutional response, and the difficulty of navigating official
