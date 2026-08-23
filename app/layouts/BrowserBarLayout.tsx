@@ -11,7 +11,7 @@ export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
 	return (
 		<>
 			<header className="w-screen top-4 fixed z-20">
-				<BrowserBar fileName={fileName} />
+				<BrowserBar fileName={`${fileName}.txt`} />
 			</header>
 			{/* content section */}
 			<section
