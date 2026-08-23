@@ -31,7 +31,7 @@ export default function BrowserBar({ fileName }: { fileName: string }) {
 		"p-2 bg-[#bacbff,_rgba(0,0,0,0.1)] border-t-3 border-l-3 border-[rgba(30,50,147,0.5)]";
 	return (
 		<header className="w-full flex flex-col items-stretch">
-			<MenuBar title="Files" closeAction={() => redirect("/desktop")} />
+			<MenuBar title="Files" />
 			<section className={`${browserBarClass} h-15`}>
 				<section className="flex h-full items-stretch gap-1">
 					<Link to={getPrevFile(fileName)} className={buttonClass}>
