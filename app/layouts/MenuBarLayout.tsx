@@ -1,4 +1,4 @@
-import { Outlet, redirect } from "react-router";
+import { Outlet } from "react-router";
 import { capitalize, dropWhile, join, pipe, takeWhile } from "remeda";
 import { MenuBar } from "../components/MenuBar";
 import type { Route } from "./+types/menubar-layout";
@@ -17,8 +17,8 @@ export default function MenuBarLayout({ matches }: Route.ComponentProps) {
 	return (
 		<>
 			<Outlet />
-			<div className="w-screen fixed top-4">
-				<MenuBar title={routeName} closeAction={() => redirect("/desktop")} />
+			<div className="w-screen fixed top-4 z-100 pointer-events-auto">
+				<MenuBar title={routeName} />
 			</div>
 		</>
 	);
