@@ -61,7 +61,7 @@ export default function ProcedureHesitationContent(): ReactNode {
                     <div className="relative w-full h-[350px] flex items-center justify-center my-12">
                         <div className="relative flex flex-col items-center">
                             <div 
-                                className="w-[153.49px] h-[153.49px] rounded-full shadow-[0px_6px_0px_rgba(22,27,63,0.3)]"
+                                className="w-[153.49px] h-[153.49px] relative z-1 rounded-full shadow-[0px_6px_0px_rgba(22,27,63,0.3)]"
                                 style={{ background: "linear-gradient(180deg, #C2CCFF 0%, #8593DC 100%)" }}
                             />
                             <div 
