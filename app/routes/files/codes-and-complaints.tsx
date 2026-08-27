@@ -1,3 +1,146 @@
+import * as d3 from "d3";
+
+function TestChart() {
+	const width = 800;
+	const height = 500;
+	const marginTop = 30;
+	const marginRight = 0;
+	const marginBottom = 30;
+	const marginLeft = 0;
+
+	const data = [
+		{
+			timePeriod: "Oct. 2019 to June 2021",
+			party: "complainant",
+			gender: "male",
+			count: 6,
+		},
+		{
+			timePeriod: "Oct. 2019 to June 2021",
+			party: "complainant",
+			gender: "female",
+			count: 6,
+		},
+		{
+			timePeriod: "Oct. 2019 to June 2021",
+			party: "respondent",
+			gender: "male",
+			count: 8,
+		},
+		{
+			timePeriod: "Oct. 2019 to June 2021",
+			party: "respondent",
+			gender: "female",
+			count: 4,
+		},
+		{
+			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
+			party: "complainant",
+			gender: "male",
+			count: 4,
+		},
+		{
+			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
+			party: "complainant",
+			gender: "female",
+			count: 24,
+		},
+		{
+			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
+			party: "respondent",
+			gender: "male",
+			count: 12,
+		},
+		{
+			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
+			party: "respondent",
+			gender: "female",
+			count: 13,
+		},
+		{
+			timePeriod: "June 2022 to Nov. 2022",
+			party: "complainant",
+			gender: "male",
+			count: 0,
+		},
+		{
+			timePeriod: "June 2022 to Nov. 2022",
+			party: "complainant",
+			gender: "female",
+			count: 1,
+		},
+		{
+			timePeriod: "June 2022 to Nov. 2022",
+			party: "respondent",
+			gender: "male",
+			count: 1,
+		},
+		{
+			timePeriod: "June 2022 to Nov. 2022",
+			party: "respondent",
+			gender: "female",
+			count: 0,
+		},
+		{
+			timePeriod: "Dec.2022 to May 2023",
+			party: "complainant",
+			gender: "male",
+			count: 1,
+		},
+		{
+			timePeriod: "Dec.2022 to May 2023",
+			party: "complainant",
+			gender: "female",
+			count: 2,
+		},
+		{
+			timePeriod: "Dec.2022 to May 2023",
+			party: "respondent",
+			gender: "male",
+			count: 3,
+		},
+		{
+			timePeriod: "Dec.2022 to May 2023",
+			party: "respondent",
+			gender: "female",
+			count: 0,
+		},
+	];
+
+	// stacked and grouped bar chart
+	// grouped by complainant and respondent
+	// stacked by gender
+
+	const fx = d3
+		.scaleBand()
+		.domain(new Set(Object.keys(data)))
+		.rangeRound([marginLeft, width - marginRight])
+		.paddingInner(0.1);
+
+	const genderCategories = new Set(["male", "female"]);
+
+	const color = d3
+		.scaleOrdinal()
+		.domain(genderCategories)
+		.range(d3.schemeSpectral[genderCategories.size])
+		.unknown("#ccc");
+
+	const y = d3
+		.scaleLinear()
+		.domain([0, 30])
+		.nice()
+		.rangeRound([height - marginBottom, marginTop]);
+
+	const formatValue = (x) => "test";
+
+	return (
+		<svg
+			width={width}
+			height={height}
+			style={{ marginLeft: marginLeft, marginRight: marginRight }}
+		></svg>
+	);
+}
 export default function CodesAndComplaints() {
 	return (
 		<main id="codes-and-complaints" className="file-main">
