@@ -20,6 +20,9 @@ export default [
 					),
 				]),
 			]),
+			layout("./layouts/MenuBarLayout.tsx", [
+				route("email", "routes/email.tsx"),
+			]),
 		]),
 	]),
 ] satisfies RouteConfig;
