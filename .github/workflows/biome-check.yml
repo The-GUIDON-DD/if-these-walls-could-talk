@@ -21,6 +21,7 @@ jobs:
           version: 11          # Specify your major or exact version
           run-time: node@22    # Automatically installs Node.js
           cache: true
+          run_install: false
           
       - name: Install Dependencies
         run: pnpm ci
