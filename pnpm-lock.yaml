@@ -49,7 +49,7 @@ importers:
         version: 2.45.0
     devDependencies:
       '@cloudflare/vite-plugin':
-        specifier: ^1.52.1
+        specifier: ^1.54.2
         version: 1.54.2(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0))(wrangler@4.127.1)
       '@react-router/dev':
         specifier: 8.0.0
@@ -70,7 +70,7 @@ importers:
         specifier: ^19.2.4
         version: 19.2.5(@types/react@19.2.18)
       isbot:
-        specifier: ^5.2.1
+        specifier: ^5.2.2
         version: 5.2.2
       lefthook:
         specifier: ^2.1.10
@@ -88,7 +88,7 @@ importers:
         specifier: ^8.2.1
         version: 8.2.2(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)
       wrangler:
-        specifier: ^4.123.0
+        specifier: ^4.127.1
         version: 4.127.1
 
 packages:
