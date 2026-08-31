@@ -14,16 +14,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      # Option A: Setup using Node (if Biome is in your package.json)
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+        
+      - name: Setup pnpm
+        uses: pnpm/setup@v1
         with:
-          node-size: '20'
-          cache: 'npm'
+          version: 11          # Specify your major or exact version
+          run-time: node@22    # Automatically installs Node.js
+          cache: true
           
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm ci
 
       - name: Run Biome CI
         run: npx @biomejs/biome ci . --reporter=github
