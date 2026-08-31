@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FILES_LIST } from "~/utils/constants";
 import { MenuBar } from "./MenuBar";
 
