@@ -20,10 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-size: '20'
-          cache: 'pnpm'
+          cache: 'npm'
           
       - name: Install Dependencies
-        run: pnpm ci
+        run: npm ci
 
       - name: Run Biome CI
         run: npx @biomejs/biome ci . --reporter=github
