@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, Outlet } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
 import {
 	DESKTOP_ICONS,

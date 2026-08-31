@@ -19,7 +19,7 @@ export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
 			>
 				<Outlet />
 			</section>
-			<div className="w-screen pointer-events-none h-70 bg-linear-to-t from-[#060e24] to-transparent fixed bottom-[5vh]" />
+			<div className="w-screen pointer-events-none h-70 bg-linear-to-t from-[#060e24] to-transparent fixed bottom-[5vh] z-10" />
 		</>
 	);
 }

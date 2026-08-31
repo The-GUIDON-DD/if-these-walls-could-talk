@@ -18,6 +18,7 @@ export default [
 						"codes-and-complaints",
 						"routes/files/codes-and-complaints.tsx",
 					),
+                    route("procedure-hesitation", "routes/files/ProcedureHesitationContent.tsx"),
 				]),
 			]),
 		]),
