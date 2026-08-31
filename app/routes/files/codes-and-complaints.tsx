@@ -163,9 +163,6 @@ export default function CodesAndComplaints() {
 	return (
 		<main id="codes-and-complaints" className="file-main">
 			<h1>Codes and complaints</h1>
-			<section className="max-w-full overflow-x-auto">
-				<TestChart />
-			</section>
 			<p>
 				Despite existing barriers in filing sexual harassment reports, Escarez
 				assures that the Ateneo commits itself to addressing both{" "}
@@ -231,6 +228,24 @@ export default function CodesAndComplaints() {
 				both reports.
 			</p>
 			{/* graph section */}
+			<section className="max-w-full overflow-x-auto">
+				<section className="w-screen h-60 bg-linear-to-b from-[rgb(97,126,194)] to-[transparent] mb-15 flex flex-col items-center pt-15">
+					<h2 className="uppercase text-4xl tracking-wide font-semibold font-mono text-shadow-[0_4px_0_rgba(0,0,0,0.5)]">
+						Formal University Codi Cases
+					</h2>
+					<section className="legend flex gap-6">
+						<section className="legend-item flex gap-3 mt-5 items-center">
+							<div className="aspect-square w-6 inset-shadow-[-4px_-4px_0px_0px_rgb(255,255,255)] border-l-3 border-t-3 border-[rgba(30,50,147,0.5)] bg-[rgb(156,177,234)]" />
+							<span className="text-lg font-mono">Male</span>
+						</section>
+						<section className="legend-item flex gap-3 mt-5 items-center">
+							<div className="aspect-square w-6 inset-shadow-[-4px_-4px_0px_0px_rgb(255,255,255)] border-l-3 border-t-3 border-[rgba(30,50,147,0.5)] bg-[#de65c7]" />
+							<span className="text-lg font-mono">Female</span>
+						</section>
+					</section>
+				</section>
+				<TestChart />
+			</section>
 			<p>
 				Notably, the reports also include recommendations for relevant parties,
 				such as University employees and students, to actively prevent the
