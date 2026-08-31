@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, Outlet } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
-import { FilesContent } from "./FilesContent";
+import { FilesContent } from "./FilesContent"; 
 import {
     DESKTOP_ICONS,
     POPUP_CONTENTS,
@@ -104,18 +104,18 @@ export default function Desktop() {
                         ))}
                     </section>
 
-                    {showSystemMessage && (
-                        <PopupWindow
-                            title="System Message"
-                            isOpen
-                            closeAction={() => setShowSystemMessage(false)}
-                            zIndex={40}
-                            width={399}
-                            height={230}
-                        >
-                            {POPUP_CONTENTS["System Message"](() => setShowSystemMessage(false))}
-                        </PopupWindow>
-                    )}
+            {showSystemMessage && (
+                <PopupWindow
+                    title="System Message"
+                    isOpen
+                    closeAction={() => { setShowSystemMessage(false); }}
+                    zIndex={40}
+                    width={399}
+                    height={230}
+                >
+                    {POPUP_CONTENTS["System Message"](() => { setShowSystemMessage(false); })}
+                </PopupWindow>
+            )}
 
                     {showAbout && (
                         <PopupWindow

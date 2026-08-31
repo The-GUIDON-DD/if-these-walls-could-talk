@@ -16,6 +16,7 @@
 		"enabled": true,
 		"rules": {
 			"preset": "recommended",
+			"a11y": "warn",
 			"suspicious": {
 				"noArrayIndexKey": "warn"
 			}
