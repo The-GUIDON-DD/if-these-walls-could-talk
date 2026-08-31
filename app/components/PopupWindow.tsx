@@ -23,29 +23,12 @@ export function PopupWindow({
     if (!isOpen) return null;
 
     const handleClose = (e?: React.MouseEvent) => {
-        // stop propagation where applicable and call the parent close action
         if (e && typeof e.stopPropagation === "function") e.stopPropagation();
-        console.log("PopupWindow handleClose:", title);
         closeAction();
     };
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contentRef = useRef<HTMLDivElement | null>(null);
-    const debug = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("popupDebug");
-
-    useEffect(() => {
-        if (!debug) return;
-        const c = containerRef.current;
-        const ch = contentRef.current;
-        if (c) {
-            c.style.outline = "2px solid lime";
-            console.log("Popup container size:", c.offsetWidth, c.offsetHeight, window.getComputedStyle(c));
-        }
-        if (ch) {
-            ch.style.outline = "2px solid red";
-            console.log("Popup content size:", ch.offsetWidth, ch.offsetHeight, window.getComputedStyle(ch));
-        }
-    }, [debug]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex }}>
