@@ -4,7 +4,7 @@ import PersonCard from "~/components/PersonCard";
 import { InteractiveEye } from "../../components/InteractiveEye";
 
 export default function ProcedureHesitationContent(): ReactNode {
-	const navigate = useNavigate();
+	const _navigate = useNavigate();
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
 	return (
