@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 
 const data = [
 	{
