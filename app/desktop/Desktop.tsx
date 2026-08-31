@@ -135,8 +135,8 @@ export default function Desktop() {
 			)}
 
 			{activePopup === "Email" && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
-					<div className="relative flex aspect-406/665 w-[80vw] max-w-[406px] flex-col overflow-hidden border-4 border-[#6d91fe] bg-[#eef0ff] shadow-[0_0.5em_0_rgba(0,0,0,0.25)]">
+				<div className="fixed inset-0 z-50 flex items-center justify-center">
+					<div className="relative flex aspect-[366/599] w-[72vw] max-w-[365px] p-3 flex-col overflow-hidden gradient-white shadow-[inset_-8px_-8px_0_0_rgba(0,0,0,0.2)]">
 						<div className="flex h-[60px] shrink-0 items-center justify-between bg-linear-to-r from-[#dcecff] to-[#4968ff] pl-6">
 							<span />
 							<button
@@ -144,7 +144,7 @@ export default function Desktop() {
 								onClick={closeActivePopup}
 								aria-label="Close Mail"
 								title="Close Mail"
-								className="flex h-full aspect-square items-center justify-center border-l-2 border-[#bacbff]/60 text-4xl text-white"
+								className="flex px-5 aspect-square items-center justify-center text-4xl text-white"
 							>
 								×
 							</button>
