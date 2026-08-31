@@ -5,25 +5,29 @@ export default function Email() {
 		{
 			id: 1,
 			subject: "The Weight of the Process",
-			preview: "For many survivors of sexual misconduct...",
+			preview:
+				"For many survivors of sexual misconduct, the decision to report is not only an administrative step, but also an act of courage meant to reclaim safety and affirm the truth of their case. ",
 			isRead: false,
 		},
 		{
 			id: 2,
 			subject: "Selena",
-			preview: "This inaccessibility and information ga...",
+			preview:
+				"This inaccessibility and information gap affect not only how cases progress, but also whether students feel able to report at all.",
 			isRead: false,
 		},
 		{
 			id: 3,
 			subject: "Prolonged Proceedings",
-			preview: "Across different stages of the process i...",
+			preview:
+				"Across different stages of the process in reporting a sexual harassment case, Ofreneo explains that repeatedly revisiting incidents in an unsafe and uncontrolled environment can risk retraumatizing survivors and intensifying the psychological weight they carry.",
 			isRead: false,
 		},
 		{
 			id: 4,
 			subject: "Mary",
-			preview: "Some survivors, like Mary, eventually d...",
+			preview:
+				"Some survivors, like Mary, eventually decide to withdraw their complaints.",
 			isRead: false,
 		},
 	]);
@@ -63,15 +67,15 @@ export default function Email() {
 							key={email.id}
 							onClick={() => markAsRead(email.id)}
 							aria-pressed={email.isRead}
-							className={`w-full px-10 border-b border-gray-300 p-4 flex items-center gap-10 text-left transition-colors 
+							className={`w-full border-b px-3 border-gray-300 py-4 flex items-center text-left transition-colors 
 								${
 									email.isRead
 										? "bg-[#D0D8FF] text-gray-500"
 										: "bg-transparent text-[#161b3f]"
 								}`}
 						>
-							<div className="w-3 h-3 border-2 border-[rgba(0,0,0,0.3)]" />
-							<div className="flex-1/3 min-w-0">
+							<div className="w-3 h-3 mx-5 border-2 border-[rgba(0,0,0,0.3)]" />
+							<div className="w-[45%] min-w-0 shrink-0">
 								<h3
 									className={`font-bold text-2xl whitespace-nowrap overflow-hidden text-ellipsis 
 										${
@@ -83,10 +87,11 @@ export default function Email() {
 									{email.subject}
 								</h3>
 							</div>
-							<div className="flex-1/2">
+							<div className="w-[35%] min-w-0 shrink-0">
 								<p
-									className={`text-lg whitespace-nowrap overflow-hidden text-ellipsis 
-										${email.isRead ? "text-gray-400" : "text-gray-500"}`}
+									className={`text-lg block w-full whitespace-nowrap overflow-hidden text-ellipsis ${
+										email.isRead ? "text-gray-400" : "text-gray-500"
+									}`}
 								>
 									{email.preview}
 								</p>
