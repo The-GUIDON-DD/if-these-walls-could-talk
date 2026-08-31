@@ -1,150 +1,171 @@
 import * as d3 from "d3";
+import { useEffect, useMemo, useRef } from "react";
+
+const data = [
+	{
+		timePeriod: "Oct. 2019 to\nJune 2021",
+		party: "complainant",
+		male: 6,
+		female: 6,
+	},
+	{
+		timePeriod: "Oct. 2019 to\nJune 2021",
+		party: "respondent",
+		male: 8,
+		female: 4,
+	},
+	{
+		timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+		party: "complainant",
+		male: 4,
+		female: 24,
+	},
+	{
+		timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+		party: "respondent",
+		male: 12,
+		female: 13,
+	},
+	{
+		timePeriod: "June 2022 to\nNov. 2022",
+		party: "complainant",
+		male: 0,
+		female: 1,
+	},
+	{
+		timePeriod: "June 2022 to\nNov. 2022",
+		party: "respondent",
+		male: 1,
+		female: 0,
+	},
+	{
+		timePeriod: "Dec.2022 to\nMay 2023",
+		party: "complainant",
+		male: 1,
+		female: 2,
+	},
+	{
+		timePeriod: "Dec.2022 to\nMay 2023",
+		party: "respondent",
+		male: 3,
+		female: 0,
+	},
+];
 
 function TestChart() {
-	const width = 800;
-	const height = 500;
-	const marginTop = 30;
-	const marginRight = 0;
-	const marginBottom = 30;
-	const marginLeft = 0;
+	const width = 860;
+	const height = 460;
+	const margin = { x: 40, top: 10, bottom: 80 };
+	const innerW = width - margin.x * 2;
+	const innerH = height - margin.top - margin.bottom;
+	const genderColors = { male: "#668af5", female: "#cd6cc3" };
+	const { series, x0, x1, y } = useMemo(() => {
+		const x0 = d3
+			.scaleBand()
+			.domain(new Set(data.map((d) => d.timePeriod)))
+			.range([0, innerW])
+			.paddingInner(0.2); // time period scale
+		const x1 = d3
+			.scaleBand()
+			.domain(["complainant", "respondent"])
+			.range([0, x0.bandwidth()])
+			.padding(0.1); // scale for party
+		const y = d3
+			.scaleLinear()
+			.domain([0, d3.max(data, (d) => d.male + d.female)])
+			.nice()
+			.range([innerH, 0]); // y-scale for counts
 
-	const data = [
-		{
-			timePeriod: "Oct. 2019 to June 2021",
-			party: "complainant",
-			gender: "male",
-			count: 6,
-		},
-		{
-			timePeriod: "Oct. 2019 to June 2021",
-			party: "complainant",
-			gender: "female",
-			count: 6,
-		},
-		{
-			timePeriod: "Oct. 2019 to June 2021",
-			party: "respondent",
-			gender: "male",
-			count: 8,
-		},
-		{
-			timePeriod: "Oct. 2019 to June 2021",
-			party: "respondent",
-			gender: "female",
-			count: 4,
-		},
-		{
-			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
-			party: "complainant",
-			gender: "male",
-			count: 4,
-		},
-		{
-			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
-			party: "complainant",
-			gender: "female",
-			count: 24,
-		},
-		{
-			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
-			party: "respondent",
-			gender: "male",
-			count: 12,
-		},
-		{
-			timePeriod: "June 2021 to Nov. 2021; Dec. 2021 to May 2022",
-			party: "respondent",
-			gender: "female",
-			count: 13,
-		},
-		{
-			timePeriod: "June 2022 to Nov. 2022",
-			party: "complainant",
-			gender: "male",
-			count: 0,
-		},
-		{
-			timePeriod: "June 2022 to Nov. 2022",
-			party: "complainant",
-			gender: "female",
-			count: 1,
-		},
-		{
-			timePeriod: "June 2022 to Nov. 2022",
-			party: "respondent",
-			gender: "male",
-			count: 1,
-		},
-		{
-			timePeriod: "June 2022 to Nov. 2022",
-			party: "respondent",
-			gender: "female",
-			count: 0,
-		},
-		{
-			timePeriod: "Dec.2022 to May 2023",
-			party: "complainant",
-			gender: "male",
-			count: 1,
-		},
-		{
-			timePeriod: "Dec.2022 to May 2023",
-			party: "complainant",
-			gender: "female",
-			count: 2,
-		},
-		{
-			timePeriod: "Dec.2022 to May 2023",
-			party: "respondent",
-			gender: "male",
-			count: 3,
-		},
-		{
-			timePeriod: "Dec.2022 to May 2023",
-			party: "respondent",
-			gender: "female",
-			count: 0,
-		},
-	];
+		const series = d3.stack().keys(["male", "female"])(data);
+		return { series, x0, x1, y };
+	}, [innerH, innerW]);
 
-	// stacked and grouped bar chart
-	// grouped by complainant and respondent
-	// stacked by gender
-
-	const fx = d3
-		.scaleBand()
-		.domain(new Set(Object.keys(data)))
-		.rangeRound([marginLeft, width - marginRight])
-		.paddingInner(0.1);
-
-	const genderCategories = new Set(["male", "female"]);
-
-	const color = d3
-		.scaleOrdinal()
-		.domain(genderCategories)
-		.range(d3.schemeSpectral[genderCategories.size])
-		.unknown("#ccc");
-
-	const y = d3
-		.scaleLinear()
-		.domain([0, 30])
-		.nice()
-		.rangeRound([height - marginBottom, marginTop]);
-
-	const formatValue = (x) => "test";
+	const yTicks = y.ticks(6);
 
 	return (
-		<svg
-			width={width}
-			height={height}
-			style={{ marginLeft: marginLeft, marginRight: marginRight }}
-		></svg>
+		<div
+			style={{ minWidth: width, minHeight: height }}
+			className="flex items-center justify-center font-mono"
+		>
+			<svg width={width} height={height}>
+				{/* tick lines */}
+				<g transform={`translate(${margin.x},${margin.top})`}>
+					{yTicks.map((t) => (
+						<g key={t}>
+							<line x1={0} x2={innerW} y1={y(t)} y2={y(t)} stroke="#1e293b" />
+							<text
+								x={-8}
+								y={y(t)}
+								dy="0.32em"
+								textAnchor="end"
+								fontSize={10}
+								fill="#94a3b8"
+							>
+								{t}
+							</text>
+						</g>
+					))}
+					{/* stacked bars per gender */}
+					{series.map((layer) => (
+						<g key={layer.key} fill={genderColors[layer.key]}>
+							{layer.map((d, i) => (
+								<rect
+									key={i}
+									x={x0(d.data.timePeriod) + x1(d.data.party)}
+									y={y(d[1])}
+									height={y(d[0]) - y(d[1])}
+									width={x1.bandwidth()}
+								/>
+							))}
+						</g>
+					))}
+				</g>
+				{data.map((d) =>
+					["complainant", "respondent"].map((party) => (
+						<text
+							key={`${d.timePeriod}-${party}`}
+							x={x0(d.timePeriod) + x1(party) + x1.bandwidth() / 2 + margin.x}
+							y={innerH + 24}
+							textAnchor="middle"
+							fontSize={10}
+							fontWeight="semibold"
+							fill="#ffffff"
+						>
+							{`${party.toUpperCase()}`}
+						</text>
+					)),
+				)}
+				{data.map((d) => (
+					<text
+						key={d.timePeriod}
+						x={x0(d.timePeriod) + x0.bandwidth() / 2 + margin.x}
+						y={innerH + 50}
+						textAnchor="middle"
+						fontSize={10}
+						fill="#c2ccff"
+					>
+						{d.timePeriod.split("\n").map((line, i) => (
+							<tspan
+								key={i}
+								x={x0(d.timePeriod) + x0.bandwidth() / 2 + margin.x}
+								dy={12 * i}
+							>
+								{line}
+							</tspan>
+						))}
+					</text>
+				))}
+			</svg>
+		</div>
 	);
 }
 export default function CodesAndComplaints() {
 	return (
 		<main id="codes-and-complaints" className="file-main">
 			<h1>Codes and complaints</h1>
+			<section className="max-w-full overflow-x-auto">
+				<TestChart />
+			</section>
 			<p>
 				Despite existing barriers in filing sexual harassment reports, Escarez
 				assures that the Ateneo commits itself to addressing both{" "}
