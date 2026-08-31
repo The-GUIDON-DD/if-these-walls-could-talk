@@ -1,6 +1,44 @@
+import * as am4charts from "@amcharts/amcharts4/charts";
+import * as am4core from "@amcharts/amcharts4/core";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
+function PieChart() {
+	useEffect(() => {
+		const chart = am4core.create("pie-chart", am4charts.PieChart3D);
+		chart.hiddenState.properties.opacity = 0;
+
+		chart.data = [
+			{
+				category: "Major",
+				count: 6,
+			},
+			{
+				category: "Moderate",
+				count: 2,
+			},
+			{
+				category: "Major",
+				count: 1,
+			},
+		];
+
+		chart.innerRadius = am4core.percent(0);
+		chart.depth = 30;
+
+		const series = chart.series.push(new am4charts.PieSeries3D());
+		series.dataFields.value = "count";
+		series.dataFields.category = "category";
+		series.colors.step = 1;
+
+		return () => {
+			chart.dispose();
+		};
+	}, []);
+
+	return <div id="pie-chart" style={{ width: "100%", height: 500 }} />;
+}
 const data = [
 	{
 		timePeriod: "Oct. 2019 to\nJune 2021",
@@ -52,7 +90,7 @@ const data = [
 	},
 ];
 
-function TestChart() {
+function BarGraph() {
 	const width = 860;
 	const height = 460;
 	const margin = { x: 40, top: 10, bottom: 80 };
@@ -159,10 +197,13 @@ function TestChart() {
 		</div>
 	);
 }
+
 export default function CodesAndComplaints() {
+	am4core.useTheme(am4themes_animated);
 	return (
 		<main id="codes-and-complaints" className="file-main">
 			<h1>Codes and complaints</h1>
+			<PieChart />
 			<p>
 				Despite existing barriers in filing sexual harassment reports, Escarez
 				assures that the Ateneo commits itself to addressing both{" "}
@@ -244,7 +285,7 @@ export default function CodesAndComplaints() {
 						</section>
 					</section>
 				</section>
-				<TestChart />
+				<BarGraph />
 			</section>
 			<p>
 				Notably, the reports also include recommendations for relevant parties,
