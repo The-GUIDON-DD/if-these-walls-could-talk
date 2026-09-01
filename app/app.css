@@ -38,13 +38,13 @@ html {
 }
 
 .file-main {
-	@apply w-full flex flex-col items-stretch mb-50;
+	@apply w-full flex flex-col items-center mb-50;
 }
 
 .file-main p {
-	@apply mb-10;
+	@apply mb-10 w-[60%];
 }
 
 .file-main h1 {
-	@apply text-center mt-30 mb-20;
+	@apply text-center mt-30 mb-20 w-[60%];
 }
