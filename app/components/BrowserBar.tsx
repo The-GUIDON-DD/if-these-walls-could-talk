@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router";
+import { Link } from "react-router";
 import { FILES_LIST } from "~/utils/constants";
 import { MenuBar } from "./MenuBar";
 
@@ -62,6 +62,7 @@ export default function BrowserBar({ fileName }: { fileName: string }) {
 					</section>
 				</section>
 			</section>
+			{/*
 			<section
 				className={`${browserBarClass} items-center text-lg font-semibold leading-[150%] text-[rgb(22,27,63,0.6)] gap-8 h-14`}
 			>
@@ -70,6 +71,7 @@ export default function BrowserBar({ fileName }: { fileName: string }) {
 				<p>Tools</p>
 				<p>Help</p>
 			</section>
+      */}
 		</header>
 	);
 }
