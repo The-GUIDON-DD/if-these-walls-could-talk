@@ -2,7 +2,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { barData, pieData, pieLegend } from "../../data/codes-complaints";
 
 interface IncidentCounts {
@@ -159,18 +159,18 @@ function BarGraph() {
 						<g key={layer.key} fill={genderColors[layer.key]}>
 							{layer.map((d, i) => (
 								<rect
-									onMouseOver={(event) => {
+									onMouseOver={(_event) => {
 										tooltip
 											.style("display", "inline-block")
 											.text(
-												`${layer.key}: ${d[1] - d[0]} (${Math.trunc(((d[1] - d[0]) / (d.data["male"] + d.data["female"])) * 100)}%)`,
+												`${layer.key}: ${d[1] - d[0]} (${Math.trunc(((d[1] - d[0]) / (d.data.male + d.data.female)) * 100)}%)`,
 											);
 									}}
 									onMouseMove={(event) => {
-										tooltip.style("top", event.pageY - 10 + "px");
-										tooltip.style("left", event.pageX + 10 + "px");
+										tooltip.style("top", `${event.pageY - 10}px`);
+										tooltip.style("left", `${event.pageX + 10}px`);
 									}}
-									onMouseOut={(event) => {
+									onMouseOut={(_event) => {
 										tooltip.style("display", "none");
 									}}
 									key={i}

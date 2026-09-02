@@ -6,7 +6,6 @@ import {
 	POPUP_CONTENTS,
 	type PopupWindowKey,
 } from "./desktopConfig";
-import { FilesContent } from "./FilesContent";
 
 function DesktopIcon({
 	imagePath,
@@ -128,7 +127,7 @@ export default function Desktop() {
 					width={889}
 					height={622}
 				>
-					{POPUP_CONTENTS["About"](() => {
+					{POPUP_CONTENTS.About(() => {
 						setShowAbout(false);
 					})}
 				</PopupWindow>
