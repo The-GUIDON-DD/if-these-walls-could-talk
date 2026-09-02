@@ -6,6 +6,7 @@ import {
 	POPUP_CONTENTS,
 	type PopupWindowKey,
 } from "./desktopConfig";
+import { FilesContent } from "./FilesContent";
 
 function DesktopIcon({
 	imagePath,
@@ -127,15 +128,36 @@ export default function Desktop() {
 					width={889}
 					height={622}
 				>
-					{POPUP_CONTENTS.About(() => {
+					{POPUP_CONTENTS["About"](() => {
 						setShowAbout(false);
 					})}
 				</PopupWindow>
 			)}
 
+			{activePopup === "Email" && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center">
+					<div className="relative flex aspect-[366/599] w-[72vw] max-w-[365px] p-3 flex-col overflow-hidden gradient-white shadow-[inset_-8px_-8px_0_0_rgba(0,0,0,0.2)]">
+						<div className="flex h-[60px] shrink-0 items-center justify-between bg-linear-to-r from-[#dcecff] to-[#4968ff] pl-6">
+							<span />
+							<button
+								type="button"
+								onClick={closeActivePopup}
+								aria-label="Close Mail"
+								title="Close Mail"
+								className="flex px-5 aspect-square items-center justify-center text-4xl text-white"
+							>
+								×
+							</button>
+						</div>
+						<div className="min-h-0 flex-1">{POPUP_CONTENTS.Email()}</div>
+					</div>
+				</div>
+			)}
+
 			{activePopup &&
 				activePopup !== "About" &&
-				activePopup !== "System Message" && (
+				activePopup !== "System Message" &&
+				activePopup !== "Email" && (
 					<PopupWindow
 						title={activePopup}
 						isOpen
