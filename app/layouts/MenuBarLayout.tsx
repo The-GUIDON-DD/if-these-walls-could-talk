@@ -17,7 +17,7 @@ export default function MenuBarLayout({ matches }: Route.ComponentProps) {
 	return (
 		<>
 			<Outlet />
-			<div className="w-screen fixed top-4 z-100 pointer-events-auto">
+			<div className="w-screen fixed top-4 z-20 pointer-events-auto">
 				<MenuBar title={routeName} />
 			</div>
 		</>

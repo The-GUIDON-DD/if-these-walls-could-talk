@@ -2,7 +2,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { barData, pieData, pieLegend } from "../../data/codes-complaints";
 
 interface IncidentCounts {
@@ -16,7 +16,6 @@ interface IncidentCounts {
 function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 	useEffect(() => {
 		const chart = am4core.create(`pie-chart-${idKey}`, am4charts.PieChart3D);
-		console.log(`pie-chart-${idKey}`);
 		chart.hiddenState.properties.opacity = 0;
 
 		chart.data = [
@@ -57,6 +56,34 @@ function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 		series.labels.template.disabled = true;
 		series.ticks.template.disabled = true;
 		series.slices.template.propertyFields.fill = "color";
+		series.slices.template.tooltipPosition = "pointer";
+		series.slices.template.trackable = true;
+		if (series.tooltip) {
+			series.tooltip.background.disabled = true;
+			series.tooltip.autoTextColor = false;
+			series.tooltip.label.fill = am4core.color("#161b3f");
+			series.tooltip.background.pointerLength = 0;
+			series.tooltip.background.cornerRadius = 0;
+			series.tooltip.getFillFromObject = false;
+			series.tooltip.animationDuration = 0;
+			series.tooltip.defaultState.transitionDuration = 0;
+			series.tooltip.hiddenState.transitionDuration = 0;
+			series.tooltip.dx = 10;
+			series.tooltip.dy = -10;
+
+			const shadowFilter = new am4core.DropShadowFilter();
+			shadowFilter.opacity = 0.25;
+			shadowFilter.blur = 0;
+			shadowFilter.dx = 4;
+			shadowFilter.dy = 4;
+
+			series.tooltip.filters.push(shadowFilter);
+		}
+		series.slices.template.tooltipHTML = `
+    <div class="center p-4 uppercase font-bold bg-[#d7deff]">
+    {category}: {value} ({value.percent}%)
+    </div>
+    `;
 
 		return () => {
 			chart.dispose();
@@ -97,12 +124,18 @@ function BarGraph() {
 	}, [innerH, innerW]);
 
 	const yTicks = y.ticks(6);
+	const tooltip = d3.select("#chart-tooltip");
 
 	return (
 		<div
 			style={{ minWidth: width, minHeight: height }}
 			className="flex items-center justify-center font-mono"
 		>
+			<div
+				id="chart-tooltip"
+				style={{ display: "none" }}
+				className="absolute bg-[#d7deff] text-[#161b3f] px-4 py-3 uppercase font-bold shadow-[4px_4px_0_rgba(0,0,0,0.25)]"
+			/>
 			<svg width={width} height={height}>
 				{/* tick lines */}
 				<g transform={`translate(${margin.x},${margin.top})`}>
@@ -126,6 +159,20 @@ function BarGraph() {
 						<g key={layer.key} fill={genderColors[layer.key]}>
 							{layer.map((d, i) => (
 								<rect
+									onMouseOver={(event) => {
+										tooltip
+											.style("display", "inline-block")
+											.text(
+												`${layer.key}: ${d[1] - d[0]} (${Math.trunc(((d[1] - d[0]) / (d.data["male"] + d.data["female"])) * 100)}%)`,
+											);
+									}}
+									onMouseMove={(event) => {
+										tooltip.style("top", event.pageY - 10 + "px");
+										tooltip.style("left", event.pageX + 10 + "px");
+									}}
+									onMouseOut={(event) => {
+										tooltip.style("display", "none");
+									}}
 									key={i}
 									x={x0(d.data.timePeriod) + x1(d.data.party)}
 									y={y(d[1])}
