@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa6";
 import { Link } from "react-router";
 import { findLast, zip } from "remeda";
 
-const totalSeconds = 10;
+const totalSeconds = 5;
 
 export function LoadingBar({ timer }: { timer: number }) {
 	const totalBars = 18;
