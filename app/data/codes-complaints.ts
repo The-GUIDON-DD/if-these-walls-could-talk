@@ -49,6 +49,126 @@ export const barData = [
 	},
 ];
 
+export const genderBarData = [
+	{
+		key: "formal-university",
+		title: "Formal University CODI Cases",
+		data: [
+			{
+				timePeriod: "Oct. 2019 to\nJune 2021",
+				id: "uni-oct2019-june2021-c",
+				party: "complainant",
+				male: 6,
+				female: 6,
+			},
+			{
+				timePeriod: "Oct. 2019 to\nJune 2021",
+				id: "uni-oct2019-june2021-r",
+				party: "respondent",
+				male: 8,
+				female: 4,
+			},
+			{
+				timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+				id: "uni-jun2021-nov2021-c",
+				party: "complainant",
+				male: 4,
+				female: 24,
+			},
+			{
+				timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+				id: "uni-jun2021-nov2021-r",
+				party: "respondent",
+				male: 12,
+				female: 13,
+			},
+			{
+				timePeriod: "June 2022 to\nNov. 2022",
+				id: "uni-jun2022-nov2022-c",
+				party: "complainant",
+				male: 0,
+				female: 1,
+			},
+			{
+				timePeriod: "June 2022 to\nNov. 2022",
+				id: "uni-jun2022-nov2022-r",
+				party: "respondent",
+				male: 1,
+				female: 0,
+			},
+			{
+				timePeriod: "Dec.2022 to\nMay 2023",
+				id: "uni-dec2022-may2022-c",
+				party: "complainant",
+				male: 1,
+				female: 2,
+			},
+			{
+				timePeriod: "Dec.2022 to\nMay 2023",
+				id: "uni-dec2022-may2022-r",
+				party: "respondent",
+				male: 3,
+				female: 0,
+			},
+		],
+	},
+	{
+		key: "formal-school",
+		title: "Formal School CODI Cases",
+		data: [
+			{
+				timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+				id: "school-jun2021-nov-2021-c",
+				party: "complainant",
+				male: 4,
+				female: 18,
+			},
+			{
+				timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+				id: "school-jun2021-nov-2021-r",
+				party: "respondent",
+				male: 20,
+				female: 2,
+			},
+			{
+				timePeriod: "June 2021 to Nov. 2021;\nDec. 2021 to May 2022",
+				id: "school-jun2021-nov-2021-c",
+				party: "complainant",
+				male: 4,
+				female: 18,
+			},
+			{
+				timePeriod: "June 2022 to\nNov. 2022",
+				id: "school-jun2022-nov-2022-c",
+				party: "complainant",
+				male: 1,
+				female: 9,
+			},
+			{
+				timePeriod: "June 2022 to\nNov. 2022",
+				id: "school-jun2022-nov-2022-r",
+				party: "respondent",
+				male: 10,
+				female: 0,
+			},
+			{
+				timePeriod: "Dec. 2022 to\nMay 2023",
+				id: "school-dec2022-may2023-c",
+				party: "complainant",
+				male: 1,
+				female: 14,
+			},
+			{
+				timePeriod: "Dec. 2022 to\nMay 2023",
+				id: "school-dec2022-may2023-r",
+				party: "respondent",
+				male: 16,
+				female: 0,
+			},
+		],
+	},
+];
+
 export const pieData = {
 	university: [
 		{
