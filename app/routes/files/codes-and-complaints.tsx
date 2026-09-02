@@ -65,8 +65,11 @@ function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 			series.tooltip.background.pointerLength = 0;
 			series.tooltip.background.cornerRadius = 0;
 			series.tooltip.getFillFromObject = false;
-			series.tooltip.dx = 5;
-			series.tooltip.dy = -5;
+			series.tooltip.animationDuration = 0;
+			series.tooltip.defaultState.transitionDuration = 0;
+			series.tooltip.hiddenState.transitionDuration = 0;
+			series.tooltip.dx = 10;
+			series.tooltip.dy = -10;
 
 			const shadowFilter = new am4core.DropShadowFilter();
 			shadowFilter.opacity = 0.25;
