@@ -58,7 +58,7 @@ export function PopupWindow({
 
 					<div className="flex items-center h-full">
 						{/* Minimize Button - Square (1:1 aspect ratio) */}
-						<div className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl">
+						<div className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl hover:bg-[rgba(186,203,255,0.1)]">
 							_
 						</div>
 
@@ -68,7 +68,7 @@ export function PopupWindow({
 							onClick={handleClose}
 							aria-label="Close"
 							title="Close"
-							className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl cursor-pointer active:bg-white/10 pointer-events-auto"
+							className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl cursor-pointer active:bg-white/10 pointer-events-auto hover:bg-[rgba(186,203,255,0.1)]"
 						>
 							✕
 						</button>
