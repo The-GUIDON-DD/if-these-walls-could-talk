@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { PopupWindow } from "../components/PopupWindow";
 import {
 	DESKTOP_ICONS,
@@ -57,6 +57,20 @@ export default function Desktop() {
 	const [showSystemMessage, setShowSystemMessage] = useState(true);
 	const [showAbout, setShowAbout] = useState(true);
 	const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
+	const _location = useLocation();
+
+	// only show initial popups if we see desktop for the first time
+	useEffect(() => {
+		const alreadyVisit = localStorage.getItem("alreadyVisit");
+
+		if (alreadyVisit) {
+			setShowSystemMessage(false);
+			setShowAbout(false);
+		} else {
+			setShowSystemMessage(true);
+			setShowAbout(true);
+		}
+	}, []);
 
 	const openPopup = (popupKey?: PopupWindowKey) => {
 		if (!popupKey) return;
@@ -105,6 +119,7 @@ export default function Desktop() {
 					isOpen
 					closeAction={() => {
 						setShowSystemMessage(false);
+						localStorage.setItem("alreadyVisit", "true");
 					}}
 					zIndex={40}
 					width={399}
@@ -112,6 +127,7 @@ export default function Desktop() {
 				>
 					{POPUP_CONTENTS["System Message"](() => {
 						setShowSystemMessage(false);
+						localStorage.setItem("alreadyVisit", "true");
 					})}
 				</PopupWindow>
 			)}

@@ -193,6 +193,9 @@ export default function Intro() {
 			loop: totalSeconds,
 			onLoop: () => setTime(time + 1),
 		}).then(() => setShowIntroText(true));
+
+		// reset flag to remove starting popups
+		localStorage.removeItem("alreadyVisit");
 	}, [time]);
 
 	return (
