@@ -13,22 +13,6 @@ interface IncidentCounts {
 	"Major and Moderate": number;
 }
 
-function TestBarChart() {
-	const chartRef = useRef<HTMLDivElement>(null);
-	function pivotData() {
-		const byPeriod = new Map<string, Record<string, unknown>>();
-		for (const d of barData) {
-			if (!byPeriod.has(d.timePeriod)) {
-				byPeriod.set(d.timePeriod, { timePeriod: d.timePeriod });
-			}
-			const row = byPeriod.get(d.timePeriod)!;
-			row[`${d.party}_male`] = d.male;
-			row[`${d.party}_female`] = d.female;
-		}
-		return Array.from(byPeriod.values());
-	}
-}
-
 function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 	useEffect(() => {
 		const chart = am4core.create(`pie-chart-${idKey}`, am4charts.PieChart3D);
@@ -105,11 +89,6 @@ function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 	return (
 		<div id={`pie-chart-${idKey}`} style={{ width: "100%", height: 200 }} />
 	);
-}
-
-function TestBarGraph() {
-	useEffect(() => {}, []);
-	return <div id="bar-chart" style={{ width: "100%", height: 300 }} />;
 }
 
 function BarGraph() {
