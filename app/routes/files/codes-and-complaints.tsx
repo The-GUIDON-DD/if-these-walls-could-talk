@@ -3,7 +3,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
 import { useEffect, useMemo, useState } from "react";
-import { barData, pieData, pieLegend } from "../../data/codes-complaints";
+import { genderBarData, pieData, pieLegend } from "../../data/codes-complaints";
 
 interface IncidentCounts {
 	Major: number;
@@ -16,7 +16,6 @@ interface IncidentCounts {
 function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 	useEffect(() => {
 		const chart = am4core.create(`pie-chart-${idKey}`, am4charts.PieChart3D);
-		console.log(`pie-chart-${idKey}`);
 		chart.hiddenState.properties.opacity = 0;
 
 		chart.data = [
@@ -57,6 +56,35 @@ function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 		series.labels.template.disabled = true;
 		series.ticks.template.disabled = true;
 		series.slices.template.propertyFields.fill = "color";
+		series.slices.template.tooltipPosition = "pointer";
+		series.slices.template.trackable = true;
+		series.hiddenState.transitionDuration = 0;
+		if (series.tooltip) {
+			series.tooltip.background.disabled = true;
+			series.tooltip.autoTextColor = false;
+			series.tooltip.label.fill = am4core.color("#161b3f");
+			series.tooltip.background.pointerLength = 0;
+			series.tooltip.background.cornerRadius = 0;
+			series.tooltip.getFillFromObject = false;
+			series.tooltip.animationDuration = 0;
+			series.tooltip.defaultState.transitionDuration = 0;
+			series.tooltip.hiddenState.transitionDuration = 0;
+			series.tooltip.dx = 10;
+			series.tooltip.dy = -10;
+
+			const shadowFilter = new am4core.DropShadowFilter();
+			shadowFilter.opacity = 0.25;
+			shadowFilter.blur = 0;
+			shadowFilter.dx = 4;
+			shadowFilter.dy = 4;
+
+			series.tooltip.filters.push(shadowFilter);
+		}
+		series.slices.template.tooltipHTML = `
+    <div class="center p-4 uppercase font-bold bg-[#d7deff]">
+    {category}: {value} ({value.percent}%)
+    </div>
+    `;
 
 		return () => {
 			chart.dispose();
@@ -68,7 +96,7 @@ function PieChart({ idKey, data }: { idKey: string; data: IncidentCounts }) {
 	);
 }
 
-function BarGraph() {
+function BarGraph({ barData }) {
 	const width = 1060;
 	const height = 460;
 	const margin = { x: 40, top: 10, bottom: 80 };
@@ -94,15 +122,21 @@ function BarGraph() {
 
 		const series = d3.stack().keys(["male", "female"])(barData);
 		return { series, x0, x1, y };
-	}, [innerH, innerW]);
+	}, [innerH, innerW, barData]);
 
 	const yTicks = y.ticks(6);
+	const tooltip = d3.select("#chart-tooltip");
 
 	return (
 		<div
 			style={{ minWidth: width, minHeight: height }}
 			className="flex items-center justify-center font-mono"
 		>
+			<div
+				id="chart-tooltip"
+				style={{ display: "none" }}
+				className="absolute bg-[#d7deff] text-[#161b3f] px-4 py-3 uppercase font-bold shadow-[4px_4px_0_rgba(0,0,0,0.25)]"
+			/>
 			<svg width={width} height={height}>
 				{/* tick lines */}
 				<g transform={`translate(${margin.x},${margin.top})`}>
@@ -126,6 +160,20 @@ function BarGraph() {
 						<g key={layer.key} fill={genderColors[layer.key]}>
 							{layer.map((d, i) => (
 								<rect
+									onMouseOver={(_event) => {
+										tooltip
+											.style("display", "inline-block")
+											.text(
+												`${layer.key}: ${d[1] - d[0]} (${Math.trunc(((d[1] - d[0]) / (d.data.male + d.data.female)) * 100)}%)`,
+											);
+									}}
+									onMouseMove={(event) => {
+										tooltip.style("top", `${event.pageY - 10}px`);
+										tooltip.style("left", `${event.pageX + 10}px`);
+									}}
+									onMouseOut={(_event) => {
+										tooltip.style("display", "none");
+									}}
 									key={i}
 									x={x0(d.data.timePeriod) + x1(d.data.party)}
 									y={y(d[1])}
@@ -139,7 +187,7 @@ function BarGraph() {
 				{barData.map((d) =>
 					["complainant", "respondent"].map((party) => (
 						<text
-							key={`${d.timePeriod}-${party}`}
+							key={`${d.id}-${party}`}
 							x={x0(d.timePeriod) + x1(party) + x1.bandwidth() / 2 + margin.x}
 							y={innerH + 26}
 							textAnchor="middle"
@@ -153,7 +201,7 @@ function BarGraph() {
 				)}
 				{barData.map((d) => (
 					<text
-						key={d.timePeriod}
+						key={`${d.id}-text`}
 						x={x0(d.timePeriod) + x0.bandwidth() / 2 + margin.x}
 						y={innerH + 58}
 						textAnchor="middle"
@@ -282,7 +330,37 @@ function PieSection() {
 	);
 }
 
+function ArrowBtn({
+	disabled,
+	next,
+	action,
+}: {
+	disabled: boolean;
+	next: boolean;
+	action: () => void;
+}) {
+	const bgColor = disabled ? "#7e89a6" : "#afbee9";
+	const strokeColor = disabled
+		? "rgba(181, 193, 255, 0.5)"
+		: "rgba(30, 50, 147, 0.5)";
+	const buttonClass = `p-2 border-t-3 border-l-3`;
+	return (
+		<button
+			className={buttonClass}
+			style={{ background: bgColor, borderColor: strokeColor }}
+		>
+			<img
+				alt={next ? "Next" : "Back"}
+				className={`w-full h-full ${next ? "" : "-scale-x-100"}`}
+				onClick={!disabled ? action : () => {}}
+				src="/browserbar/arrow.svg"
+			/>
+		</button>
+	);
+}
+
 export default function CodesAndComplaints() {
+	const [currentBarData, setCurrentBarData] = useState(0);
 	am4core.useTheme(am4themes_animated);
 	return (
 		<main id="codes-and-complaints" className="file-main">
@@ -354,9 +432,21 @@ export default function CodesAndComplaints() {
 			{/* graph section */}
 			<section className="max-w-full overflow-x-auto flex flex-col items-center">
 				<section className="w-screen h-60 bg-linear-to-b from-[rgb(97,126,194)] to-[transparent] mb-15 flex flex-col items-center pt-15">
-					<h2 className="uppercase text-4xl tracking-wide font-semibold font-mono text-shadow-[0_4px_0_rgba(0,0,0,0.5)]">
-						Formal University Codi Cases
-					</h2>
+					<section className="flex items-center justify-center gap-20">
+						<ArrowBtn
+							next={false}
+							disabled={currentBarData === 0}
+							action={() => setCurrentBarData(currentBarData - 1)}
+						/>
+						<h2 className="uppercase text-4xl tracking-wide font-semibold font-mono text-shadow-[0_4px_0_rgba(0,0,0,0.5)]">
+							{genderBarData[currentBarData].title}
+						</h2>
+						<ArrowBtn
+							next={true}
+							disabled={currentBarData === genderBarData.length - 1}
+							action={() => setCurrentBarData(currentBarData + 1)}
+						/>
+					</section>
 					<section className="legend flex gap-6">
 						<section className="legend-item flex gap-3 mt-5 items-center">
 							<div className="aspect-square w-6 inset-shadow-[-4px_-4px_0px_0px_rgb(255,255,255)] border-l-3 border-t-3 border-[rgba(30,50,147,0.5)] bg-[rgb(156,177,234)]" />
@@ -368,7 +458,7 @@ export default function CodesAndComplaints() {
 						</section>
 					</section>
 				</section>
-				<BarGraph />
+				<BarGraph barData={genderBarData[currentBarData].data} />
 				<PieSection />
 			</section>
 			<p>
