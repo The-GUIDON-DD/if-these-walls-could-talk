@@ -51,10 +51,10 @@ html {
 	@apply w-full flex flex-col items-center mb-50;
 }
 
-.file-main p {
+.file-main > p {
 	@apply mb-10 w-[60%];
 }
 
-.file-main h1 {
+.file-main > h1 {
 	@apply text-center mt-30 mb-20 w-[60%];
 }
