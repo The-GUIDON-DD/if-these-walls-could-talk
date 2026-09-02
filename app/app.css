@@ -24,6 +24,16 @@
 	background: radial-gradient(#3a54cf, #0a124d);
 }
 
+.gradient-btn {
+	background: linear-gradient(to top, #161b3f, #1e349a);
+}
+
+.gradient-btn:hover {
+	background:
+		linear-gradient(rgba(186, 203, 255, 0.1), rgba(186, 203, 255, 0.1)),
+		linear-gradient(to top, #161b3f, #1e349a);
+}
+
 .text-shadow {
 	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
 }
