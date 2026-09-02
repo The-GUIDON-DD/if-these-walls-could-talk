@@ -3,7 +3,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
 import { useEffect, useMemo, useState } from "react";
-import { barData, pieData, pieLegend } from "../../data/codes-complaints";
+import { pieData, pieLegend } from "../../data/codes-complaints";
 
 interface IncidentCounts {
 	Major: number;
