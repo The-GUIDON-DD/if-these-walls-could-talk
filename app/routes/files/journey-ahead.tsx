@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-import PaperPeople from "../../components/PaperPeople";
-
 const quoteText =
 	"\u201cI just want [the] Ateneo to know that there are so many students that [are] completely left in the dark to deal with all these [different types of] sexual harassment,\u201d";
 

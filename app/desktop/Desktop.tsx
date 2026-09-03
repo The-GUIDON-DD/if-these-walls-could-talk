@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
+import useSound from "use-sound";
+import click from "/audio/click.mp3?url";
 import { PopupWindow } from "../components/PopupWindow";
 import {
 	DESKTOP_ICONS,
@@ -57,6 +59,7 @@ export default function Desktop() {
 	const [showSystemMessage, setShowSystemMessage] = useState(true);
 	const [showAbout, setShowAbout] = useState(true);
 	const [activePopup, setActivePopup] = useState<PopupWindowKey | null>(null);
+	const [clickSfx] = useSound(click);
 	const _location = useLocation();
 
 	// only show initial popups if we see desktop for the first time
@@ -126,6 +129,7 @@ export default function Desktop() {
 					height={230}
 				>
 					{POPUP_CONTENTS["System Message"](() => {
+						clickSfx();
 						setShowSystemMessage(false);
 						localStorage.setItem("alreadyVisit", "true");
 					})}

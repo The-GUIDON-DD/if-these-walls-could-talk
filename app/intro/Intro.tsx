@@ -3,13 +3,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { Link } from "react-router";
 import { findLast, zip } from "remeda";
+import useSound from "use-sound";
+import beepHi from "/audio/beep_hi.mp3?url";
+import longBeep from "/audio/beep_long_startup.mp3?url";
+import beep from "/audio/beep_med.mp3?url";
 
 const totalSeconds = 5;
 
 export function LoadingBar({ timer }: { timer: number }) {
 	const totalBars = 18;
 	// bar should update at 0, 25%, 75%, and 100% of the total seconds/completion.
-	const updatePercentages = [0, 0.25, 0.5, 0.75, 1];
+	const updatePercentages = [0, 0.5, 1];
 	const updateTimes = updatePercentages.map((percent) =>
 		Math.floor(totalSeconds * percent),
 	);
@@ -105,11 +109,11 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 		<section
 			ref={root}
 			id="intro-text"
-			className="w-full w-max-screen h-[360vh] overflow-x-clip"
+			className="w-full w-max-screen h-[360vh]"
 		>
 			<section
 				id="intro-text-cont"
-				className="sticky top-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-full"
+				className="sticky top-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-screen"
 			>
 				<p id="intro-text-p1" className={paragraphStyle} style={{ opacity: 0 }}>
 					IN RECENT years, the University has expanded policies, offices, and
@@ -150,6 +154,7 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 function LoginScreen() {
 	const root = useRef<HTMLElement>(null);
 	const scope = useRef<ReturnType<typeof createScope> | null>(null);
+	const [beepHiSfx] = useSound(beepHi);
 	useEffect(() => {
 		scope.current = createScope({ root }).add(() => {
 			animate("#intro-login", {
@@ -176,6 +181,7 @@ function LoginScreen() {
 				<p className="font-mono text-white uppercase text-lg">Guest User</p>
 				<Link
 					to="/desktop"
+					onClick={() => beepHiSfx()}
 					className="font-mono text-white uppercase text-lg px-5 py-2 mt-5 border-[rgba(47, 79, 130, 0.25)] border-t border-l gradient-btn"
 				>
 					Log In
@@ -189,18 +195,35 @@ export default function Intro() {
 	const [time, setTime] = useState(0);
 	const [showIntroText, setShowIntroText] = useState(false);
 	const [showLogin, setShowLogin] = useState(false);
+	const [beepSfx, { stop: stopBeep }] = useSound(beep);
+	const [longBeepSfx] = useSound(longBeep);
 	const enableLogin = useCallback(() => setShowLogin(true), []);
 
 	useEffect(() => {
-		createTimer({
+		const timer = createTimer({
 			duration: 1000,
 			loop: totalSeconds,
-			onLoop: () => setTime(time + 1),
-		}).then(() => setShowIntroText(true));
+			onLoop: (self) => {
+				if (self.currentIteration === 2 || self.currentIteration === 1) {
+					beepSfx();
+				}
+				if (self.currentIteration === 4) {
+					longBeepSfx();
+				}
+				setTime((prev) => {
+					return prev + 1;
+				});
+			},
+		});
+		timer.then(() => {
+			timer.pause();
+			stopBeep();
+			setShowIntroText(true);
+		});
 
 		// reset flag to remove starting popups
 		localStorage.removeItem("alreadyVisit");
-	}, [time]);
+	}, [beepSfx, stopBeep, longBeepSfx]);
 
 	return (
 		<>
