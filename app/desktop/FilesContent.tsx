@@ -1,9 +1,12 @@
 import { type ReactNode, useState } from "react";
 import { Link } from "react-router";
+import useSound from "use-sound";
 import { FILES_LIST } from "~/utils/constants";
+import click from "/audio/click.mp3?url";
 
 export function FilesContent(): ReactNode {
 	const [hoveredId, setHoveredId] = useState<string>("public-reckonings");
+	const [clickSfx] = useSound(click);
 	const currentFile = FILES_LIST.find(({ id }) => hoveredId === id);
 
 	return (
@@ -13,7 +16,7 @@ export function FilesContent(): ReactNode {
 					const active = hoveredId === id;
 
 					return (
-						<Link key={id} to={`/files/${id}`}>
+						<Link key={id} onClick={() => clickSfx()} to={`/files/${id}`}>
 							<div
 								onMouseEnter={() => setHoveredId(id)}
 								className={`flex flex-col items-center p-4 rounded min-w-[200px] cursor-pointer transition-all outline-none ${
