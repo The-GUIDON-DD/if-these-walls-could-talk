@@ -1,6 +1,48 @@
+import { useEffect, useRef, useState } from "react";
+
 import PaperPeople from "../../components/PaperPeople";
 
+const quoteText =
+    "\u201cI just want [the] Ateneo to know that there are so many students that [are] completely left in the dark to deal with all these [different types of] sexual harassment,\u201d";
+
 export default function JourneyAhead() {
+    const quoteBoxRef = useRef<HTMLDivElement>(null);
+    const [visibleQuote, setVisibleQuote] = useState("");
+
+    useEffect(() => {
+        const quoteBox = quoteBoxRef.current;
+        if (!quoteBox) return;
+
+        let typingTimer: number | undefined;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+
+            observer.disconnect();
+
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                setVisibleQuote(quoteText);
+                return;
+            }
+
+            let characterIndex = 0;
+            typingTimer = window.setInterval(() => {
+                characterIndex += 1;
+                setVisibleQuote(quoteText.slice(0, characterIndex));
+
+                if (characterIndex === quoteText.length) {
+                    window.clearInterval(typingTimer);
+                }
+            }, 28);
+        });
+
+        observer.observe(quoteBox);
+
+        return () => {
+            observer.disconnect();
+            if (typingTimer !== undefined) window.clearInterval(typingTimer);
+        };
+    }, []);
+
 	return (
         <>
         <main id="journey-ahead" className="file-main">
@@ -82,10 +124,19 @@ export default function JourneyAhead() {
                     </defs>
                 </svg>
                 
-                <div className="w-full border-t-4 border-l-4 border-[#1E329380] p-6 bg-[#DCE5FF] flex-1 flex items-center">
+                <div
+                    ref={quoteBoxRef}
+                    className="w-full border-t-4 border-l-4 border-[#1E329380] p-6 bg-[#DCE5FF] flex-1 flex items-center"
+                >
                     <p className="font-sans text-base md:text-lg leading-relaxed font-semibold">
-                        <span className="bg-[#0032C9] text-white box-decoration-clone px-1.5 py-0.5">
-                            &ldquo;I just want [the] Ateneo to know that there are so many students that [are] completely left in the dark to deal with all these [different types of] sexual harassment,&rdquo;
+                        <span
+                            className="bg-[#0032C9] text-white box-decoration-clone px-1.5 py-0.5"
+                            aria-label={quoteText}
+                        >
+                            {visibleQuote}
+                            <span className="animate-pulse" aria-hidden="true">
+                                |
+                            </span>
                         </span>
                     </p>
                 </div>
@@ -93,20 +144,30 @@ export default function JourneyAhead() {
         </div>
 
             <p>
-                Selena emphasizes. As a survivor, she hopes the University can provide proper and consistent solutions to affected members of the community. 
+                Selena emphasizes. As a survivor, she hopes the University can provide
+                proper and consistent solutions to affected members of the community.
             </p>
 
             <p>
-                On a similar note, Mary calls on the University to establish a simpler and more accessible system for students. As the nature of harassment cases evolves, she believes that improving the dissemination of guidelines can help students easily distinguish which people and offices to approach for concerns similar to hers.
+                On a similar note, Mary calls on the University to establish a simpler and
+                more accessible system for students. As the nature of harassment cases
+                evolves, she believes that improving the dissemination of guidelines can
+                help students easily distinguish which people and offices to approach for
+                concerns similar to hers.
             </p>
 
             <p>
-                Beyond this, Mary wishes to see the Ateneo become more proactive in handling reported cases, particularly in updating the concerned parties on the status of their complaint. 
-
+                Beyond this, Mary wishes to see the Ateneo become more proactive in handling
+                reported cases, particularly in updating the concerned parties on the status
+                of their complaint.
             </p>
 
             <p>
-                Ultimately, in fostering inclusivity and collective well-being, the Ateneo must close the gap between the student body and the administration, combatting inconsistencies in actively addressing complaints. Productive change means pushing for a culture that prioritizes the awareness of these realities and ensuring survivor-centered access to justice.
+                Ultimately, in fostering inclusivity and collective well-being, the Ateneo
+                must close the gap between the student body and the administration,
+                combatting inconsistencies in actively addressing complaints. Productive
+                change means pushing for a culture that prioritizes the awareness of these
+                realities and ensuring survivor-centered access to justice.
             </p>
 
 		</main>
