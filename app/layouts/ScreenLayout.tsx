@@ -4,7 +4,8 @@ export default function ScreenLayout() {
 	const fullScreenLayer =
 		"pointer-events-none bg-center bg-cover w-full h-full fixed inset-0 z-50";
 	return (
-		<main className="w-screen min-h-screen overflow-x-clip">
+		<main className="w-screen max-w-screen min-h-screen overflow-x-clip">
+			<audio src="/audio/bghum.mp3" autoPlay={true} loop={true} />
 			<div className="w-full min-h-screen">
 				<Outlet />
 			</div>

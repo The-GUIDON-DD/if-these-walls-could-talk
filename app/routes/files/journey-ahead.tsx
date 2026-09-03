@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-import PaperPeople from "../../components/PaperPeople";
-
 const quoteText =
 	"\u201cI just want [the] Ateneo to know that there are so many students that [are] completely left in the dark to deal with all these [different types of] sexual harassment,\u201d";
 
@@ -79,7 +77,7 @@ export default function JourneyAhead() {
 					through students’ and stakeholders’ feedback.
 				</p>
 
-				<div className="relative z-10 w-[59.01rem] max-w-full mx-auto my-12 md:-translate-x-20 flex flex-col shadow-[0px_6px_0px_rgba(22,27,63,0.3)]">
+				<div className="relative z-10 w-[59.01rem] max-w-full mx-auto my-10 md:-translate-x-20 flex flex-col shadow-[0px_6px_0px_rgba(22,27,63,0.3)]">
 					<div
 						className="w-full h-[50px]"
 						style={{
@@ -98,7 +96,7 @@ export default function JourneyAhead() {
 					</div>
 				</div>
 
-				<div className="relative z-10 w-[59.01rem] max-w-full mx-auto my-12 -mt-32 md:translate-x-20 flex flex-col shadow-[0px_6px_0px_rgba(22,27,63,0.3)]">
+				<div className="relative z-10 w-[59.01rem] max-w-full mx-auto my-12 -mt-20 md:translate-x-20 flex flex-col shadow-[0px_6px_0px_rgba(22,27,63,0.3)]">
 					<div
 						className="w-full h-[50px]"
 						style={{
