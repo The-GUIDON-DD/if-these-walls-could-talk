@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export function EmailContent() {
 	return (
-		<div className="h-full overflow-auto bg-linear-to-b from-[#eef0ff] to-[#c2ccff] px-[9%] py-[7%] font-mono">
+		<div className="h-full overflow-clip bg-linear-to-b from-[#eef0ff] to-[#c2ccff] px-[9%] py-[7%] font-mono">
 			<h1 className="text-center font-sans text-6xl font-black italic leading-none text-[rgba(0,46,255,1)] text-shadow-[1px_3px_0_#7d829f] [-webkit-text-stroke:2px_#eef0ff]">
 				Welcome!
 			</h1>
@@ -99,7 +99,7 @@ export function EmailContent() {
 						</defs>
 					</svg>
 					<span className="w-full shadow-[3px_2px_0_rgba(0,0,0,0.2),inset_3px_3px_0_0_rgba(255,255,255,1)] px-5 py-3 mr-2 text-3xl font-semibold text-[#161b3f]">
-						Guess
+						Guest
 					</span>
 				</Link>
 			</div>

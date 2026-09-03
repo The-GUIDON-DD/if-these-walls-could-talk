@@ -97,11 +97,16 @@ export function AboutContent({ onOk }: AboutContentProps): ReactNode {
 						</div>
 
 						<div>
-							<p className="font-semibold text-black">Interactive by</p>
+							<p className="font-semibold text-black">Designed by</p>
 							<p>Diego Andal</p>
 							<p>Devin Avenida</p>
 							<p>Helena Leaño</p>
-							<p className="italic text-gray-500">Developer</p>
+						</div>
+						<div>
+							<p className="font-semibold text-black">Developed by</p>
+							<p>Cheska Huang</p>
+							<p>Abby Montayre</p>
+							<p>Angela Salarda</p>
 						</div>
 					</div>
 				</div>

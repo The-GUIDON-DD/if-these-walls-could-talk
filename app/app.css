@@ -48,7 +48,7 @@ html {
 }
 
 .file-main {
-	@apply w-full flex flex-col items-center mb-50;
+	@apply w-full flex flex-col items-center mb-50 overflow-clip;
 }
 
 .file-main > p {
@@ -57,4 +57,22 @@ html {
 
 .file-main > h1 {
 	@apply text-center mt-30 mb-20 w-[60%];
+}
+
+.infinite-hor-scroll {
+	animation: 25s linear infinite infinite-hor-scroll;
+}
+
+@keyframes infinite-hor-scroll {
+	from {
+		transform: translateX(0vw);
+	}
+
+	to {
+		transform: translateX(-100vw);
+	}
+}
+
+.email-content a {
+	@apply underline text-[#002eff];
 }

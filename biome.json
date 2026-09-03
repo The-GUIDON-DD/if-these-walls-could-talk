@@ -19,6 +19,9 @@
 			"a11y": "warn",
 			"suspicious": {
 				"noArrayIndexKey": "warn"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "warn"
 			}
 		}
 	},
