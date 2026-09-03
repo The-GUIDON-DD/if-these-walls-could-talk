@@ -68,7 +68,7 @@ function AddressBar({ fileName }: { fileName: string }) {
 				}}
 			>
 				{isExpanded ? (
-					fileList.map(({ id }, ix) => (
+					fileList.map(({ id, fileName }, ix) => (
 						<Link
 							key={id}
 							to={`/files/${id}`}
@@ -84,12 +84,12 @@ function AddressBar({ fileName }: { fileName: string }) {
 							}
 							onMouseOver={() => setSelectedFile(ix)}
 						>
-							<p>Files/{id}.txt</p>
+							<p>Files/{fileName}</p>
 						</Link>
 					))
 				) : (
 					<section className="flex h-10 w-full items-center pl-4 text-xl font-medium">
-						<p>Files/{fileName}.txt</p>
+						<p>Files/{currentFile.fileName}</p>
 					</section>
 				)}
 			</section>

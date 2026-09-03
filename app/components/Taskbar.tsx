@@ -5,7 +5,7 @@ export default function Taskbar() {
 				<p className="italic">If These Walls Could Talk</p>
 			</div>
 			<div className="pl-10 border-l-2 border-gray-300 flex items-center">
-				<p>00:00</p>
+				<p>09:04</p>
 			</div>
 		</div>
 	);

@@ -102,7 +102,11 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 		"w-3/5 font-sans font-medium leading-[145%] text-4xl col-span-full row-span-full text-white font-bold text-center retro-text-shadow opacity-0";
 	const linkStyle = "text-white underline";
 	return (
-		<section ref={root} id="intro-text" className="w-full h-[360vh]">
+		<section
+			ref={root}
+			id="intro-text"
+			className="w-full w-max-screen h-[360vh] overflow-x-clip"
+		>
 			<section
 				id="intro-text-cont"
 				className="sticky top-0 grid grid-cols-1 grid-rows-1 place-items-center h-screen w-full"

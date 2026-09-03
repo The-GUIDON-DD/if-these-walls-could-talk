@@ -184,8 +184,11 @@ export default function JourneyAhead() {
 			<div className="w-screen overflow-x-clip relative">
 				<div className="flex w-[300vw] infinite-hor-scroll">
 					<img className="w-screen" src="/paper-ppl.svg" />
-					<img className="w-screen" src="/paper-ppl.svg" />
-					<img className="w-screen" src="/paper-ppl.svg" />
+					<img className="w-screen relative left-[-6px]" src="/paper-ppl.svg" />
+					<img
+						className="w-screen relative left-[-12px]"
+						src="/paper-ppl.svg"
+					/>
 				</div>
 			</div>
 		</>
