@@ -2,8 +2,8 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as d3 from "d3";
-import { useEffect, useMemo, useState } from "react";
-import { barData, pieData, pieLegend } from "../../data/codes-complaints";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { genderBarData, pieData, pieLegend } from "../../data/codes-complaints";
 
 interface IncidentCounts {
 	Major: number;
@@ -103,6 +103,7 @@ function BarGraph({ barData }) {
 	const innerW = width - margin.x * 2;
 	const innerH = height - margin.top - margin.bottom;
 	const genderColors = { male: "#668af5", female: "#cd6cc3" };
+	const tooltipRef = useRef(null);
 	const { series, x0, x1, y } = useMemo(() => {
 		const x0 = d3
 			.scaleBand()
@@ -125,7 +126,6 @@ function BarGraph({ barData }) {
 	}, [innerH, innerW, barData]);
 
 	const yTicks = y.ticks(6);
-	const tooltip = d3.select("#chart-tooltip");
 
 	return (
 		<div
@@ -134,7 +134,8 @@ function BarGraph({ barData }) {
 		>
 			<div
 				id="chart-tooltip"
-				style={{ display: "none" }}
+				ref={tooltipRef}
+				style={{ display: "none", pointerEvents: "none" }}
 				className="absolute bg-[#d7deff] text-[#161b3f] px-4 py-3 uppercase font-bold shadow-[4px_4px_0_rgba(0,0,0,0.25)]"
 			/>
 			<svg width={width} height={height}>
@@ -161,18 +162,24 @@ function BarGraph({ barData }) {
 							{layer.map((d, i) => (
 								<rect
 									onMouseOver={(_event) => {
-										tooltip
+										d3.select(tooltipRef.current)
 											.style("display", "inline-block")
 											.text(
 												`${layer.key}: ${d[1] - d[0]} (${Math.trunc(((d[1] - d[0]) / (d.data.male + d.data.female)) * 100)}%)`,
 											);
 									}}
 									onMouseMove={(event) => {
-										tooltip.style("top", `${event.pageY - 10}px`);
-										tooltip.style("left", `${event.pageX + 10}px`);
+										d3.select(tooltipRef.current).style(
+											"top",
+											`${event.pageY - 10}px`,
+										);
+										d3.select(tooltipRef.current).style(
+											"left",
+											`${event.pageX + 10}px`,
+										);
 									}}
 									onMouseOut={(_event) => {
-										tooltip.style("display", "none");
+										d3.select(tooltipRef.current).style("display", "none");
 									}}
 									key={i}
 									x={x0(d.data.timePeriod) + x1(d.data.party)}
