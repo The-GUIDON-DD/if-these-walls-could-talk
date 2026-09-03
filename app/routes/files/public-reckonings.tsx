@@ -4,12 +4,12 @@ import PersonCard from "~/components/PersonCard";
 
 function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
-		<article className="grow flex flex-col items-center md: gap-5 md:gap-10 three-step">
+		<article className="grow flex flex-col items-center md: gap-5 md:gap-7 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
-			<h3 className="text-white font-medium text-3xl text-center  h-10 md:h-20">
+			<h3 className="text-white font-medium text-3xl text-center h-10 md:h-15">
 				{title}
 			</h3>
-			<section className="w-full flex items-center justify-center p-10 h-70 rounded-2xl border-white border-3">
+			<section className="w-full flex items-center justify-center p-10 h-60 rounded-2xl border-white border-3">
 				<p className="text-white font-medium text-2xl text-center ">{desc}</p>
 			</section>
 		</article>
@@ -53,11 +53,11 @@ function ThreeStepFramework() {
 			.init();
 	}, []);
 	return (
-		<section className="mt-10 w-[70%]" id="three-step-framework">
+		<section className="mt-10 w-[50%]" id="three-step-framework">
 			<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
 				Three-Step Framework
 			</h2>
-			<section className="w-full flex flex-col md:flex-row gap-8 my-15">
+			<section className="w-full flex flex-col md:flex-row gap-15  mt-10 mb-20">
 				{steps.map(({ title, desc }) => (
 					<StepContainer key={title} title={title} desc={desc} />
 				))}

@@ -35,6 +35,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body>
+				<audio
+					id="bg-audio"
+					src="/audio/bghum.mp3"
+					autoPlay={true}
+					loop={true}
+				/>
 				{children}
 				<ScrollRestoration />
 				<Scripts />

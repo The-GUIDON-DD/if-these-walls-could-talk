@@ -6,7 +6,9 @@ import { MenuBar } from "./MenuBar";
 const browserBarClass =
 	"bg-[#B1BFED] px-[12vw] py-2 flex border-t-4 border-[#7988c9]";
 const buttonClass =
-	"p-2 bg-[#bacbff,_rgba(0,0,0,0.1)] border-t-3 border-l-3 border-[rgba(30,50,147,0.5)]";
+	"p-2 bg-[#afbee9] border-t-3 border-l-3 border-[rgba(30,50,147,0.5)]";
+const disabledButtonClass =
+	"p-2 bg-[#7e89a6] border-t-3 border-l-3 border-[rgba(181,193,255,0.5)]";
 
 function getNextFile(fileName: string) {
 	const curFileIndex = FILES_LIST.findIndex(({ id }) => fileName === id);
@@ -14,7 +16,7 @@ function getNextFile(fileName: string) {
 		return "";
 	}
 	if (curFileIndex === FILES_LIST.length - 1) {
-		return FILES_LIST[0].id;
+		return FILES_LIST[curFileIndex].id;
 	}
 	return FILES_LIST[curFileIndex + 1].id;
 }
@@ -25,7 +27,7 @@ function getPrevFile(fileName: string) {
 		return "";
 	}
 	if (curFileIndex === 0) {
-		return FILES_LIST[FILES_LIST.length - 1].id;
+		return FILES_LIST[curFileIndex].id;
 	}
 	return FILES_LIST[curFileIndex - 1].id;
 }
@@ -72,6 +74,7 @@ function AddressBar({ fileName }: { fileName: string }) {
 						<Link
 							key={id}
 							to={`/files/${id}`}
+							onClick={() => setIsExpanded(false)}
 							className="flex h-10 w-full items-center pl-4 text-xl font-medium"
 							style={
 								selectedFile === ix
@@ -98,19 +101,30 @@ function AddressBar({ fileName }: { fileName: string }) {
 }
 
 export default function BrowserBar({ fileName }: { fileName: string }) {
+	const currentFileIx = FILES_LIST.findIndex((file) => file.id === fileName);
 	return (
 		<header className="w-full flex flex-col items-stretch">
 			<MenuBar title="Files" />
 			<section className={`${browserBarClass} h-15 gap-2`}>
 				<section className="flex h-full items-stretch gap-1">
-					<Link to={`/files/${getPrevFile(fileName)}`} className={buttonClass}>
+					<Link
+						to={`/files/${getPrevFile(fileName)}`}
+						className={currentFileIx === 0 ? disabledButtonClass : buttonClass}
+					>
 						<img
 							alt="Back"
 							className="w-full h-full -scale-x-100"
 							src="/browserbar/arrow.svg"
 						/>
 					</Link>
-					<Link to={`files/${getNextFile(fileName)}`} className={buttonClass}>
+					<Link
+						to={`files/${getNextFile(fileName)}`}
+						className={
+							currentFileIx === FILES_LIST.length - 1
+								? disabledButtonClass
+								: buttonClass
+						}
+					>
 						<img
 							alt="Next"
 							className="w-full h-full"
