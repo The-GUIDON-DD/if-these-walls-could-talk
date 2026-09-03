@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { IoMdClose } from "react-icons/io";
 
 type EmailItem = {
 	id: number;
@@ -186,14 +187,14 @@ export default function Email() {
 						onClick={(event) => event.stopPropagation()}
 						className="h-[min(640px,calc(100vh-4rem))] w-[min(900px,calc(100vw-4rem))] gradient-white shadow-[8px_8px_0_rgba(22,27,63,0.25) p-]"
 					>
-						<header className="flex h-16 items-center justify-between  border-b-0 bg-linear-to-r from-[#c9e6ff] to-[#4968ff] px-5">
+						<header className="flex h-16 items-center justify-end border-b-0 bg-linear-to-r from-[#c9e6ff] to-[#4968ff] px-5">
 							<button
 								type="button"
 								onClick={() => setSelectedEmail(null)}
 								aria-label="Close email"
-								className="font-mono text-3xl font-bold leading-none text-[#161b3f]"
+								className="font-mono text-3xl leading-none text-[white]"
 							>
-								×
+								<IoMdClose />
 							</button>
 						</header>
 
