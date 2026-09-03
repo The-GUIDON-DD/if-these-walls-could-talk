@@ -72,3 +72,7 @@ html {
 		transform: translateX(-100vw);
 	}
 }
+
+.email-content a {
+	@apply underline text-[#002eff];
+}
