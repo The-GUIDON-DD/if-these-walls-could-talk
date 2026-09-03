@@ -22,6 +22,7 @@ export default [
 						"procedure-hesitation",
 						"routes/files/ProcedureHesitationContent.tsx",
 					),
+					route("journey-ahead", "routes/files/journey-ahead.tsx"),
 				]),
 			]),
 			layout("./layouts/MenuBarLayout.tsx", [
