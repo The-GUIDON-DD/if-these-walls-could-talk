@@ -109,7 +109,7 @@ export default function ProcedureHesitationContent(): ReactNode {
 				available support.
 			</p>
 
-			<div className="relative w-[50%] min-w-[600px] h-[350px] flex items-center justify-center my-12">
+			<div className="relative w-[50%] max-w-[800px] min-w-[700px] h-[350px] flex items-center justify-center my-12">
 				<div className="relative flex flex-col items-center">
 					<div
 						className="w-[153.49px] h-[153.49px] relative z-1 rounded-full shadow-[0px_6px_0px_rgba(22,27,63,0.3)]"

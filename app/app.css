@@ -65,7 +65,7 @@ html {
 }
 
 .infinite-hor-scroll {
-	animation: 25s linear infinite infinite-hor-scroll;
+	animation: 45s linear infinite infinite-hor-scroll;
 }
 
 @keyframes infinite-hor-scroll {

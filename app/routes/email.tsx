@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import useSound from "use-sound";
+import click from "/audio/click.mp3?url";
 
 type EmailItem = {
 	id: number;
@@ -73,6 +75,7 @@ function EmailDetailPopup({ email }: { email: EmailItem }) {
 }
 
 export default function Email() {
+	const [clickSfx] = useSound(click);
 	const [emails, setEmails] = useState<EmailItem[]>([
 		{
 			id: 1,
@@ -86,7 +89,7 @@ export default function Email() {
 			id: 2,
 			subject: "Selena",
 			content:
-				"This inaccessibility and information gap affect not only how cases progress, but also whether students feel able to report at all. Within this context, the act of speaking up can reopen wounds that survivors are still trying to heal. In particular, Selena reveals how a system intended to ensure fairness can also become emotionally demanding.\n\nSelena recalls filing her report just a day after experiencing harassment from a fellow student. After her blockmate connected her to the Office of Student Affairs (OSA), she hoped that the office would provide clarity on how to proceed with her case and how the University would handle it. Yet, what began as an act of courage soon turned into weeks of frustration.\n\nThe people I was dealing with could never give me a sure answer. I had to be extremely specific with everything that happened, and even with the amount of evidence I had, it felt like it still wasn’t enough,” she admits. In particular, she cited her experience with the OSA, the UGH, and the Office of Student Discipline.\n\nMoving between multiple offices required Selena to recount the same painful experience multiple times. While each office explained its individual role, she was left doubtful about the overall status of her case and what outcomes to expect. “I just feel like I’m in a very gray area,” she reflects. “I don’t even know if the guy that did [the harassment] to me is gonna get any form of punishment.",
+				"This inaccessibility and information gap affect not only how cases progress, but also whether students feel able to report at all. Within this context, the act of speaking up can reopen wounds that survivors are still trying to heal. In particular, Selena reveals how a system intended to ensure fairness can also become emotionally demanding.\n\nSelena recalls filing her report just a day after experiencing harassment from a fellow student. After her blockmate connected her to the Office of Student Affairs (OSA), she hoped that the office would provide clarity on how to proceed with her case and how the University would handle it. Yet, what began as an act of courage soon turned into weeks of frustration.\n\n“The people I was dealing with could never give me a sure answer. I had to be extremely specific with everything that happened, and even with the amount of evidence I had, it felt like it still wasn’t enough,” she admits. In particular, she cited her experience with the OSA, the UGH, and the Office of Student Discipline.\n\nMoving between multiple offices required Selena to recount the same painful experience multiple times. While each office explained its individual role, she was left doubtful about the overall status of her case and what outcomes to expect. “I just feel like I’m in a very gray area,” she reflects. “I don’t even know if the guy that did [the harassment] to me is gonna get any form of punishment.",
 			isRead: false,
 			isUnlocked: false,
 		},
@@ -132,7 +135,7 @@ export default function Email() {
 
 	return (
 		<>
-			<div className="flex h-screen gap-0 gradient-white font-mono pt-18">
+			<div className="flex h-screen overflow-clip gap-0 gradient-white font-mono pt-18">
 				<aside className="w-70">
 					<div className="bg-linear-to-r from-[#dcecff] to-[#4968ff] w-full py-4 px-1" />
 					<div className="h-full border-r-5 border-[rgba(0,0,0,0.3)] shadow-[inset_-10px_0_0_0_rgba(0,0,0,0.1)] box-border">
@@ -195,6 +198,7 @@ export default function Email() {
 					aria-modal="true"
 					aria-label={selectedEmail.subject}
 					onClick={() => {
+						clickSfx();
 						markAsRead(selectedEmail.id);
 						setSelectedEmail(null);
 					}}
@@ -208,6 +212,7 @@ export default function Email() {
 							<button
 								type="button"
 								onClick={() => {
+									clickSfx();
 									markAsRead(selectedEmail.id);
 									setSelectedEmail(null);
 								}}

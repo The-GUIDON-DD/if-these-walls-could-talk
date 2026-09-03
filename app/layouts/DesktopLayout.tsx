@@ -5,7 +5,7 @@ export default function DesktopLayout() {
 	return (
 		<>
 			<Outlet />
-			<div className="w-screen fixed bottom-[1.5vh] z-30">
+			<div className="w-screen fixed bottom-[1.2vh] z-30">
 				<Taskbar />
 			</div>
 		</>

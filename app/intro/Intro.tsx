@@ -200,10 +200,16 @@ export default function Intro() {
 	const enableLogin = useCallback(() => setShowLogin(true), []);
 
 	useEffect(() => {
+		const bgAudio = document.getElementById("bg-audio") as HTMLAudioElement;
 		const timer = createTimer({
 			duration: 1000,
 			loop: totalSeconds,
 			onLoop: (self) => {
+				if (self.currentIteration < totalSeconds) {
+					if (bgAudio && bgAudio.paused) {
+						bgAudio.play();
+					}
+				}
 				if (self.currentIteration === 2 || self.currentIteration === 1) {
 					beepSfx();
 				}

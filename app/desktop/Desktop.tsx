@@ -160,7 +160,9 @@ export default function Desktop() {
 							<span />
 							<button
 								type="button"
-								onClick={closeActivePopup}
+								onClick={() => {
+									closeActivePopup();
+								}}
 								aria-label="Close Mail"
 								title="Close Mail"
 								className="flex px-5 aspect-square items-center justify-center text-4xl text-white"
