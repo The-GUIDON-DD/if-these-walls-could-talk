@@ -103,14 +103,14 @@ export default function BrowserBar({ fileName }: { fileName: string }) {
 			<MenuBar title="Files" />
 			<section className={`${browserBarClass} h-15 gap-2`}>
 				<section className="flex h-full items-stretch gap-1">
-					<Link to={getPrevFile(fileName)} className={buttonClass}>
+					<Link to={`/files/${getPrevFile(fileName)}`} className={buttonClass}>
 						<img
 							alt="Back"
 							className="w-full h-full -scale-x-100"
 							src="/browserbar/arrow.svg"
 						/>
 					</Link>
-					<Link to={getNextFile(fileName)} className={buttonClass}>
+					<Link to={`files/${getNextFile(fileName)}`} className={buttonClass}>
 						<img
 							alt="Next"
 							className="w-full h-full"
