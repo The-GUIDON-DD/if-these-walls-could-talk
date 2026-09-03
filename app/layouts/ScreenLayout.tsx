@@ -4,7 +4,7 @@ export default function ScreenLayout() {
 	const fullScreenLayer =
 		"pointer-events-none bg-center bg-cover w-full h-full fixed inset-0 z-50";
 	return (
-		<main className="w-screen min-h-screen">
+		<main className="w-screen max-w-screen min-h-screen overflow-x-clip">
 			<div className="w-full min-h-screen">
 				<Outlet />
 			</div>

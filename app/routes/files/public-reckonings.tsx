@@ -4,12 +4,12 @@ import PersonCard from "~/components/PersonCard";
 
 function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
-		<article className="grow flex flex-col items-center md: gap-5 md:gap-10 three-step">
+		<article className="grow flex flex-col items-center md: gap-5 md:gap-7 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
-			<h3 className="text-white font-medium text-3xl text-center  h-10 md:h-20">
+			<h3 className="text-white font-medium text-3xl text-center h-10 md:h-15">
 				{title}
 			</h3>
-			<section className="w-full flex items-center justify-center p-10 h-70 rounded-2xl border-white border-3">
+			<section className="w-full flex items-center justify-center p-10 h-60 rounded-2xl border-white border-3">
 				<p className="text-white font-medium text-2xl text-center ">{desc}</p>
 			</section>
 		</article>
@@ -33,11 +33,8 @@ function ThreeStepFramework() {
 	];
 	useEffect(() => {
 		const tl = createTimeline({
-			autoplay: onScroll({
-				target: "#public-reckonings",
-				enter: "start top+=20vh",
-				leave: "start bottom+=100vh",
-			}),
+			autoplay: true,
+			delay: 750,
 		});
 		tl.add("#three-step-framework", {
 			opacity: [0, 1],
@@ -56,11 +53,11 @@ function ThreeStepFramework() {
 			.init();
 	}, []);
 	return (
-		<section className="mt-10" id="three-step-framework">
+		<section className="mt-10 w-[50%]" id="three-step-framework">
 			<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
 				Three-Step Framework
 			</h2>
-			<section className="w-full flex flex-col md:flex-row gap-15 my-25">
+			<section className="w-full flex flex-col md:flex-row gap-15  mt-10 mb-20">
 				{steps.map(({ title, desc }) => (
 					<StepContainer key={title} title={title} desc={desc} />
 				))}
@@ -116,12 +113,14 @@ export default function PublicReckonings() {
 				</a>{" "}
 				of sexual harassment.
 			</p>
-			<PersonCard
-				name="JADE PRINCIPE"
-				desc={
-					"However, no such formal framework was in place during the time of former Philosophy professor Jade Principe, who faced sexual harassment cases in 2016 for breaching professional boundaries, sending inappropriate messages, and extending date invitations to his student."
-				}
-			/>
+			<div className="w-[60%]">
+				<PersonCard
+					name="JADE PRINCIPE"
+					desc={
+						"However, no such formal framework was in place during the time of former Philosophy professor Jade Principe, who faced sexual harassment cases in 2016 for breaching professional boundaries, sending inappropriate messages, and extending date invitations to his student."
+					}
+				/>
+			</div>
 			<p>
 				The case was initially classified as a disciplinary matter despite the
 				reported misconduct,{" "}

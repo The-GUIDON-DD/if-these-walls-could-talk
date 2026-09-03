@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import useSound from "use-sound";
+import click from "/audio/click.mp3?url";
 
 type EmailItem = {
 	id: number;
 	subject: string;
 	content: string;
 	isRead: boolean;
+	isUnlocked: boolean;
 };
 
 function EmailDetailPopup({ email }: { email: EmailItem }) {
@@ -72,6 +75,7 @@ function EmailDetailPopup({ email }: { email: EmailItem }) {
 }
 
 export default function Email() {
+	const [clickSfx] = useSound(click);
 	const [emails, setEmails] = useState<EmailItem[]>([
 		{
 			id: 1,
@@ -79,13 +83,15 @@ export default function Email() {
 			content:
 				"For many survivors of sexual misconduct, the decision to report is not only an administrative step, but also an act of courage meant to reclaim safety and affirm the truth of their case. Yet, this decision also brings them into a system that can feel heavy and difficult to navigate—all while already carrying significant emotional strain.\n \nAccording to Ofreneo, the University introduces its sexual misconduct protocols to students through orientations, online guidelines, and policies on creating safe spaces outlined in the Ateneo <a href='https://www.ateneo.edu/sites/default/files/2022-01/2020-08-28-ADMU-Code-Decorum-Administrative-Rules-v1.0.pdf'>Code of Decorum and Administrative Rules</a>. Notably, many of these protocols are integrated within the systems of the Ateneo curriculum itself.\n \nOne such example is the <a href='https://drive.google.com/file/d/1h8QsHpiDPYnIjJ1nTmW71Mceww-3JF-a/view'>Introduction to Ateneo Culture and Traditions</a>, a required course for all incoming Atenean freshmen. Through this course, students are introduced to the processes for filing a complaint and the offices involved in handling sexual misconduct cases.\n \nHowever, Ofreneo reflects that exposure does not always translate into understanding. As a relatively young office established in <a href='https://www.ateneo.edu/news/2021/12/04/creation-loyola-schools-gender-hub-provision-support-assistance-cases-sexual'>2019</a>, the UGH remains uncertain about how well students retain or comprehend these procedures after their initial introduction, particularly once orientations are over.\n \nIn light of this, sexual misconduct survivors Selena* and Mary* share that they would not have known how to file a report without guidance from friends. Their experiences point to a wider lack of awareness among students about where and how to report sexual misconduct.",
 			isRead: false,
+			isUnlocked: true,
 		},
 		{
 			id: 2,
 			subject: "Selena",
 			content:
-				"This inaccessibility and information gap affect not only how cases progress, but also whether students feel able to report at all. Within this context, the act of speaking up can reopen wounds that survivors are still trying to heal. In particular, Selena reveals how a system intended to ensure fairness can also become emotionally demanding.\n\nSelena recalls filing her report just a day after experiencing harassment from a fellow student. After her blockmate connected her to the Office of Student Affairs (OSA), she hoped that the office would provide clarity on how to proceed with her case and how the University would handle it. Yet, what began as an act of courage soon turned into weeks of frustration.\n\nThe people I was dealing with could never give me a sure answer. I had to be extremely specific with everything that happened, and even with the amount of evidence I had, it felt like it still wasn’t enough,” she admits. In particular, she cited her experience with the OSA, the UGH, and the Office of Student Discipline.\n\nMoving between multiple offices required Selena to recount the same painful experience multiple times. While each office explained its individual role, she was left doubtful about the overall status of her case and what outcomes to expect. “I just feel like I’m in a very gray area,” she reflects. “I don’t even know if the guy that did [the harassment] to me is gonna get any form of punishment.",
+				"This inaccessibility and information gap affect not only how cases progress, but also whether students feel able to report at all. Within this context, the act of speaking up can reopen wounds that survivors are still trying to heal. In particular, Selena reveals how a system intended to ensure fairness can also become emotionally demanding.\n\nSelena recalls filing her report just a day after experiencing harassment from a fellow student. After her blockmate connected her to the Office of Student Affairs (OSA), she hoped that the office would provide clarity on how to proceed with her case and how the University would handle it. Yet, what began as an act of courage soon turned into weeks of frustration.\n\n“The people I was dealing with could never give me a sure answer. I had to be extremely specific with everything that happened, and even with the amount of evidence I had, it felt like it still wasn’t enough,” she admits. In particular, she cited her experience with the OSA, the UGH, and the Office of Student Discipline.\n\nMoving between multiple offices required Selena to recount the same painful experience multiple times. While each office explained its individual role, she was left doubtful about the overall status of her case and what outcomes to expect. “I just feel like I’m in a very gray area,” she reflects. “I don’t even know if the guy that did [the harassment] to me is gonna get any form of punishment.",
 			isRead: false,
+			isUnlocked: false,
 		},
 		{
 			id: 3,
@@ -93,6 +99,7 @@ export default function Email() {
 			content:
 				"Across different stages of the process in reporting a sexual harassment case, Ofreneo explains that repeatedly revisiting incidents in an unsafe and uncontrolled environment can risk <a href='https://psycnet.apa.org/record/2010-09708-008'>retraumatizing</a> survivors and intensifying the psychological weight they carry.\n\nIn this sense, Ofreneo acknowledges that the challenge of recounting such experiences is not only procedural, but deeply personal. “We always say care first,” she emphasizes, underscoring the UGH’s principle to prioritize survivors’ psychological well-being at every step of the reporting process.\n\nAs part of this care-first approach, the UGH assigns trained case companions to accompany survivors throughout the process. These companions, all part of the UGH, provide stability at moments when survivors may feel most vulnerable.\n\nHowever, as cases move through documentation and review, the pace of bureaucracy often lags behind the urgency of care. For student complainants, the drawn-out process becomes another layer of strain.\n\nIn this light, Escarez admits that many cases extend well beyond the 10-day <a href='https://www.ateneo.edu/sites/default/files/2022-01/2020-08-28-ADMU-Code-Decorum-Administrative-Rules-v1.0.pdf'>decision</a> period.\n\nAlthough established measures protect fairness, they often prolong proceedings, leaving complainants waiting for clarity that can take months to arrive.",
 			isRead: false,
+			isUnlocked: false,
 		},
 		{
 			id: 4,
@@ -100,6 +107,7 @@ export default function Email() {
 			content:
 				"Some survivors, like Mary, eventually decide to withdraw their complaints.\n\nMary filed her report during her freshman year, hopeful that speaking up would finally bring certainty about how her case was progressing and whether any action would be taken. However, that hope faded when updates from University offices stopped arriving.\n\n“After I filed [my report], I didn’t receive any more updates,” she recalls. “It felt like a cliffhanger. I never really heard back from them again.”\n\nSimilar to Mary’s case, several complainants in recent years have either <a href='https://www.ateneo.edu/sites/default/files/2023-08/UODI%20Report%20December%202022%20to%20May%202023%20FINAL.pdf'>withdrawn</a> their cases or retained their reports at the informal level. Ofreneo adds that the reasons for these may vary—from confidentiality concerns to emotional fatigue—and that this pattern points to a shared sense of weariness among those navigating the system.\n\nBehind these numbers are students balancing academics, recovery, and the weight of a process that demands repeated vulnerability. In the end, many find it easier to step back than to keep reliving what happened.\n\n“It was good that I got to let it out, but after that, nothing happened, so I just moved on,” Mary remarks, referring to her decision to stop pursuing her report.",
 			isRead: false,
+			isUnlocked: false,
 		},
 	]);
 
@@ -112,16 +120,22 @@ export default function Email() {
 				email.id === id ? { ...email, isRead: true } : email,
 			),
 		);
+		if (id < emails.length) {
+			setEmails((currentEmails) =>
+				currentEmails.map((email) =>
+					email.id === id + 1 ? { ...email, isUnlocked: true } : email,
+				),
+			);
+		}
 	};
 
 	const openEmail = (email: EmailItem) => {
-		markAsRead(email.id);
 		setSelectedEmail(email);
 	};
 
 	return (
 		<>
-			<div className="flex h-screen gap-0 gradient-white font-mono pt-15">
+			<div className="flex h-screen overflow-clip gap-0 gradient-white font-mono pt-18">
 				<aside className="w-70">
 					<div className="bg-linear-to-r from-[#dcecff] to-[#4968ff] w-full py-4 px-1" />
 					<div className="h-full border-r-5 border-[rgba(0,0,0,0.3)] shadow-[inset_-10px_0_0_0_rgba(0,0,0,0.1)] box-border">
@@ -139,38 +153,41 @@ export default function Email() {
 				</aside>
 				<main className="flex-1 overflow-auto">
 					<nav>
-						{emails.map((email) => (
-							<button
-								type="button"
-								key={email.id}
-								onClick={() => openEmail(email)}
-								aria-pressed={email.isRead}
-								className={`w-full border-b px-3 border-gray-300 py-4 flex items-center text-left transition-colors 
+						{emails.map(
+							(email) =>
+								email.isUnlocked && (
+									<button
+										type="button"
+										key={email.id}
+										onClick={() => openEmail(email)}
+										aria-pressed={email.isRead}
+										className={`w-full border-b px-3 border-gray-300 py-4 flex items-center text-left transition-colors 
 								${
 									email.isRead
 										? "bg-[#D0D8FF] text-gray-500"
 										: "bg-transparent text-[#161b3f]"
 								}`}
-							>
-								<div className="w-3 h-3 mx-5 border-2 border-[rgba(0,0,0,0.3)]" />
-								<div className="w-[45%] min-w-0 shrink-0">
-									<h3
-										className={`font-bold text-2xl whitespace-nowrap overflow-hidden text-ellipsis 
-										${email.isRead ? "text-[rgba(22,27,63,0.55)] font-medium" : "text-[#161b3f]"}`}
 									>
-										{email.subject}
-									</h3>
-								</div>
-								<div className="w-[35%] min-w-0 shrink-0">
-									<p
-										className={`text-lg block w-full whitespace-nowrap overflow-hidden text-ellipsis ${
-											email.isRead ? "text-gray-400" : "text-gray-500"
-										} email-content`}
-										dangerouslySetInnerHTML={{ __html: email.content }}
-									/>
-								</div>
-							</button>
-						))}
+										<div className="w-3 h-3 mx-5 border-2 border-[rgba(0,0,0,0.3)]" />
+										<div className="w-[45%] min-w-0 shrink-0">
+											<h3
+												className={`font-bold text-2xl whitespace-nowrap overflow-hidden text-ellipsis 
+										${email.isRead ? "text-[rgba(22,27,63,0.55)] font-medium" : "text-[#161b3f]"}`}
+											>
+												{email.subject}
+											</h3>
+										</div>
+										<div className="w-[35%] min-w-0 shrink-0">
+											<p
+												className={`text-lg block w-full whitespace-nowrap overflow-hidden text-ellipsis ${
+													email.isRead ? "text-gray-400" : "text-gray-500"
+												} email-content`}
+												dangerouslySetInnerHTML={{ __html: email.content }}
+											/>
+										</div>
+									</button>
+								),
+						)}
 					</nav>
 				</main>
 			</div>
@@ -180,7 +197,11 @@ export default function Email() {
 					role="dialog"
 					aria-modal="true"
 					aria-label={selectedEmail.subject}
-					onClick={() => setSelectedEmail(null)}
+					onClick={() => {
+						clickSfx();
+						markAsRead(selectedEmail.id);
+						setSelectedEmail(null);
+					}}
 					className="fixed inset-0 z-50 flex items-center justify-center bg-[#161b3f]/30 p-8"
 				>
 					<div
@@ -190,7 +211,11 @@ export default function Email() {
 						<header className="flex h-16 items-center justify-end border-b-0 bg-linear-to-r from-[#c9e6ff] to-[#4968ff] px-5">
 							<button
 								type="button"
-								onClick={() => setSelectedEmail(null)}
+								onClick={() => {
+									clickSfx();
+									markAsRead(selectedEmail.id);
+									setSelectedEmail(null);
+								}}
 								aria-label="Close email"
 								className="font-mono text-3xl leading-none text-[white]"
 							>

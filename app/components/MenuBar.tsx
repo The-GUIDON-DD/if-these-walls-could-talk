@@ -16,14 +16,14 @@ export function MenuBar({ title, closeAction }: MenuBarProps) {
 						<button
 							type="button"
 							onClick={closeAction}
-							className="border-l-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
+							className="border-l-2 border-gray-300 px-6 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
 						>
 							<span className="text-center">_</span>
 						</button>
 						<button
 							type="button"
 							onClick={closeAction}
-							className="border-l-2 border-r-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
+							className="border-l-2 border-r-2 border-gray-300 px-6 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
 						>
 							<span>
 								<IoMdClose />
@@ -34,13 +34,13 @@ export function MenuBar({ title, closeAction }: MenuBarProps) {
 					<>
 						<Link
 							to="/desktop"
-							className="border-l-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
+							className="border-l-2 border-gray-300 px-6 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)] hover:no-underline"
 						>
 							<span className="text-center">_</span>
 						</Link>
 						<Link
 							to="/desktop"
-							className="border-l-2 border-r-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
+							className="border-l-2 border-r-2 border-gray-300 px-6 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
 						>
 							<span>
 								<IoMdClose />

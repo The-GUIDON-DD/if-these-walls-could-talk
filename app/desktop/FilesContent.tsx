@@ -1,21 +1,25 @@
 import { type ReactNode, useState } from "react";
 import { Link } from "react-router";
+import useSound from "use-sound";
 import { FILES_LIST } from "~/utils/constants";
+import click from "/audio/click.mp3?url";
 
 export function FilesContent(): ReactNode {
 	const [hoveredId, setHoveredId] = useState<string>("public-reckonings");
+	const [clickSfx] = useSound(click);
+	const currentFile = FILES_LIST.find(({ id }) => hoveredId === id);
 
 	return (
 		<div className="relative w-full h-full p-6 font-['Chivo_Mono'] select-none flex flex-col justify-between">
 			<div className="w-full flex-1 bg-[#A7B8E6] border-t-[3px] border-l-[3px] border-[#1E3293]/50 p-6 flex flex-wrap gap-6 justify-center items-center overflow-auto">
-				{FILES_LIST.map(({ id, label }) => {
+				{FILES_LIST.map(({ id, label, fileName }) => {
 					const active = hoveredId === id;
 
 					return (
-						<Link key={id} to={`/files/${id}`}>
+						<Link key={id} onClick={() => clickSfx()} to={`/files/${id}`}>
 							<div
 								onMouseEnter={() => setHoveredId(id)}
-								className={`flex flex-col items-center p-4 rounded w-[160px] cursor-pointer transition-all outline-none ${
+								className={`flex flex-col items-center p-4 rounded min-w-[200px] cursor-pointer transition-all outline-none ${
 									active
 										? "bg-[#D0D9F3] border border-[#1E3293]/30 shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
 										: "bg-transparent"
@@ -52,8 +56,8 @@ export function FilesContent(): ReactNode {
 									</defs>
 								</svg>
 
-								<span className="text-base text-center leading-snug px-1 text-[#2B3563]">
-									{label}
+								<span className="text-base text-center leading-snug w-full px-1 text-[#2B3563]">
+									{fileName}
 								</span>
 							</div>
 						</Link>
@@ -65,7 +69,9 @@ export function FilesContent(): ReactNode {
 				<div className="px-4 flex items-center border-t-[3px] border-l-[3px] border-[#1E3293]/50 bg-[#A7B8E6]">
 					<p className="text-base">{FILES_LIST.length} object(s)</p>
 				</div>
-				<div className="flex-1 border-t-[3px] border-l-[3px] border-[#1E3293]/50 bg-[#A7B8E6]" />
+				<div className="flex-1 border-t-[3px] border-l-[3px] pl-2 pt-1 border-[#1E3293]/50 bg-[#A7B8E6]">
+					<p className="text-base">Files/{currentFile.fileName}</p>
+				</div>
 			</div>
 		</div>
 	);
