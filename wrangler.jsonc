@@ -1,10 +1,12 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "if-these-walls-could-talk",
-	"compatibility_date": "2026-08-11",
+	"compatibility_date": "2026-08-28",
+	"assets": {
+		"directory": "./build/client",
+		"not_found_handling": "single-page-application"
+	},
 	"observability": {
 		"enabled": true
-	},
-	"main": "./workers/app.ts",
-	"compatibility_flags": ["nodejs_compat"]
+	}
 }

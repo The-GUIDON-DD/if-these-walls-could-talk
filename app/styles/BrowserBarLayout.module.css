@@ -24,7 +24,6 @@
 	@apply text-2xl;
 	@apply font-sans;
 	@apply font-medium;
-	@apply w-full;
 }
 
 .browser a,

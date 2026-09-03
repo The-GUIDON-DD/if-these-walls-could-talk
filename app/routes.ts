@@ -1,9 +1,9 @@
 import {
-    index,
-    layout,
-    prefix,
-    type RouteConfig,
-    route,
+	index,
+	layout,
+	prefix,
+	type RouteConfig,
+	route,
 } from "@react-router/dev/routes";
 
 export default [
@@ -18,9 +18,15 @@ export default [
 						"codes-and-complaints",
 						"routes/files/codes-and-complaints.tsx",
 					),
-                    route("procedure-hesitation", "routes/files/ProcedureHesitationContent.tsx"),
+					route(
+						"procedure-hesitation",
+						"routes/files/ProcedureHesitationContent.tsx",
+					),
 					route("journey-ahead", "routes/files/journey-ahead.tsx"),
 				]),
+			]),
+			layout("./layouts/MenuBarLayout.tsx", [
+				route("email", "routes/email.tsx"),
 			]),
 		]),
 	]),

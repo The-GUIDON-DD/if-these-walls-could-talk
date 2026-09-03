@@ -11,15 +11,15 @@ export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
 	return (
 		<>
 			<header className="w-screen top-4 fixed z-20">
-				<BrowserBar fileName={`${fileName}.txt`} />
+				<BrowserBar fileName={fileName} />
 			</header>
 			{/* content section */}
 			<section
-				className={`w-screen min-h-screen text-white flex flex-col items-stretchpx-1/6 pt-50 pb-50 bg-[#060e24] px-[20%] ${styles.browser}`}
+				className={`w-screen min-h-screen text-white flex flex-col items-stretchpx-1/6 pt-50 pb-50 bg-[#060e24] ${styles.browser}`}
 			>
 				<Outlet />
 			</section>
-			<div className="w-screen pointer-events-none h-70 bg-linear-to-t from-[#060e24] to-transparent fixed bottom-[5vh]" />
+			<div className="w-screen pointer-events-none h-70 bg-linear-to-t from-[#060e24] to-transparent fixed bottom-[5vh] z-10" />
 		</>
 	);
 }
