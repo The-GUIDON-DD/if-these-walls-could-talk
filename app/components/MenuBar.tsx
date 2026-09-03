@@ -34,7 +34,7 @@ export function MenuBar({ title, closeAction }: MenuBarProps) {
 					<>
 						<Link
 							to="/desktop"
-							className="border-l-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)]"
+							className="border-l-2 border-gray-300 px-2 h-full flex items-center justify-center hover:bg-[rgba(186,203,255,0.1)] hover:no-underline"
 						>
 							<span className="text-center">_</span>
 						</Link>
