@@ -121,7 +121,7 @@ export default function Email() {
 
 	return (
 		<>
-			<div className="flex h-screen gap-0 gradient-white font-mono pt-15">
+			<div className="flex h-screen gap-0 gradient-white font-mono pt-18">
 				<aside className="w-70">
 					<div className="bg-linear-to-r from-[#dcecff] to-[#4968ff] w-full py-4 px-1" />
 					<div className="h-full border-r-5 border-[rgba(0,0,0,0.3)] shadow-[inset_-10px_0_0_0_rgba(0,0,0,0.1)] box-border">

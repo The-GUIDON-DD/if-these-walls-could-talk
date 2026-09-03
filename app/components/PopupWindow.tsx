@@ -1,5 +1,7 @@
 import type { MouseEvent, ReactNode } from "react";
 import { useRef } from "react";
+import useSound from "use-sound";
+import click from "/audio/click.mp3?url";
 
 type PopupWindowProps = {
 	title: string;
@@ -20,12 +22,14 @@ export function PopupWindow({
 	height = 230,
 	zIndex = 50,
 }: PopupWindowProps) {
+	const [clickSfx] = useSound(click);
 	const handleClose = (e?: MouseEvent) => {
 		/*
 		 * Prevent clicks originating inside the popup from bubbling up to the
 		 * backdrop and trigger handleClose again.
 		 */
 		e?.stopPropagation();
+		clickSfx();
 		closeAction();
 	};
 
@@ -58,9 +62,15 @@ export function PopupWindow({
 
 					<div className="flex items-center h-full">
 						{/* Minimize Button - Square (1:1 aspect ratio) */}
-						<div className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl hover:bg-[rgba(186,203,255,0.1)]">
+						<button
+							type="button"
+							onClick={handleClose}
+							aria-label="Close"
+							title="Close"
+							className="h-full aspect-square flex items-center justify-center border-l-2 border-[#BACBFF]/30 text-white font-mono text-xl hover:bg-[rgba(186,203,255,0.1)]"
+						>
 							_
-						</div>
+						</button>
 
 						{/* Close Button - Square (1:1 aspect ratio) */}
 						<button

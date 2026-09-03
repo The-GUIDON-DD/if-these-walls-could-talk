@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -43,6 +44,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+	useEffect(() => {
+		const clickSound = new Audio("/audio/click.mp3");
+
+		const handleGlobalClick = () => {
+			clickSound.currentTime = 0;
+			clickSound.play();
+		};
+
+		window.addEventListener("click", handleGlobalClick);
+
+		return () => {
+			window.removeEventListener("click", handleGlobalClick);
+		};
+	}, []);
 	return <Outlet />;
 }
 
