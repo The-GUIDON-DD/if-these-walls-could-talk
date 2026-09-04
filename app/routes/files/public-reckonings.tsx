@@ -4,7 +4,7 @@ import PersonCard from "~/components/PersonCard";
 
 function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
-		<article className="grow flex flex-col items-center md: gap-5 md:gap-7 three-step">
+		<article className="w-[30%] h-65 flex flex-col items-center md: gap-5 md:gap-7 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
 			<h3 className="text-white font-medium text-3xl text-center h-10 md:h-15">
 				{title}
