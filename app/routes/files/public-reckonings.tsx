@@ -6,9 +6,12 @@ function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
 		<article className="grow flex flex-col items-center md: gap-5 md:gap-7 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
-			<h3 className="text-white font-medium text-3xl text-center h-10 md:h-15">
+			<div className="flex flex-col items-center h-10 md:h-15">
+				<h3 className="text-white font-medium text-3xl text-center">
 				{title}
 			</h3>
+			</div>
+			
 			<section className="w-full flex items-center justify-center p-10 h-60 rounded-2xl border-white border-3">
 				<p className="text-white font-medium text-2xl text-center ">{desc}</p>
 			</section>
@@ -53,7 +56,7 @@ function ThreeStepFramework() {
 			.init();
 	}, []);
 	return (
-		<section className="mt-10 w-[50%]" id="three-step-framework">
+		<section className="mt-10 w-[70%] flex flex-col items-center" id="three-step-framework">
 			<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
 				Three-Step Framework
 			</h2>
