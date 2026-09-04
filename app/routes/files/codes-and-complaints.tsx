@@ -474,11 +474,6 @@ export default function CodesAndComplaints() {
 				recurrence of sexual harassment incidents.
 			</p>
 			<p>
-				Notably, the reports also include recommendations for relevant parties,
-				such as University employees and students, to actively prevent the
-				recurrence of sexual harassment incidents.
-			</p>
-			<p>
 				Nevertheless, initiatives like the semi-annual report can only prove
 				effective if they are practiced with consistency. As of writing, the
 				UODI has only released a total of four reports and has yet to publish a
