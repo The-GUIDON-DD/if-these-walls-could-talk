@@ -15,7 +15,7 @@ export default function BrowserBarLayout({ matches }: Route.ComponentProps) {
 			</header>
 			{/* content section */}
 			<section
-				className={`w-screen min-h-screen text-white flex flex-col items-stretchpx-1/6 pt-50 pb-50 bg-[#060e24] ${styles.browser}`}
+				className={`w-screen min-h-screen text-white flex flex-col items-stretchpx-1/6 pt-50 pb-30 bg-[#060e24] ${styles.browser}`}
 			>
 				<Outlet />
 			</section>
