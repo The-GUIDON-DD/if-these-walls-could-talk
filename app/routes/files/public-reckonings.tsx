@@ -73,7 +73,7 @@ function ThreeStepFramework() {
 export default function PublicReckonings() {
 	return (
 		<main id="public-reckonings" className="file-main">
-			<h1>Public Reckonings</h1>
+			<h1>Public reckonings</h1>
 			<p>
 				In accordance with the{" "}
 				<a href="https://www.officialgazette.gov.ph/1995/02/14/republic-act-no-7877/">
