@@ -83,24 +83,28 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 					target: "#intro-text-cont",
 					enter: { target: "top+=120vh", container: "top" },
 					leave: { target: "top+=220vh", container: "top" },
+					onLeave: enableLogin,
 					sync: "play reverse play reset",
 				}),
 			});
 			animate("#intro-chevron", {
-				opacity: [1, 0],
-				duration: 500,
-				autoplay: onScroll({
-					target: "#intro-text-cont",
-					enter: { target: "top+=120vh", container: "top" },
-					leave: { target: "top+=240vh", container: "top" },
-					onLeave: enableLogin,
-					sync: "play pause reverse reset",
-				}),
+				opacity: [1, 0.5, 1],
+				duration: 3000,
+				ease: "ease",
+				loop: true,
+				autoplay: true,
 			});
 		});
 
 		return () => scope.current?.revert();
 	}, [enableLogin]);
+
+	function moveToNextSection() {
+		window.scrollBy({
+			top: window.innerHeight * 1.7,
+			behavior: "smooth",
+		});
+	}
 
 	const paragraphStyle =
 		"w-3/5 font-sans font-medium leading-[145%] text-4xl col-span-full row-span-full text-white font-bold text-center retro-text-shadow opacity-0";
@@ -125,7 +129,7 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 						support systems
 					</a>{" "}
 					aimed at making campus spaces more inclusive through adopting
-					grievance mechanisms and gender focused initiatives and guidelines.
+					grievance mechanisms and gender-focused initiatives and guidelines.
 				</p>
 				<p id="intro-text-p2" className={paragraphStyle} style={{ opacity: 0 }}>
 					While the Ateneo{" "}
@@ -140,12 +144,14 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 					encounter lengthy procedures that often fail to deliver timely justice
 					or safety.
 				</p>
-				<div
+				<button
+					type="button"
+					onClick={moveToNextSection}
 					id="intro-chevron"
 					className="text-white align-self-end relative bottom-30"
 				>
 					<FaChevronDown size={48} />
-				</div>
+				</button>
 			</section>
 		</section>
 	);

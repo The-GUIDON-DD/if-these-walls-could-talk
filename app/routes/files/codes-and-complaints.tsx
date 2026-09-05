@@ -241,7 +241,7 @@ function LegendItem({
 	labelColor?: string;
 }) {
 	return (
-		<section className="legend-item flex mt-5 items-center gap-5">
+		<section className="legend-item flex mt-5 items-center gap-5 h-[30px]">
 			<div
 				className="aspect-square w-6 inset-shadow-[-4px_-4px_0px_0px_rgb(255,255,255)] border-l-3 border-t-3 border-[rgba(30,50,147,0.5)]"
 				style={{ background: color }}
@@ -299,8 +299,8 @@ function PieSection() {
 							</span>
 						</button>
 					</section>
-					<section className="flex flex-col items-center px-10 gap-15 border-l-3 box-border border-[rgba(30,50,147,0.4)] pb-5">
-						<section className="flex gap-5 justify-center">
+					<section className="flex flex-col items-center px-10 gap-15 border-l-3 box-border border-[rgba(30,50,147,0.4)] pb-5 pt-2 h-[450px]">
+						<section className="flex gap-5 justify-center h-[40px]">
 							{pieLegend[currentTab].map(({ category, color }) => (
 								<LegendItem
 									key={category}
@@ -445,7 +445,7 @@ export default function CodesAndComplaints() {
 							disabled={currentBarData === 0}
 							action={() => setCurrentBarData(currentBarData - 1)}
 						/>
-						<h2 className="uppercase text-4xl tracking-wide font-semibold font-mono text-shadow-[0_4px_0_rgba(0,0,0,0.5)]">
+						<h2 className="uppercase text-4xl w-[65vw] text-center tracking-wide font-semibold font-mono text-shadow-[0_4px_0_rgba(0,0,0,0.5)] width-[40%]">
 							{genderBarData[currentBarData].title}
 						</h2>
 						<ArrowBtn
@@ -468,11 +468,6 @@ export default function CodesAndComplaints() {
 				<BarGraph barData={genderBarData[currentBarData].data} />
 				<PieSection />
 			</section>
-			<p>
-				Notably, the reports also include recommendations for relevant parties,
-				such as University employees and students, to actively prevent the
-				recurrence of sexual harassment incidents.
-			</p>
 			<p>
 				Notably, the reports also include recommendations for relevant parties,
 				such as University employees and students, to actively prevent the
@@ -523,10 +518,12 @@ export default function CodesAndComplaints() {
 				pervading on- and off-campus. However, the lack of continuity on
 				initiatives like UODI’s semi-annual reports opens nuanced discussions on
 				maintaining transparency, as well as on properly cultivating trust
-				within the Ateneo community. Beyond quantitative reports, the University
-				must also be reminded of the real and complex experiences of survivors,
-				all of whom must navigate through the intricacies of coping and moving
-				forward.
+				within the Ateneo community.
+			</p>
+			<p>
+				Beyond quantitative reports, the University must also be reminded of the
+				real and complex experiences of survivors, all of whom must navigate
+				through the intricacies of coping and moving forward.
 			</p>
 		</main>
 	);

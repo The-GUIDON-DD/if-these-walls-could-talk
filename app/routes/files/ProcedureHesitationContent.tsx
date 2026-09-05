@@ -252,7 +252,7 @@ export default function ProcedureHesitationContent(): ReactNode {
 			</p>
 
 			<p>
-				For Selena, hesitation was shaped by these concerns about
+				For Selena*, hesitation was shaped by these concerns about
 				accountability. She recalled her father asking what would happen to the
 				student who had harassed her. “They told [my father] that the Ateneo
 				isn’t the kind of institution that likes to punish its students,” she
@@ -261,7 +261,7 @@ export default function ProcedureHesitationContent(): ReactNode {
 
 			<div className="w-[60%]">
 				<PersonCard
-					name="SELENA"
+					name="SELENA*"
 					desc='According to her, administrators explained that the University believes in giving second chances and providing therapy to reform behaviour. Her father, she adds, was uneasy at the thought that the person who harmed her might remain on campus "just hoping to change."'
 				/>
 			</div>
@@ -301,6 +301,10 @@ export default function ProcedureHesitationContent(): ReactNode {
 				Mutual respect, active awareness, and consistent care form the
 				groundwork of an environment where survivors can step forward without
 				fear.
+			</p>
+			<p className="italic mt-5">
+				*Editor’s Note: The name of the interviewee has been changed to protect
+				their identity and privacy.
 			</p>
 		</main>
 	);

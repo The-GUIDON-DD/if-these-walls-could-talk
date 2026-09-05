@@ -63,7 +63,7 @@ export default function JourneyAhead() {
 					However, with inconsistencies in the publication of sexual harassment
 					reports in the University, there exists a gap in identifying the
 					current effectiveness of these systems, and it remains unclear whether
-					the community remains encouraged to speak up about their concerns.
+					the community is encouraged to speak up about their concerns.
 				</p>
 				<p>
 					Nevertheless, Ofreneo acknowledges the expanding needs of the Ateneo
@@ -87,11 +87,11 @@ export default function JourneyAhead() {
 					<div className="w-full bg-[#FFFFFF] p-8 md:p-12 border-t-4 border-l-4 border-[#00000040] ">
 						<p className="font-sans !text-[#033CE8] text-base md:text-lg leading-relaxed font-semibold">
 							In response to the current measures implemented by the Ateneo,
-							Selena stresses the need for the institution to improve its demand
-							for holding perpetrators accountable. She reflects on the need for
-							a balance between formative change and championing discipline for
-							the parties involved in complaint cases to genuinely address such
-							instances.
+							Selena* stresses the need for the institution to improve its
+							demand for holding perpetrators accountable. She reflects on the
+							need for a balance between formative change and championing
+							discipline for the parties involved in complaint cases to
+							genuinely address such instances.
 						</p>
 					</div>
 				</div>
@@ -156,11 +156,11 @@ export default function JourneyAhead() {
 				</p>
 
 				<p>
-					On a similar note, Mary calls on the University to establish a simpler
-					and more accessible system for students. As the nature of harassment
-					cases evolves, she believes that improving the dissemination of
-					guidelines can help students easily distinguish which people and
-					offices to approach for concerns similar to hers.
+					On a similar note, Mary* calls on the University to establish a
+					simpler and more accessible system for students. As the nature of
+					harassment cases evolves, she believes that improving the
+					dissemination of guidelines can help students easily distinguish which
+					people and offices to approach for concerns similar to hers.
 				</p>
 
 				<p>
@@ -176,6 +176,11 @@ export default function JourneyAhead() {
 					complaints. Productive change means pushing for a culture that
 					prioritizes the awareness of these realities and ensuring
 					survivor-centered access to justice.
+				</p>
+
+				<p className="italic mt-5">
+					*Editor’s Note: The name of the interviewee has been changed to
+					protect their identity and privacy.
 				</p>
 			</main>
 

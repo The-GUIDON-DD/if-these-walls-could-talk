@@ -6,9 +6,10 @@ function StepContainer({ title, desc }: { title: string; desc: string }) {
 	return (
 		<article className="grow flex flex-col items-center md: gap-5 md:gap-7 three-step">
 			<img src="/files/public-reckonings/Check.svg" alt="Check" />
-			<h3 className="text-white font-medium text-3xl text-center h-10 md:h-15">
-				{title}
-			</h3>
+			<div className="flex flex-col justify-center h-18">
+				<h3 className="text-white font-medium text-3xl text-center">{title}</h3>
+			</div>
+
 			<section className="w-full flex items-center justify-center p-10 h-60 rounded-2xl border-white border-3">
 				<p className="text-white font-medium text-2xl text-center ">{desc}</p>
 			</section>
@@ -20,7 +21,7 @@ function ThreeStepFramework() {
 	const steps = [
 		{
 			title: "Submission of reports",
-			desc: "UODI complies all formal and informal reports from complainants.",
+			desc: "UODI compiles all formal and informal reports from complainants.",
 		},
 		{
 			title: "Preliminary investigation",
@@ -53,7 +54,10 @@ function ThreeStepFramework() {
 			.init();
 	}, []);
 	return (
-		<section className="mt-10 w-[50%]" id="three-step-framework">
+		<section
+			className="mt-10 w-[70%] flex flex-col items-center"
+			id="three-step-framework"
+		>
 			<h2 className="w-full text-center uppercase text-4xl text-white font-bold">
 				Three-Step Framework
 			</h2>
@@ -183,11 +187,12 @@ export default function PublicReckonings() {
 				as focused group discussions, reading groups, and writing workshops.
 			</p>
 			<p>
-				The pattern of informal complaints suggests barriers within formal
-				reporting, including limited awareness of procedures, uncertainty about
-				institutional response, and the difficulty of navigating official
-				channels. The prevalence of informal complaints underscores these gaps
-				in accessibility and confidence in the reporting process.
+				These patterns of informal complaints and independent,
+				community-initiated efforts suggests barriers within formal
+				reporting—including limited awareness of procedures, uncertainty about
+				institutional response, and difficulty navigating official channels. The
+				prevalence of such underscores these gaps in accessibility and
+				confidence in the reporting process.
 			</p>
 		</main>
 	);
