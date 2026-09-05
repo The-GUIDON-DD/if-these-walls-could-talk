@@ -129,7 +129,7 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 						support systems
 					</a>{" "}
 					aimed at making campus spaces more inclusive through adopting
-					grievance mechanisms and gender focused initiatives and guidelines.
+					grievance mechanisms and gender-focused initiatives and guidelines.
 				</p>
 				<p id="intro-text-p2" className={paragraphStyle} style={{ opacity: 0 }}>
 					While the Ateneo{" "}

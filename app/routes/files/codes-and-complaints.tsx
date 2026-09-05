@@ -518,10 +518,12 @@ export default function CodesAndComplaints() {
 				pervading on- and off-campus. However, the lack of continuity on
 				initiatives like UODI’s semi-annual reports opens nuanced discussions on
 				maintaining transparency, as well as on properly cultivating trust
-				within the Ateneo community. Beyond quantitative reports, the University
-				must also be reminded of the real and complex experiences of survivors,
-				all of whom must navigate through the intricacies of coping and moving
-				forward.
+				within the Ateneo community.
+			</p>
+			<p>
+				Beyond quantitative reports, the University must also be reminded of the
+				real and complex experiences of survivors, all of whom must navigate
+				through the intricacies of coping and moving forward.
 			</p>
 		</main>
 	);
