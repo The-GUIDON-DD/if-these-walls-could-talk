@@ -63,7 +63,7 @@ export default function JourneyAhead() {
 					However, with inconsistencies in the publication of sexual harassment
 					reports in the University, there exists a gap in identifying the
 					current effectiveness of these systems, and it remains unclear whether
-					the community remains encouraged to speak up about their concerns.
+					the community is encouraged to speak up about their concerns.
 				</p>
 				<p>
 					Nevertheless, Ofreneo acknowledges the expanding needs of the Ateneo
