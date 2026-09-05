@@ -179,7 +179,7 @@ export default function JourneyAhead() {
 				</p>
 
 				<p className="italic mt-5">
-					*Editor’s Note: The name of the interviewees has been changed to
+					*Editor’s Note: The names of the interviewees has been changed to
 					protect their identity and privacy.
 				</p>
 			</main>
