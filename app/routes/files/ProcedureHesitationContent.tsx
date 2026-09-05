@@ -25,12 +25,15 @@ export default function ProcedureHesitationContent(): ReactNode {
 				carries significant personal implications that survivors carefully
 				consider before deciding how to proceed. She emphasizes that readiness
 				cannot be imposed by institutions and should instead come from the
-				survivors themselves. Building on this, Ofreneo notes that the pace of
-				reporting is closely tied to a survivor’s sense of safety and trust in
-				the process itself. While some may feel prepared to act immediately,
-				others need time to rebuild confidence in the system and in the support
-				structures around them. Respecting this pace, she notes, is part of the
-				University’s responsibility to care.
+				survivors themselves.
+			</p>
+			<p>
+				Building on this, Ofreneo notes that the pace of reporting is closely
+				tied to a survivor’s sense of safety and trust in the process itself.
+				While some may feel prepared to act immediately, others need time to
+				rebuild confidence in the system and in the support structures around
+				them. Respecting this pace, she notes, is part of the University’s
+				responsibility to care.
 			</p>
 			<p>
 				As survivors weigh their options, many first turn to{" "}
