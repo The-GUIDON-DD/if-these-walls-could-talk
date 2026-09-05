@@ -306,7 +306,7 @@ export default function ProcedureHesitationContent(): ReactNode {
 				fear.
 			</p>
 			<p className="italic mt-5">
-				*Editor’s Note: The name of the interviewee has been changed to protect
+				*Editor’s Note: The name of the interviewees has been changed to protect
 				their identity and privacy.
 			</p>
 		</main>
