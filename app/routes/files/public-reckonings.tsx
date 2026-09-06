@@ -1,4 +1,4 @@
-import { createTimeline, onScroll, stagger } from "animejs";
+import { createTimeline, stagger } from "animejs";
 import { useEffect } from "react";
 import PersonCard from "~/components/PersonCard";
 

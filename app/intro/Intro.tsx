@@ -160,7 +160,7 @@ export function IntroText({ enableLogin }: { enableLogin: () => void }) {
 function LoginScreen() {
 	const root = useRef<HTMLElement>(null);
 	const scope = useRef<ReturnType<typeof createScope> | null>(null);
-	const [beepHiSfx] = useSound(beepHi);
+	const [_beepHiSfx] = useSound(beepHi);
 
 	function onLoginClick() {
 		const bgAudio = document.getElementById("bg-audio") as HTMLAudioElement;
@@ -219,7 +219,7 @@ export default function Intro() {
 			loop: totalSeconds,
 			onLoop: (self) => {
 				if (self.currentIteration < totalSeconds) {
-					if (bgAudio && bgAudio.paused) {
+					if (bgAudio?.paused) {
 						bgAudio.play();
 					}
 				}

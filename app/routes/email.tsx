@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import useSound from "use-sound";
 import click from "/audio/click.mp3?url";
@@ -133,6 +133,18 @@ export default function Email() {
 		setSelectedEmail(email);
 	};
 
+	const cachedMarkAsRead = useCallback(markAsRead, [emails.length]);
+
+	useEffect(() => {
+		const emailsRead = localStorage.getItem("emailsRead");
+		if (emailsRead) {
+			const lastEmail = parseInt(emailsRead, 10);
+			for (let i = 1; i <= lastEmail; ++i) {
+				cachedMarkAsRead(i);
+			}
+		}
+	}, [cachedMarkAsRead]);
+
 	return (
 		<>
 			<div className="flex h-screen overflow-clip gap-0 gradient-white font-mono pt-18">
@@ -198,7 +210,9 @@ export default function Email() {
 					aria-modal="true"
 					aria-label={selectedEmail.subject}
 					onClick={() => {
-						clickSfx();
+						if (!selectedEmail.isRead) {
+							localStorage.setItem("emailsRead", `${selectedEmail.id}`);
+						}
 						markAsRead(selectedEmail.id);
 						setSelectedEmail(null);
 					}}
@@ -213,6 +227,9 @@ export default function Email() {
 								type="button"
 								onClick={() => {
 									clickSfx();
+									if (!selectedEmail.isRead) {
+										localStorage.setItem("emailsRead", `${selectedEmail.id}`);
+									}
 									markAsRead(selectedEmail.id);
 									setSelectedEmail(null);
 								}}
