@@ -161,6 +161,13 @@ function LoginScreen() {
 	const root = useRef<HTMLElement>(null);
 	const scope = useRef<ReturnType<typeof createScope> | null>(null);
 	const [beepHiSfx] = useSound(beepHi);
+
+	function onLoginClick() {
+		const bgAudio = document.getElementById("bg-audio") as HTMLAudioElement;
+		if (bgAudio.paused) {
+			bgAudio.play();
+		}
+	}
 	useEffect(() => {
 		scope.current = createScope({ root }).add(() => {
 			animate("#intro-login", {
@@ -187,7 +194,7 @@ function LoginScreen() {
 				<p className="font-mono text-white uppercase text-lg">Guest User</p>
 				<Link
 					to="/desktop"
-					onClick={() => beepHiSfx()}
+					onClick={onLoginClick}
 					className="font-mono text-white uppercase text-lg px-5 py-2 mt-5 border-[rgba(47, 79, 130, 0.25)] border-t border-l gradient-btn"
 				>
 					Log In
